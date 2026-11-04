@@ -1,0 +1,23 @@
+# python experiments/exp_families.py data   (pinned env; CatBoost timings inflated by a concurrent job, ~45 s/fit on idle CPU)
+p1_ lgbm  auc=0.8493 ll=0.4256 bestcost=0.8251 cost@1/11=0.8297 3s
+p1_ xgb   auc=0.8503 ll=0.4240 bestcost=0.8212 cost@1/11=0.8240 4s
+p1_ cat   auc=0.8462 ll=0.4298 bestcost=0.8325 cost@1/11=0.8480 328s
+p1_ lgbm+cat auc=0.8501 ll=0.4238 bestcost=0.8294
+p1_ xgb+cat auc=0.8505 ll=0.4232 bestcost=0.8247
+p1_ lgbm+xgb auc=0.8507 ll=0.4234 bestcost=0.8224
+p1_ all3 auc=0.8510 ll=0.4225 bestcost=0.8217
+p2_ lgbm  auc=0.7215 ll=0.5119 bestcost=1.0000 cost@1/11=1.0073 2s
+p2_ xgb   auc=0.7179 ll=0.5133 bestcost=0.9968 cost@1/11=1.0168 3s
+p2_ cat   auc=0.7096 ll=0.5218 bestcost=0.9974 cost@1/11=1.0477 315s
+p2_ lgbm+cat auc=0.7192 ll=0.5133 bestcost=0.9974
+p2_ xgb+cat auc=0.7170 ll=0.5143 bestcost=0.9971
+p2_ lgbm+xgb auc=0.7213 ll=0.5114 bestcost=0.9973
+p2_ all3 auc=0.7201 ll=0.5122 bestcost=0.9976
+p3_ lgbm  auc=0.7320 ll=0.2019 bestcost=0.7421 cost@1/11=0.7476 11s
+p3_ xgb   auc=0.7330 ll=0.2017 bestcost=0.7373 cost@1/11=0.7406 8s
+p3_ cat   auc=0.7102 ll=0.2079 bestcost=0.7524 cost@1/11=0.7569 242s
+p3_ lgbm+cat auc=0.7290 ll=0.2026 bestcost=0.7390
+p3_ xgb+cat auc=0.7310 ll=0.2021 bestcost=0.7306
+p3_ lgbm+xgb auc=0.7352 ll=0.2009 bestcost=0.7295
+p3_ all3 auc=0.7337 ll=0.2013 bestcost=0.7318
+

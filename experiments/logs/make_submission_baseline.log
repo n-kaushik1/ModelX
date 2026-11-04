@@ -1,0 +1,6 @@
+p1: trained and saved in 137 s
+p2: trained and saved in 165 s
+p3: trained and saved in 198 s
+wrote C:/Users/nikan/Downloads/Course Project-20261022/submission/baseline/submission.zip (22.1 MB): solution.py, manifest.json, p1_model.joblib, p2_model.joblib, p3_model.joblib, p3_threshold.json
+self-check passed: upload C:/Users/nikan/Downloads/Course Project-20261022/submission/baseline/submission.zip on the My Submissions tab
+make_submission exit=0

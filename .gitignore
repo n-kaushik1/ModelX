@@ -1,0 +1,16 @@
+# Python environments (recreate with scripts/setup_env.*)
+.venv*/
+venv/
+__pycache__/
+*.pyc
+
+# Development CSVs: unzipped from public_data.zip by scripts/setup_env.*
+data/
+
+# Library / tool output
+catboost_info/
+*.joblib
+.ipynb_checkpoints/
+
+# Claude Code personal settings
+.claude/settings.local.json

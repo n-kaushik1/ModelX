@@ -1,0 +1,15 @@
+# python experiments/exp_threshold.py data submission/improved   (system env: sklearn 1.9.1, lightgbm 4.7.0)
+rep0 t_emp=0.1090 emp=0.7356 bayes=0.7444 avg=0.7572 oracle=0.7283
+rep1 t_emp=0.0934 emp=0.8050 bayes=0.8094 avg=0.8094 oracle=0.7533
+rep2 t_emp=0.0945 emp=0.6928 bayes=0.6994 avg=0.6978 oracle=0.6928
+rep3 t_emp=0.1173 emp=0.7128 bayes=0.6872 avg=0.7028 oracle=0.6756
+rep4 t_emp=0.1185 emp=0.7206 bayes=0.6994 avg=0.7011 oracle=0.6922
+rep5 t_emp=0.0906 emp=0.8117 bayes=0.8117 avg=0.8117 oracle=0.7533
+rep6 t_emp=0.0941 emp=0.7539 bayes=0.7600 avg=0.7533 oracle=0.7500
+rep7 t_emp=0.1086 emp=0.7578 bayes=0.7600 avg=0.7461 oracle=0.7394
+rep8 t_emp=0.0939 emp=0.7317 bayes=0.7383 avg=0.7350 oracle=0.6928
+rep9 t_emp=0.1063 emp=0.7528 bayes=0.7756 avg=0.7644 oracle=0.7367
+empirical  mean=0.7474 sd=0.0359
+bayes      mean=0.7486 sd=0.0417
+logit_avg  mean=0.7479 sd=0.0389
+oracle     mean=0.7214 sd=0.0284

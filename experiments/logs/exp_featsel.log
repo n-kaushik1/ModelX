@@ -1,0 +1,13 @@
+# python experiments/exp_featsel.py data   (pinned env)
+== p1 all: auc=0.8512 ll=0.4235 cost=0.8185
+== p1 sel: auc=0.8514 ll=0.4232 cost=0.8090
+   always dropped: ['ambient_humidity', 'batch_sequence_number', 'batch_weight', 'machine_age_years', 'machine_type', 'material_grade', 'process_pressure', 'product_family', 'production_line', 'recent_minor_alarm_count', 'shift', 'supplier_code', 'warehouse_storage_days']
+   sometimes dropped: ['ambient_temperature', 'material_density_estimate', 'previous_batch_failure_rate', 'raw_material_density']
+== p2 all: auc=0.7214 ll=0.5109 cost=0.9961
+== p2 sel: auc=0.7151 ll=0.5156 cost=0.9949
+   always dropped: ['account_balance_last_month', 'administrative_score', 'annual_revenue', 'balance_volatility', 'branch_distance_km', 'credit_enquiries_6m', 'current_ratio', 'existing_loan_count', 'industry_segment', 'late_payment_count_12m', 'legal_structure', 'marketing_spend_ratio', 'office_rent_index', 'previous_restructuring', 'receivables_days', 'region', 'revenue_per_employee', 'website_age_months']
+   sometimes dropped: ['average_account_balance', 'cash_reserve_months', 'inventory_days', 'liquidity_proxy']
+== p3 all: auc=0.7342 ll=0.2009 cost=0.7294
+== p3 sel: auc=0.7112 ll=0.2073 cost=0.7700
+   always dropped: ['alarm_count_15m', 'alarm_count_1h', 'connected_user_count', 'connection_drop_rate', 'critical_alarm_count', 'distinct_alarm_types', 'error_rate', 'latency_mean_ms', 'latency_p95_ms', 'maintenance_ticket_count_90d', 'node_age_years', 'node_type', 'packet_loss_5m', 'packet_loss_rate', 'rack_position_code', 'recent_configuration_change', 'redundancy_available', 'region_type', 'repeated_alarm_ratio', 'site_access_time_min', 'technology_generation', 'time_of_day_band', 'time_since_first_alarm_min', 'vendor_family', 'weekday_weekend']
+   sometimes dropped: ['days_since_maintenance', 'firmware_age_months', 'latency_variability', 'lease_cost_index', 'spare_capacity_index', 'traffic_volume', 'weather_severity_index']

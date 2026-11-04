@@ -1,0 +1,5 @@
+roc_auc selected: ['logreg'] threshold: 0.5 searched: ['cat', 'et', 'hgb', 'lgbm', 'logreg', 'rf', 'xgb']
+fresh-process ok [0.2157 0.203  0.2073]
+decision_cost selected: ['hgb', 'logreg'] threshold: 0.0896 searched: ['cat', 'et', 'hgb', 'lgbm', 'logreg', 'rf', 'xgb']
+fresh-process ok [0.2193 0.1771 0.1979]
+ROBUSTNESS TEST PASSED
