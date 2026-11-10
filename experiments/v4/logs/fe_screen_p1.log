@@ -1,0 +1,49 @@
+===== p1 base LL=0.41824 AUC=0.85417 (2s)
+1493 candidates
+scored in 17s; noise floor (best RAW/NOISE gain) = 0.00000
+  +0.00088  process_pressure/cycle_time
+  +0.00052  cycle_time/process_pressure
+  +0.00043  zhours_since_maintenance*zbatch_sequence_number
+  +0.00040  zambient_humidity+zrecent_minor_alarm_count
+  +0.00034  material_purity_index/batch_weight
+  +0.00030  batch_weight/material_purity_index
+  +0.00029  zenergy_per_unit+zrecent_minor_alarm_count
+  +0.00018  zprocess_temperature+zambient_temperature
+  +0.00014  zambient_temperature-zmaterial_density_estimate
+  +0.00013  zmaterial_purity_index-zprevious_batch_failure_rate
+  +0.00009  material_purity_index/process_temperature
+  +0.00009  zambient_humidity-zhours_since_maintenance
+  +0.00008  zenergy_per_unit+zmachine_age_years
+  +0.00005  zprocess_pressure*zenergy_per_unit
+  +0.00003  raw_material_moisture*process_pressure
+  +0.00003  zenergy_per_unit+zmaterial_density_estimate
+  +0.00002  shiftxoperator_experience_band
+  +0.00002  zraw_material_density*zwarehouse_storage_days
+  +0.00000  RAW:shift
+  +0.00000  COUNT:raw_material_density
+  +0.00000  COUNT:material_purity_index
+  +0.00000  COUNT:batch_weight
+  +0.00000  COUNT:process_temperature
+  +0.00000  COUNT:process_pressure
+  +0.00000  COUNT:cycle_time
+  +0.00000  COUNT:energy_per_unit
+  +0.00000  COUNT:cooling_rate
+  +0.00000  COUNT:ambient_humidity
+  +0.00000  COUNT:machine_age_years
+  +0.00000  COUNT:hours_since_maintenance
+  +0.00000  COUNT:temperature_sensor_2
+  +0.00000  COUNT:material_density_estimate
+  -0.00000  COUNT:previous_batch_failure_rate
+  -0.00002  zcycle_time+zambient_humidity
+  -0.00002  zraw_material_density+zmaterial_purity_index
+  -0.00003  zcooling_rate-ztool_wear_index
+  -0.00004  zmaterial_density_estimate-zwarehouse_storage_days
+  -0.00005  zmaterial_purity_index*zwarehouse_storage_days
+  -0.00006  zprocess_pressure-zcycle_time
+  -0.00007  material_density_estimate/machine_age_years
+  -0.00008  RAW:machine_type
+  -0.00008  RAW:operator_experience_band
+  -0.00008  zraw_material_moisture+zenergy_per_unit
+  -0.00009  zbatch_weight-zprocess_temperature
+  -0.00009  cooling_rate/tool_wear_index
+raw/noise: RAW:shift:+0.00000, RAW:machine_type:-0.00008, RAW:operator_experience_band:-0.00008, RAW:product_family:-0.00017, RAW:material_grade:-0.00022, RAW:machine_age_years:-0.00040, NOISE:3:-0.00042, RAW:supplier_code:-0.00051, RAW:recent_minor_alarm_count:-0.00053, RAW:production_line:-0.00058, RAW:process_pressure:-0.00072, RAW:batch_sequence_number:-0.00072, NOISE:1:-0.00082, NOISE:2:-0.00097, NOISE:4:-0.00098, RAW:ambient_temperature:-0.00099, RAW:hours_since_maintenance:-0.00099, RAW:ambient_humidity:-0.00102, RAW:raw_material_moisture:-0.00104, RAW:cycle_time:-0.00107, RAW:warehouse_storage_days:-0.00110, RAW:material_density_estimate:-0.00111, RAW:cooling_rate:-0.00113, RAW:batch_weight:-0.00123, RAW:energy_per_unit:-0.00138, NOISE:0:-0.00140, RAW:material_purity_index:-0.00144, RAW:temperature_sensor_2:-0.00148, RAW:tool_wear_index:-0.00150, RAW:previous_batch_failure_rate:-0.00160, RAW:process_temperature:-0.00169, RAW:raw_material_density:-0.00183

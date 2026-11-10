@@ -1,0 +1,7 @@
+p2 rep0 done
+p2 rep1 done
+p2 refit1       primary=-0.51046 per-rep=[-0.51025, -0.51066] LL=0.51046 calib-slope=1.023
+p2 refit3       primary=-0.51031 per-rep=[-0.51031, -0.51031] LL=0.51031 calib-slope=1.025
+p2 bag5         primary=-0.51003 per-rep=[-0.5101, -0.50996] LL=0.51003 calib-slope=1.059
+p2 bag5+refit3  primary=-0.51007 per-rep=[-0.5101, -0.51004] LL=0.51007 calib-slope=1.043
+p2 bag5_3s      primary=-0.51011 per-rep=[-0.51013, -0.51008] LL=0.51011 calib-slope=1.061

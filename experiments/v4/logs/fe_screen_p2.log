@@ -1,0 +1,49 @@
+===== p2 base LL=0.50927 AUC=0.72433 (2s)
+2861 candidates
+scored in 35s; noise floor (best RAW/NOISE gain) = -0.00012
+  +0.00046  zbusiness_age_years*zmarketing_spend_ratio
+  +0.00044  zaverage_account_balance*zoffice_rent_index
+  +0.00039  zbusiness_age_years-zmarketing_spend_ratio
+  +0.00038  zlate_payment_count_12m-zmarketing_spend_ratio
+  +0.00035  zoperating_margin-zdebt_service_ratio
+  +0.00034  zemployee_count-zliquidity_proxy
+  +0.00032  late_payment_count_12m/current_ratio
+  +0.00028  zcash_reserve_months+zutilization_3m_average
+  +0.00027  inventory_days/office_rent_index
+  +0.00027  debt_service_ratio*utilization_3m_average
+  +0.00026  zdebt_service_ratio+zoffice_rent_index
+  +0.00025  zcash_flow_volatility+zcredit_enquiries_6m
+  +0.00023  business_age_years*credit_utilization
+  +0.00023  credit_utilization/branch_distance_km
+  +0.00022  current_ratio/late_payment_count_12m
+  +0.00021  zbusiness_age_years+zmarketing_spend_ratio
+  +0.00021  zadministrative_score-zbranch_distance_km
+  +0.00020  debt_service_ratio*estimated_debt_burden
+  +0.00019  business_age_years/debt_to_equity
+  +0.00018  office_rent_index/inventory_days
+  +0.00016  zprevious_restructuring-zwebsite_age_months
+  +0.00015  zcash_flow_volatility-zwebsite_age_months
+  +0.00015  zcredit_enquiries_6m-zbalance_volatility
+  +0.00014  employee_count/credit_enquiries_6m
+  +0.00013  account_balance_last_month/cash_flow_volatility
+  +0.00013  debt_to_equity/business_age_years
+  +0.00013  debt_to_equity*credit_utilization
+  +0.00012  COUNT:marketing_spend_ratio
+  +0.00012  zdebt_service_ratio+zutilization_3m_average
+  +0.00012  zrevenue_growth+zliquidity_proxy
+  +0.00011  employee_count*existing_loan_count
+  +0.00011  zrevenue_per_employee*zwebsite_age_months
+  +0.00011  zcredit_utilization*zoffice_rent_index
+  +0.00011  max_days_past_due_12m*marketing_spend_ratio
+  +0.00010  estimated_debt_burden*liquidity_proxy
+  +0.00010  zoperating_margin-zcredit_enquiries_6m
+  +0.00009  operating_margin/account_balance_last_month
+  +0.00009  debt_to_equity*balance_volatility
+  +0.00008  zrevenue_growth-zlate_payment_count_12m
+  +0.00007  zcurrent_ratio*zadministrative_score
+  +0.00007  utilization_3m_average*administrative_score
+  +0.00006  zcash_flow_volatility+zwebsite_age_months
+  +0.00006  business_age_years*operating_margin
+  +0.00005  marketing_spend_ratio/utilization_3m_average
+  +0.00005  zcredit_utilization-zaverage_account_balance
+raw/noise: RAW:branch_distance_km:-0.00012, RAW:previous_restructuring:-0.00020, NOISE:1:-0.00027, RAW:legal_structure:-0.00028, RAW:region:-0.00030, RAW:existing_loan_count:-0.00032, RAW:credit_enquiries_6m:-0.00034, RAW:late_payment_count_12m:-0.00041, RAW:industry_segment:-0.00045, RAW:website_age_months:-0.00059, RAW:max_days_past_due_12m:-0.00061, RAW:utilization_3m_average:-0.00064, NOISE:2:-0.00069, NOISE:4:-0.00079, RAW:revenue_growth:-0.00081, RAW:balance_volatility:-0.00093, RAW:office_rent_index:-0.00094, RAW:debt_service_ratio:-0.00096, RAW:inventory_days:-0.00097, RAW:operating_margin:-0.00098, RAW:current_ratio:-0.00105, RAW:revenue_per_employee:-0.00109, RAW:liquidity_proxy:-0.00110, RAW:employee_count:-0.00110, RAW:estimated_debt_burden:-0.00115, RAW:annual_revenue:-0.00116, NOISE:3:-0.00118, RAW:business_age_years:-0.00120, RAW:account_balance_last_month:-0.00121, RAW:credit_utilization:-0.00121, RAW:cash_flow_volatility:-0.00123, RAW:marketing_spend_ratio:-0.00123, NOISE:0:-0.00126, RAW:debt_to_equity:-0.00144, RAW:receivables_days:-0.00160, RAW:administrative_score:-0.00160, RAW:average_account_balance:-0.00164, RAW:cash_reserve_months:-0.00168

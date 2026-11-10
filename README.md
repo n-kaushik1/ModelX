@@ -14,7 +14,8 @@ escalation) and later on three hidden ones.
 
 | What | Where |
 |---|---|
-| **Zip to upload to the leaderboard** | [`submission/sub2/sub2.zip`](submission/sub2/sub2.zip) (version 4) |
+| **Zip to upload to the leaderboard** | [`submission/sub2/sub2.zip`](submission/sub2/sub2.zip) (version 5) |
+| Submission v4 (framework version 6): **in progress, not yet a submission** | [`submission/v4/`](submission/v4/); status, changes and evidence in [`V4_NOTES.md`](submission/v4/V4_NOTES.md) |
 | Previous zips (v3: `experiments/variants/sub2_v3.zip`, v2) | [`submission/improved/submission.zip`](submission/improved/submission.zip) |
 | Fallback / reference zip | [`submission/baseline/submission.zip`](submission/baseline/submission.zip) |
 | Framework code | [`submission/sub2/solution.py`](submission/sub2/solution.py) |
@@ -64,8 +65,10 @@ ModelX/
 ├── public_data.zip            the three development CSVs (unzipped into data/ by the setup script)
 ├── starting_kit.zip           the official starting kit, unchanged
 ├── submission/
-│   ├── sub2/                  ← the current submission (version 4: complexity ladder, measured-structure constraints, logit blending, GAM)
-│   │   ├── solution.py, sub2.zip, and the official kit files
+│   ├── v4/                    submission v4 = framework version 6, in progress (k-fold bagging, library ensemble; see V4_NOTES.md)
+│   │   ├── solution.py, V4_NOTES.md, and the official kit files
+│   ├── sub2/                  ← the current submission (versions 3-5: complexity ladder, measured-structure constraints, logit blending, GAM)
+│   │   ├── solution.py, sub2.zip (version 5 build), and the official kit files
 │   ├── improved/              version 2, kept for comparison
 │   │   ├── solution.py        the framework (StudentSolution)
 │   │   ├── submission.zip     built zip, ready to upload
@@ -73,6 +76,7 @@ ModelX/
 │   └── baseline/              the first version, kept frozen for comparison (same structure)
 ├── experiments/               scripts behind the numbers in docs/experiment_notes.md
 │   ├── eval_splits.py         repeated 80/20 evaluation with joblib save/load (main comparison tool)
+│   ├── v4/                    submission-v4 experiments: feature screen, model variants, bagging, ensembles, outer CV (+ logs/)
 │   ├── sub2/                  v3 experiments: model families / depth ladder, feature pairs, Optuna, stacking
 │   ├── robust_test.py         unseen categories, missing values, shuffled/missing columns, fresh-process load
 │   ├── exp_families.py        LightGBM vs XGBoost vs CatBoost

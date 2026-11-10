@@ -278,3 +278,29 @@ on all three problems (through the framework: P1 AUC 0.849 vs 0.846, P2 log loss
   the refinement. GAM ladder: C = 0.05 and 0.2 with hinges.
 
 Everything else is v4. The boosting members, blending, calibration and threshold logic are unchanged.
+
+
+## Submission v4 = framework version 6 (in progress)
+
+Details, tables and raw logs: `submission/v4/V4_NOTES.md`, `experiments/v4/`. Environment: Windows, 16 cores,
+the exact leaderboard versions. Protocol: 5-fold CV repeated over 3 fold seeds (structure detection nested),
+plus repeated outer CV for the final-predictor question.
+
+- **No feature-engineering signal.** An OpenFE-style screen (residual booster on base-model OOF logits) of about
+  7,000 candidates (pairwise ratios / products / sums / differences, group-relative values, category crosses,
+  count encodings) found nothing above the noise floor; on P3 a pure-noise column scored as well as the best
+  candidates. `revenue_per_employee` is exactly `annual_revenue / employee_count`, sensor pairs are noisy copies,
+  and several effects are step functions, which is why trees win.
+- **Single models have plateaued.** LightGBM variants (lr 0.01, subsample 0.5, 3 leaves, 3 seeds, ...), EBM-style
+  stage-wise GA2M, and GAM variants all land within about ±0.0005 of the structured LightGBM reference.
+- **k-fold bagging beats the refit.** Averaging the 5 inner fold models beat v5's refit on all rows (trees x1.125,
+  3 seeds) on all three problems: P1 AUC 0.8551 vs 0.8542, P2 log loss 0.5100 vs 0.5103, P3 log loss 0.1981 vs
+  0.1983 (cost at 1/11: 0.720 vs 0.724).
+- **Library ensembles.** Caruana selection over a library of configurations beats the reference model by
+  +0.0002 AUC (P1), -0.0017 log loss (P2) and -0.0005 log loss (P3) on held-out rows; a logistic stack is better
+  still on P2 but worse on P1 and P3, so v4 chooses between them by nested CV.
+- **Monotone CatBoost** (depth 3, lr 0.03) is the most-weighted blend member on P1 and P3.
+
+Pending: outer 5-fold CV of v4 vs v5 on all three problems, offline holdout analysis (combiner, calibration of
+bagged predictions, P3 threshold), and the final build.
+
