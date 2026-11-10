@@ -1,0 +1,5 @@
+p1: trained and saved in 293 s
+p2: trained and saved in 307 s
+p3: trained and saved in 295 s
+wrote sub2.zip (2.7 MB): solution.py, manifest.json, p1_model.joblib, p2_model.joblib, p3_model.joblib, p3_threshold.json
+self-check passed: upload sub2.zip on the My Submissions tab

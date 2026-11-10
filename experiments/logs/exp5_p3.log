@@ -1,0 +1,73 @@
+===== p3 =====
+--- learning curve (fraction of training fold) ---
+stumps frac=0.25 it=285                  AUC=0.72321 LL=0.20492 cost@best=0.7584(t=0.100) cost@1/11=0.7605 1s
+depth2 frac=0.25 it=177                  AUC=0.72069 LL=0.20505 cost@best=0.7567(t=0.099) cost@1/11=0.7646 1s
+stumps frac=0.5 it=395                   AUC=0.72663 LL=0.20312 cost@best=0.7449(t=0.081) cost@1/11=0.7549 1s
+depth2 frac=0.5 it=227                   AUC=0.73144 LL=0.20149 cost@best=0.7389(t=0.084) cost@1/11=0.7453 2s
+stumps frac=0.75 it=837                  AUC=0.73890 LL=0.20019 cost@best=0.7271(t=0.096) cost@1/11=0.7355 4s
+depth2 frac=0.75 it=558                  AUC=0.74727 LL=0.19730 cost@best=0.6970(t=0.088) cost@1/11=0.7057 3s
+stumps frac=1.0 it=711                   AUC=0.73605 LL=0.20063 cost@best=0.7341(t=0.091) cost@1/11=0.7345 4s
+depth2 frac=1.0 it=497                   AUC=0.74730 LL=0.19770 cost@best=0.7053(t=0.086) cost@1/11=0.7084 4s
+--- additive shapes from a stumps model (full data) ---
+packet_loss_rate               gain=0.013 spearman=+0.93 signchg= 0 range=0.13 ▁▁▁▁▁▁▁▁▁▁▁▁▃▃▃▃▃▃▅▅▅▅▅▅▇
+latency_mean_ms                gain=0.009 spearman=-0.77 signchg= 0 range=0.15 ▇▇▇▇▇▇▇▆▆▆▆▆▆▆▄▄▄▄▄▄▁▁▇▇▁
+latency_variability            gain=0.047 spearman=+0.56 signchg= 0 range=0.39 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▄▄▄▄▆▆▆▇
+throughput_utilization         gain=0.169 spearman=-0.21 signchg= 0 range=1.03 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▄▇
+connection_drop_rate           gain=0.002 spearman=+0.84 signchg= 0 range=0.00 ▁▁▁▁▁▁▁▁▁▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇
+error_rate                     gain=0.015 spearman=+0.95 signchg= 0 range=0.44 ▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂▂▂▂▂▂▂▄▇
+traffic_volume                 gain=0.015 spearman=-0.18 signchg= 0 range=0.35 ▇▇▅▅▅▅▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▂▂
+traffic_change_1h              gain=0.358 spearman=+0.14 signchg= 0 range=1.52 ▇▄▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▃▃▄▇
+alarm_count_15m                gain=0.014 spearman=+0.86 signchg= 0 range=0.19 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▂▂▂▂▇▇▇
+alarm_count_1h                 gain=0.003 spearman=+0.98 signchg= 0 range=0.06 ▁▁▁▁▁▁▁▁▂▂▂▂▂▃▃▃▃▃▇▇▇▇▇▇▇
+critical_alarm_count           gain=0.047 spearman=+1.00 signchg= 0 range=0.47 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▄▄▄▄▄▇
+repeated_alarm_ratio           gain=0.006 spearman=-0.14 signchg= 0 range=0.33 ▇▇▇▇▇▇▇▇▇▇▇▆▆▆▆▆▆▆▆▆▇▇▇▇▁
+time_since_first_alarm_min     gain=0.004 spearman=+0.35 signchg= 0 range=0.08 ▇▁▁▁▁▁▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅▅
+node_age_years                 gain=0.008 spearman=-0.72 signchg= 0 range=0.26 ▇▅▅▄▄▄▄▄▄▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+firmware_age_months            gain=0.018 spearman=+0.70 signchg= 0 range=0.71 ▁▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▃▄▇
+recent_configuration_change    gain=0.008 spearman=+1.00 signchg= 0 range=0.18 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▇▇▇▇▇
+days_since_maintenance         gain=0.021 spearman=+0.94 signchg= 0 range=0.48 ▁▂▂▂▁▁▁▁▃▃▃▃▃▃▃▃▃▃▃▃▃▃▇▇▇
+weather_severity_index         gain=0.014 spearman=+0.39 signchg= 0 range=0.22 ▇▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▆▆▇▇
+connected_user_count           gain=0.009 spearman=+0.58 signchg= 0 range=0.15 ▁▁▁▁▁▁▁▁▁▁▁▁▁▆▆▆▇▇▇▇▇▇▇▇▁
+redundancy_available           gain=0.005 spearman=-1.00 signchg= 0 range=0.11 ▇▇▇▇▇▇▇▇▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+packet_loss_5m                 gain=0.016 spearman=+0.95 signchg= 0 range=0.15 ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▃▅▅▅▅▅▅▇
+latency_p95_ms                 gain=0.004 spearman=-0.91 signchg= 0 range=0.08 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▁▁▁▁▁▁▁▁▁▅
+utilization_15m_average        gain=0.085 spearman=+0.88 signchg= 0 range=0.72 ▁▁▁▁▃▃▃▂▂▂▂▂▂▂▂▃▃▃▃▃▅▆▆▆▇
+spare_capacity_index           gain=0.020 spearman=+0.05 signchg= 0 range=0.37 ▇▅▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+maintenance_ticket_count_90d   gain=0.004 spearman=-0.49 signchg= 0 range=0.18 ▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▇▁▁
+site_access_time_min           gain=0.020 spearman=+0.73 signchg= 1 range=0.51 ▁▇▅▅▅▅▅▆▆▆▆▆▆▆▆▆▆▆▆▆▆▇▇▇▇
+lease_cost_index               gain=0.024 spearman=+0.09 signchg= 0 range=0.24 ▁▁▁▆▆▆▇▇▅▄▄▄▁▁▁▁▁▁▁▁▅▅▅▅▅
+rack_position_code             gain=0.010 spearman=+0.02 signchg= 0 range=0.22 ▇▃▃▃▃▃▄▇▇▇▇▇▇▅▅▅▅▅▅▅▅▅▅▅▁
+node_type                      gain=0.026 (categorical)
+vendor_family                  gain=0.000 (categorical)
+technology_generation          gain=0.000 (categorical)
+region_type                    gain=0.004 (categorical)
+time_of_day_band               gain=0.001 (categorical)
+weekday_weekend                gain=0.000 (categorical)
+--- interaction detection from depth-2 model ---
+  throughput_utilization       x traffic_change_1h              8.9% of pair gain
+  traffic_change_1h            x utilization_15m_average        7.3% of pair gain
+  critical_alarm_count         x recent_configuration_change    3.9% of pair gain
+  latency_variability          x traffic_change_1h              3.9% of pair gain
+  throughput_utilization       x node_type                      3.5% of pair gain
+  utilization_15m_average      x node_type                      3.4% of pair gain
+  throughput_utilization       x redundancy_available           2.3% of pair gain
+  traffic_change_1h            x critical_alarm_count           1.2% of pair gain
+  critical_alarm_count         x spare_capacity_index           1.2% of pair gain
+  traffic_volume               x connected_user_count           1.1% of pair gain
+  throughput_utilization       x critical_alarm_count           1.1% of pair gain
+  firmware_age_months          x node_type                      1.1% of pair gain
+--- interaction-constrained models (additive + top-k pairs) ---
+constrained d2 top0 it=432               AUC=0.73737 LL=0.20025 cost@best=0.7317(t=0.084) cost@1/11=0.7411 3s
+constrained d3 top0 it=408               AUC=0.73406 LL=0.20094 cost@best=0.7395(t=0.101) cost@1/11=0.7552 4s
+constrained d2 top2 it=436               AUC=0.73639 LL=0.20063 cost@best=0.7377(t=0.095) cost@1/11=0.7442 4s
+constrained d3 top2 it=409               AUC=0.73538 LL=0.20092 cost@best=0.7309(t=0.109) cost@1/11=0.7442 4s
+constrained d2 top4 it=513               AUC=0.73793 LL=0.19964 cost@best=0.7285(t=0.086) cost@1/11=0.7355 4s
+constrained d3 top4 it=436               AUC=0.73731 LL=0.19967 cost@best=0.7212(t=0.115) cost@1/11=0.7265 4s
+constrained d2 top8 it=487               AUC=0.74738 LL=0.19711 cost@best=0.7035(t=0.099) cost@1/11=0.7096 4s
+constrained d3 top8 it=431               AUC=0.74418 LL=0.19734 cost@best=0.7024(t=0.099) cost@1/11=0.7115 4s
+--- monotone constraints where the additive shape is monotone (|spearman|>0.9, <=2 sign changes) ---
+monotone features: {'packet_loss_rate': 1, 'error_rate': 1, 'alarm_count_1h': 1, 'critical_alarm_count': 1, 'recent_configuration_change': 1, 'days_since_maintenance': 1, 'redundancy_available': -1, 'packet_loss_5m': 1, 'latency_p95_ms': -1}
+stumps + monotone it=724                 AUC=0.73608 LL=0.20060 cost@best=0.7334(t=0.080) cost@1/11=0.7346 4s
+depth2 + monotone it=485                 AUC=0.74774 LL=0.19754 cost@best=0.7103(t=0.094) cost@1/11=0.7124 4s
+stumps lr0.01 it=3372                    AUC=0.73564 LL=0.20071 cost@best=0.7303(t=0.080) cost@1/11=0.7426 15s
+stumps lr0.05 3 seeds it=711             AUC=0.73605 LL=0.20063 cost@best=0.7341(t=0.091) cost@1/11=0.7345 11s

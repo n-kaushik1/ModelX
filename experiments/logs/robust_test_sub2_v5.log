@@ -1,0 +1,5 @@
+roc_auc selected: ['cat', 'gam', 'lgbm'] threshold: 0.5 searched: ['cat', 'et', 'gam', 'lgbm', 'xgb']
+fresh-process ok [0.2056 0.1946 0.2089]
+decision_cost selected: ['cat', 'gam', 'lgbm', 'xgb'] threshold: 0.084 searched: ['cat', 'et', 'gam', 'lgbm', 'xgb']
+fresh-process ok [0.1938 0.1819 0.199 ]
+ROBUSTNESS TEST PASSED

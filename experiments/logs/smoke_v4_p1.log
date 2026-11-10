@@ -1,0 +1,35 @@
+[framework] objective: {'metric': 'roc_auc', 'metric_defaulted': False}
+[framework] profile: {'n_rows': 8000, 'n_features': 27, 'n_numeric': 20, 'n_categorical': 7, 'positive_rate': 0.30525, 'minority_count': 2442, 'imbalanced': False, 'missing_rate_overall': 0.012402777777777776, 'n_cols_with_missing': 6, 'max_cardinality': 5, 'n_skewed_numeric': 2} dropped: {}
+[framework] gam   it00 roc_auc=0.84236 trees=None t=    4s
+[framework] gam   it01 roc_auc=0.84348 trees=None t=   10s
+[framework] lgbm  it00 roc_auc=0.85238 trees=1439 t=   12s
+[framework] lgbm  it01 roc_auc=0.85359 trees=760 t=   15s
+[framework] lgbm  it02 roc_auc=0.85414 trees=911 t=   19s
+[framework] lgbm  it03 roc_auc=0.85347 trees=821 t=   22s
+[framework] lgbm  it04 roc_auc=0.85248 trees=467 t=   24s
+[framework] lgbm  it05 roc_auc=0.85341 trees=613 t=   28s
+[framework] lgbm  it06 roc_auc=0.85128 trees=346 t=   30s
+[framework] lgbm  it07 roc_auc=0.85008 trees=393 t=   34s
+[framework] xgb   it00 roc_auc=0.85186 trees=1590 t=   39s
+[framework] xgb   it01 roc_auc=0.85220 trees=909 t=   43s
+[framework] config failed xgb(depth=2, lr=0.03, mcw=5, subsample=0.8, colsample=0.8, l2=1, inter_k=8, mono=1, class_weight=None) ValueError('Constrained features are not a subset of training data feature names')
+[framework] xgb   it03 roc_auc=0.85157 trees=513 t=   47s
+[framework] config failed xgb(depth=3, lr=0.03, mcw=5, subsample=0.8, colsample=0.7, l2=1, inter_k=16, mono=1, class_weight=None) ValueError('Constrained features are not a subset of training data feature names')
+[framework] xgb   it05 roc_auc=0.85007 trees=374 t=   50s
+[framework] xgb   it06 roc_auc=0.84924 trees=405 t=   55s
+[framework] cat   it00 roc_auc=0.85174 trees=504 t=   71s
+[framework] cat   it01 roc_auc=0.85212 trees=345 t=   85s
+[framework] cat   it02 roc_auc=0.85138 trees=264 t=  102s
+[framework] et    it00 roc_auc=0.83574 trees=None t=  118s
+[framework] et    it01 roc_auc=0.83693 trees=None t=  131s
+[framework] final-fold gam   roc_auc=0.84181 roc_auc=0.84181 gam(C=1, knots=8, class_weight=None)
+[framework] final-fold lgbm  roc_auc=0.85234 roc_auc=0.85234 lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8,
+[framework] final-fold lgbm  roc_auc=0.85208 roc_auc=0.85208 lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8,
+[framework] final-fold xgb   roc_auc=0.85110 roc_auc=0.85110 xgb(depth=2, lr=0.03, mcw=5, subsample=0.8, colsample=0.8, l
+[framework] final-fold cat   roc_auc=0.85147 roc_auc=0.85147 cat(depth=4, lr=0.05, l2=5, random_strength=1, bagging_tempe
+[framework] final-fold et    roc_auc=0.83772 roc_auc=0.83772 et(n_estimators=400, min_leaf=10, max_features=0.4, class_we
+[framework] done in 176s; blend={'lgbm+struct': 0.5, 'cat': 0.5} threshold=0.5000
+fit 176 s
+holdout                                  AUC=0.85334 LL=0.41956 cost@best=0.7978(t=0.102) cost@1/11=0.8216
+threshold 0.5 normcost 2.0079136690647483
+{"objective": {"metric": "roc_auc", "metric_defaulted": false}, "baseline_prior": {"roc_auc": 0.5}, "family_scores": {"gam": 0.8418080319843544, "lgbm+struct": 0.8523353164411099, "lgbm": 0.8520829704708797, "xgb": 0.8510953214983441, "cat": 0.8514717406405065, "et": 0.8377166380944718}, "family_logloss": {"gam": 0.4340577828797398, "lgbm+struct": 0.4209901861560779, "lgbm": 0.4212843022875709, "xgb": 0.42286590224455717, "cat": 0.4237147050165826, "et": 0.4754874741628788}, "blend_weights": {"lgbm+struct": 0.5, "cat": 0.5}, "blend_oof_score": 0.8530356962346887, "blend_oof_logloss": 0.4209380831743277, "logloss_blend_raw": 0.4209380831743277, "logloss_blend_calibrated": 0.42029853617436763, "selected": ["lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8, colsample=0.8, l2=1, inter_k=8, mono=1, class_weight=None, n_estimators=1025)", "lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8, colsample=0.8, l2=1, inter_k=8, mono=1, class_weight=None, n_estimators=1025)", "lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8, colsample=0.8, l2=1, inter_k=8, mono=1, class_weight=None, n_estimators=1025)", "cat(depth=4, lr=0.05, l2=5, random_strength=1, bagging_temperature=1, class_weight=None, n_estimators=388)", "cat(depth=4, lr=0.05, l2=5, random_strength=1, bagging_temperature=1, class_weight=None, n_estimators=388)", "cat(depth=4, lr=0.05, l2=5, random_strength=1, bagging_temperature=1, class_weight=None, n_estimators=388)"], "fit_seconds": 175.58665227890015, "threshold": 0.5}

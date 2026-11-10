@@ -1,0 +1,21 @@
+===== p2 ===== (repeated 5-fold x 3 fold seeds; higher is better: AUC or -logloss)
+B structured d2 inter8 mono                      ll=-0.50986 sd=0.00070 per-seed=[-0.50887, -0.5103, -0.51039] 20s
+B inter_k=16                                     ll=-0.50959 sd=0.00056 per-seed=[-0.5088, -0.50988, -0.51008] 11s
+B inter_k=4                                      ll=-0.50951 sd=0.00064 per-seed=[-0.50862, -0.50978, -0.51012] 12s
+B dart (drop_rate .1)                            ll=-0.51407 sd=0.00101 per-seed=[-0.51266, -0.51496, -0.51459] 384s
+B num_leaves=3                                   ll=-0.50999 sd=0.00070 per-seed=[-0.50902, -0.51065, -0.5103] 13s
+B depth3 leaves6 inter16                         ll=-0.50952 sd=0.00081 per-seed=[-0.50846, -0.5097, -0.51042] 14s
+B min_sum_hessian 5                              ll=-0.50987 sd=0.00067 per-seed=[-0.50894, -0.51023, -0.51045] 12s
+B cat_l2 30 cat_smooth 50                        ll=-0.50987 sd=0.00068 per-seed=[-0.50892, -0.51025, -0.51045] 12s
+hinge-GAM k=7 C=0.05                             ll=-0.51095 sd=0.00048 per-seed=[-0.51028, -0.51118, -0.51137] 19s
+hinge-GAM k=7 C=0.2                              ll=-0.51256 sd=0.00057 per-seed=[-0.51177, -0.51282, -0.51309] 14s
+blend B + hinge-GAM (1:1)                        ll=-0.50908 per-seed=[-0.50816, -0.50944, -0.50965]
+blend B + hinge-GAM (3:1)                        ll=-0.50892 per-seed=[-0.50796, -0.50933, -0.50948]
+blend B + B16 + B4                               ll=-0.50949 per-seed=[-0.50862, -0.50983, -0.51003]
+optuna best on fold-seed 0: -0.50824 params={'lr': 0.014232396792130692, 'depth': 2, 'mcs': 20, 'subsample': 0.5000400789030646, 'colsample': 0.9880860873382717, 'l2': 0.14568811136531654, 'l1': 0.0015911842485943981, 'inter_k': 8, 'mono': 1, 'leaves': 4} (302s)
+optuna-best checked on fold seeds 0,1,2          ll=-0.50931 sd=0.00077 per-seed=[-0.50824, -0.50969, -0.51] 25s
+blend B + optuna-best                            ll=-0.50942 per-seed=[-0.5084, -0.50984, -0.51002]
+calibration none      ll=-0.50986 per-seed=[-0.50887, -0.5103, -0.51039]
+calibration platt     ll=-0.50980 per-seed=[-0.50873, -0.51028, -0.51038]
+calibration isotonic  ll=-0.51161 per-seed=[-0.51001, -0.51233, -0.51248]
+calibration beta      ll=-0.50979 per-seed=[-0.50874, -0.51031, -0.51033]

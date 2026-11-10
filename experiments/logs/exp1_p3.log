@@ -1,0 +1,19 @@
+p3 (15000, 35)
+lgb stumps lr.05 it=791                  AUC=0.73662 LL=0.20101 cost@best=0.7385(t=0.073) cost@1/11=0.7492 4s
+lgb depth2 lr.03 it=510                  AUC=0.74229 LL=0.19912 cost@best=0.7231(t=0.077) cost@1/11=0.7343 4s
+lgb depth3 lr.03 it=230                  AUC=0.74397 LL=0.19914 cost@best=0.7236(t=0.090) cost@1/11=0.7298 2s
+lgb leaves15 lr.02 it=236                AUC=0.74350 LL=0.19911 cost@best=0.7302(t=0.104) cost@1/11=0.7417 4s
+lgb leaves31 lr.02 it=195                AUC=0.74208 LL=0.19996 cost@best=0.7318(t=0.089) cost@1/11=0.7366 5s
+xgb depth3 lr.03 it=309                  AUC=0.74623 LL=0.19869 cost@best=0.7195(t=0.083) cost@1/11=0.7302 6s
+xgb depth5 lr.02 it=233                  AUC=0.74622 LL=0.19878 cost@best=0.7173(t=0.107) cost@1/11=0.7214 6s
+cat depth6 lr.05 it=184                  AUC=0.74403 LL=0.19806 cost@best=0.7222(t=0.093) cost@1/11=0.7271 30s
+cat depth4 lr.05 it=254                  AUC=0.74451 LL=0.19769 cost@best=0.7187(t=0.080) cost@1/11=0.7297 26s
+spline-LR C=0.03 knots8                  AUC=0.72601 LL=0.20442 cost@best=0.7606(t=0.094) cost@1/11=0.7642 4s
+spline-LR C=0.1 knots8                   AUC=0.73253 LL=0.20243 cost@best=0.7462(t=0.084) cost@1/11=0.7579 4s
+spline-LR C=0.3 knots8                   AUC=0.73227 LL=0.20246 cost@best=0.7417(t=0.105) cost@1/11=0.7537 6s
+spline-LR C=1.0 knots8                   AUC=0.73012 LL=0.20325 cost@best=0.7442(t=0.103) cost@1/11=0.7558 8s
+spline-LR C=0.1 knots5                   AUC=0.73202 LL=0.20186 cost@best=0.7310(t=0.091) cost@1/11=0.7324 7s
+spline-LR C=0.1 knots12                  AUC=0.72718 LL=0.20340 cost@best=0.7588(t=0.089) cost@1/11=0.7631 8s
+blend lgb15+xgb3+cat6                    AUC=0.74873 LL=0.19777 cost@best=0.7203(t=0.086) cost@1/11=0.7259
+blend lgb15+xgb3+cat6+spl0.1             AUC=0.74814 LL=0.19794 cost@best=0.7161(t=0.094) cost@1/11=0.7196
+blend stump+spl0.1                       AUC=0.73904 LL=0.20052 cost@best=0.7278(t=0.082) cost@1/11=0.7376

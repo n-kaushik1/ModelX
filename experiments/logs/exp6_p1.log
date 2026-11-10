@@ -1,0 +1,18 @@
+p1 n monotone 6 top pairs [('material_purity_index', 'cycle_time'), ('material_purity_index', 'energy_per_unit'), ('cycle_time', 'operator_experience_band'), ('material_purity_index', 'process_temperature'), ('cycle_time', 'cooling_rate'), ('process_temperature', 'tool_wear_index')]
+lgb d2 inter4 + mono it=940              AUC=0.85603 LL=0.41646 cost@best=0.8172(t=0.120) cost@1/11=0.8225 5s
+lgb d2 inter8 + mono it=978              AUC=0.85552 LL=0.41670 cost@best=0.8142(t=0.132) cost@1/11=0.8250 6s
+lgb d2 inter12 + mono it=1023            AUC=0.85575 LL=0.41619 cost@best=0.8174(t=0.093) cost@1/11=0.8224 5s
+lgb d2 inter16 + mono it=986             AUC=0.85573 LL=0.41634 cost@best=0.8152(t=0.122) cost@1/11=0.8217 4s
+lgb d2 inter24 + mono it=967             AUC=0.85556 LL=0.41622 cost@best=0.8165(t=0.098) cost@1/11=0.8225 5s
+lgb d3 inter8 + mono it=712              AUC=0.85556 LL=0.41710 cost@best=0.8169(t=0.115) cost@1/11=0.8283 6s
+lgb d3 inter16 + mono it=693             AUC=0.85539 LL=0.41722 cost@best=0.8113(t=0.124) cost@1/11=0.8241 5s
+lgb d2 inter8 + mono colsample1 lr.02 it=1543 AUC=0.85508 LL=0.41718 cost@best=0.8128(t=0.127) cost@1/11=0.8307 8s
+lgb d2 inter8 + mono 3 seeds it=1000     AUC=0.85556 LL=0.41659 cost@best=0.8120(t=0.127) cost@1/11=0.8266 15s
+xgb d2 inter8 + mono it=1136             AUC=0.85416 LL=0.41862 cost@best=0.8149(t=0.130) cost@1/11=0.8287 9s
+xgb d3 inter8 + mono it=730              AUC=0.85382 LL=0.41933 cost@best=0.8187(t=0.143) cost@1/11=0.8261 6s
+xgb d3 mono only it=631                  AUC=0.85330 LL=0.41991 cost@best=0.8143(t=0.081) cost@1/11=0.8312 6s
+cat d4 + mono it=391                     AUC=0.85271 LL=0.42198 cost@best=0.8168(t=0.113) cost@1/11=0.8238 35s
+OLD blend lgb_d2+xgb_d3+cat_d4           AUC=0.85440 LL=0.41855 cost@best=0.8151(t=0.082) cost@1/11=0.8179
+NEW blend c8_d2m+x_c8_d3m+cat_d4m        AUC=0.85526 LL=0.41775 cost@best=0.8159(t=0.138) cost@1/11=0.8266
+NEW blend c8_d2m+c16_d3m+x_c8_d2m+x_c8_d3m+cat_d4m AUC=0.85557 LL=0.41717 cost@best=0.8139(t=0.139) cost@1/11=0.8258
+MIX blend c8_d2m+x_c8_d3m+cat_d4m+lgb_d2+xgb_d3+cat_d4 AUC=0.85513 LL=0.41776 cost@best=0.8159(t=0.085) cost@1/11=0.8212

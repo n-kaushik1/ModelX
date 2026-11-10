@@ -1,0 +1,15 @@
+p3 pairs added: [('packet_loss_rate', 'packet_loss_5m', 0.955), ('latency_mean_ms', 'latency_p95_ms', 0.903), ('throughput_utilization', 'utilization_15m_average', 0.963)]
+lgb stumps +pairs it=912                 AUC=0.73564 LL=0.20105 cost@best=0.7400(t=0.071) cost@1/11=0.7525 5s
+lgb depth2 +pairs it=402                 AUC=0.73960 LL=0.19968 cost@best=0.7316(t=0.100) cost@1/11=0.7340 4s
+lgb depth3 +pairs it=206                 AUC=0.74194 LL=0.19933 cost@best=0.7286(t=0.079) cost@1/11=0.7335 4s
+lgb stumps lr.02 it=2000                 AUC=0.73647 LL=0.20104 cost@best=0.7357(t=0.074) cost@1/11=0.7508 8s
+lgb depth2 3 seeds it=473                AUC=0.74309 LL=0.19895 cost@best=0.7259(t=0.080) cost@1/11=0.7333 10s
+lgb depth2 colsample.5 lr.02 it=797      AUC=0.74071 LL=0.19962 cost@best=0.7306(t=0.085) cost@1/11=0.7377 5s
+lgb depth2 colsample.5 lr.02 +pairs it=804 AUC=0.73915 LL=0.19992 cost@best=0.7344(t=0.088) cost@1/11=0.7405 5s
+xgb depth2 lr.03 it=409                  AUC=0.74321 LL=0.19933 cost@best=0.7307(t=0.100) cost@1/11=0.7335 6s
+xgb depth3 +pairs it=312                 AUC=0.74125 LL=0.19943 cost@best=0.7233(t=0.103) cost@1/11=0.7370 6s
+cat depth4 +pairs it=255                 AUC=0.74341 LL=0.19799 cost@best=0.7159(t=0.080) cost@1/11=0.7178 27s
+cat depth3 it=289                        AUC=0.74675 LL=0.19773 cost@best=0.7234(t=0.076) cost@1/11=0.7272 20s
+blend st+d2+xgb3+cat4                    AUC=0.74586 LL=0.19821 cost@best=0.7170(t=0.082) cost@1/11=0.7266
+blend pairs: st+d2+d3+xgb3+cat4          AUC=0.74359 LL=0.19864 cost@best=0.7224(t=0.069) cost@1/11=0.7322
+blend pairs+plain all                    AUC=0.74497 LL=0.19835 cost@best=0.7210(t=0.068) cost@1/11=0.7237
