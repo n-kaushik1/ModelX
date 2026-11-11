@@ -14,31 +14,42 @@ escalation) and later on three hidden ones.
 
 | What | Where |
 |---|---|
-| **Zip to upload to the leaderboard** | [`submission/improved/submission.zip`](submission/improved/submission.zip) |
+| **Zip to upload to the leaderboard** | [`submission/sub2/sub2.zip`](submission/sub2/sub2.zip) (version 5) |
+| Submission v4 (framework version 6): **in progress, not yet a submission** | [`submission/v4/`](submission/v4/); status, changes and evidence in [`V4_NOTES.md`](submission/v4/V4_NOTES.md) |
+| Previous zips (v3: `experiments/variants/sub2_v3.zip`, v2) | [`submission/improved/submission.zip`](submission/improved/submission.zip) |
 | Fallback / reference zip | [`submission/baseline/submission.zip`](submission/baseline/submission.zip) |
-| Framework code | [`submission/improved/solution.py`](submission/improved/solution.py) |
+| Framework code | [`submission/sub2/solution.py`](submission/sub2/solution.py) |
 | What was tried and why | [`docs/experiment_notes.md`](docs/experiment_notes.md) |
 | How the framework works | [`docs/framework_design.md`](docs/framework_design.md) |
 
-Both zips were built with the official `make_submission.py` in the exact leaderboard environment and passed its
+All zips were built with the official `make_submission.py` in the exact leaderboard environment and passed its
 self-check.
 
-**Local results** (mean of 3 stratified 80/20 splits; not leaderboard scores):
+**Local results** (mean of 3 stratified 80/20 splits, seeds 42/1/2; not leaderboard scores):
 
-| Problem | Metric | Baseline | Improved |
-|---|---|---|---|
-| P1 Manufacturing | ROC-AUC (higher is better) | **0.8476** | 0.8458 |
-| P2 Credit | Log loss (lower is better) | 0.5116 | **0.5099** |
-| P3 Telecom | Normalized cost (lower is better) | 0.6837 | **0.6824** |
+| Problem | Metric | Baseline | Improved (v2) | **sub2 (v4)** |
+|---|---|---|---|---|
+| P1 Manufacturing | ROC-AUC (higher is better) | 0.8476 | 0.8458 | **0.8492** |
+| P2 Credit | Log loss (lower is better) | 0.5116 | 0.5099 | **0.5087** |
+| P3 Telecom | Normalized cost (lower is better) | 0.6837 | 0.6824 | **0.6802** |
 
-Compared with the baseline, the improved version:
-- adds XGBoost as a candidate;
-- adds CatBoost, used only when a categorical column has more than 30 levels;
-- gives every model family a fixed, independent share of the tuning time and its own random stream;
-- reads the leaderboard's `requires_threshold` and `positive_label` metadata;
-- can never return NaN.
+Version 4 (`submission/sub2/`) is better than v2 on every split of P1 and P2 and on 2 of 3 splits of P3.
+Compared with v2 it:
+- tunes every boosting family with a *complexity ladder* (tree depth 1, 2, 3, 4, 6, number of trees by early
+  stopping) followed by random refinement around the best depth: all three public problems turn out to be mostly
+  additive with hinge / U-shaped effects, where depth-1/2 boosting beats the 15-31-leaf trees v2 searched;
+- **measures the structure of the training data and uses it as model constraints**: a quick depth-2 model ranks
+  the feature pairs that interact, a quick depth-1 model gives each feature's additive shape and its monotone
+  direction where the shape is monotone; the boosting candidates are then searched with and without
+  `interaction_constraints` / `monotone_constraints` (nested inside every fold, so nothing leaks);
+- re-scores the best configurations on fresh folds with a fixed tree count, then blends them in logit space with
+  greedy (Caruana) selection; for the cost problem the members are selected by log loss, which transfers better
+  than the noisy best-threshold cost;
+- adds a spline-logistic GAM candidate and makes CatBoost a regular candidate;
+- respects CPU affinity limits and scales the tree count when refitting on all rows.
 
-It is better on P2 and P3 and about 0.002 AUC worse on P1, which is within noise.
+Full details and the supporting experiments (model families, Optuna, feature pairs, stacking, threshold transfer)
+are in [`docs/experiment_notes.md`](docs/experiment_notes.md).
 
 **Key dates:** leaderboard closes **28 Nov 2026, 23:59 IST**; final report due **29 Nov**.
 
@@ -54,13 +65,19 @@ ModelX/
 ├── public_data.zip            the three development CSVs (unzipped into data/ by the setup script)
 ├── starting_kit.zip           the official starting kit, unchanged
 ├── submission/
-│   ├── improved/              ← the current submission
+│   ├── v4/                    submission v4 = framework version 6, in progress (k-fold bagging, library ensemble; see V4_NOTES.md)
+│   │   ├── solution.py, V4_NOTES.md, and the official kit files
+│   ├── sub2/                  ← the current submission (versions 3-5: complexity ladder, measured-structure constraints, logit blending, GAM)
+│   │   ├── solution.py, sub2.zip (version 5 build), and the official kit files
+│   ├── improved/              version 2, kept for comparison
 │   │   ├── solution.py        the framework (StudentSolution)
 │   │   ├── submission.zip     built zip, ready to upload
 │   │   └── make_submission.py, local_test.py, problems.py, requirements.txt   (official kit files)
 │   └── baseline/              the first version, kept frozen for comparison (same structure)
 ├── experiments/               scripts behind the numbers in docs/experiment_notes.md
 │   ├── eval_splits.py         repeated 80/20 evaluation with joblib save/load (main comparison tool)
+│   ├── v4/                    submission-v4 experiments: feature screen, model variants, bagging, ensembles, outer CV (+ logs/)
+│   ├── sub2/                  v3 experiments: model families / depth ladder, feature pairs, Optuna, stacking
 │   ├── robust_test.py         unseen categories, missing values, shuffled/missing columns, fresh-process load
 │   ├── exp_families.py        LightGBM vs XGBoost vs CatBoost
 │   ├── exp_threshold.py       P3 threshold strategies
@@ -112,7 +129,7 @@ The last lines it prints should show `python 3.11.x`, the versions above, and th
 ### 1. Check that the framework still works (about 2 min)
 
 ```bash
-.venv/bin/python experiments/robust_test.py submission/improved
+.venv/bin/python experiments/robust_test.py submission/sub2
 ```
 
 It fits on synthetic data with awkward properties and checks predictions in a fresh process, as the leaderboard
@@ -121,9 +138,9 @@ does. It must end with `ROBUSTNESS TEST PASSED`.
 ### 2. Estimate scores locally (about 10 min per problem on 16 cores)
 
 ```bash
-.venv/bin/python experiments/eval_splits.py submission/improved data p1 42 1 2
-.venv/bin/python experiments/eval_splits.py submission/improved data p2 42 1 2
-.venv/bin/python experiments/eval_splits.py submission/improved data p3 42 1 2
+.venv/bin/python experiments/eval_splits.py submission/sub2 data p1 42 1 2
+.venv/bin/python experiments/eval_splits.py submission/sub2 data p2 42 1 2
+.venv/bin/python experiments/eval_splits.py submission/sub2 data p3 42 1 2
 ```
 
 Each line of output is one split: the score in the leaderboard metric, the chosen blend, and the per-family CV
@@ -133,11 +150,11 @@ scores. Compare against the tables in `docs/experiment_notes.md` using the same 
 ### 3. Build the zip to upload (about 10 min)
 
 ```bash
-cd submission/improved
-../../.venv/bin/python make_submission.py ../../data
+cd submission/sub2
+../../.venv/bin/python make_submission.py ../../data --out sub2.zip
 ```
 
-This trains on the full development data, writes `submission.zip`, then reloads it in a fresh process and
+This trains on the full development data, writes `sub2.zip`, then reloads it in a fresh process and
 predicts, the same check the leaderboard runs. It must end with `self-check passed`. If it warns about a
 version mismatch, the environment is wrong; re-run the setup script.
 

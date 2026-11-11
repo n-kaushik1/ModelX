@@ -1,0 +1,7 @@
+p3 rep0 done
+p3 rep1 done
+p3 refit1       primary=-0.19821 per-rep=[-0.19766, -0.19877] LL=0.19821 calib-slope=1.001 cost@1/11=0.7262
+p3 refit3       primary=-0.19825 per-rep=[-0.19769, -0.19881] LL=0.19825 calib-slope=1.001 cost@1/11=0.7244
+p3 bag5         primary=-0.19811 per-rep=[-0.19744, -0.19879] LL=0.19811 calib-slope=1.039 cost@1/11=0.7202
+p3 bag5+refit3  primary=-0.19811 per-rep=[-0.19749, -0.19872] LL=0.19811 calib-slope=1.021 cost@1/11=0.7212
+p3 bag5_3s      primary=-0.19810 per-rep=[-0.19743, -0.19878] LL=0.19810 calib-slope=1.048 cost@1/11=0.7204

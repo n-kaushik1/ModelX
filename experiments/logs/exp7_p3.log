@@ -1,0 +1,18 @@
+===== p3 =====
+B: d2 inter8 mono (native cats) it=490   AUC=0.74637 LL=0.19770 cost@best=0.7091(t=0.102) cost@1/11=0.7156 7s
+B + 5 seeds it=527                       AUC=0.74596 LL=0.19758 cost@best=0.7055(t=0.090) cost@1/11=0.7064 21s
+B one-hot cats it=663                    AUC=0.73971 LL=0.19935 cost@best=0.7212(t=0.098) cost@1/11=0.7283 5s
+B max_bin 1023 it=561                    AUC=0.74740 LL=0.19763 cost@best=0.7065(t=0.083) cost@1/11=0.7106 6s
+B max_bin 63 it=551                      AUC=0.74617 LL=0.19800 cost@best=0.7100(t=0.097) cost@1/11=0.7136 4s
+B extra_trees it=1054                    AUC=0.74820 LL=0.19677 cost@best=0.7012(t=0.107) cost@1/11=0.7095 6s
+B drop zero-gain feats (nested) it=587   AUC=0.74558 LL=0.19762 cost@best=0.7070(t=0.095) cost@1/11=0.7131 5s
+B min_child 50 it=560                    AUC=0.74544 LL=0.19787 cost@best=0.7095(t=0.085) cost@1/11=0.7156 5s
+B colsample 1.0 subsample 1.0 it=539     AUC=0.74362 LL=0.19827 cost@best=0.7151(t=0.084) cost@1/11=0.7196 4s
+B lr 0.015 it=1005                       AUC=0.74504 LL=0.19786 cost@best=0.7111(t=0.085) cost@1/11=0.7156 7s
+B path_smooth 10 it=575                  AUC=0.74598 LL=0.19759 cost@best=0.7094(t=0.101) cost@1/11=0.7188 5s
+B inter8 no mono it=491                  AUC=0.74576 LL=0.19769 cost@best=0.7079(t=0.101) cost@1/11=0.7162 3s
+linear_tree stumps (no constraints) it=796 AUC=0.73695 LL=0.20056 cost@best=0.7259(t=0.085) cost@1/11=0.7334 5s
+linear_tree d2 (no constraints) it=416   AUC=0.74748 LL=0.19755 cost@best=0.7141(t=0.097) cost@1/11=0.7190 4s
+linear_tree d2 + inter8 (no mono) it=424 AUC=0.74652 LL=0.19748 cost@best=0.7088(t=0.089) cost@1/11=0.7108 4s
+blend B + one-hot + max_bin1023 + extra_trees AUC=0.74771 LL=0.19725 cost@best=0.7003(t=0.091) cost@1/11=0.7003
+blend B + linear_tree d2                 AUC=0.74807 LL=0.19735 cost@best=0.7086(t=0.109) cost@1/11=0.7173

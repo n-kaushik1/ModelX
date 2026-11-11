@@ -1,0 +1,49 @@
+===== p3 base LL=0.19691 AUC=0.74876 (2s)
+2868 candidates
+scored in 45s; noise floor (best RAW/NOISE gain) = 0.00029
+  +0.00061  packet_loss_rate/time_since_first_alarm_min
+  +0.00037  zredundancy_available*zutilization_15m_average
+  +0.00035  ztime_since_first_alarm_min+zfirmware_age_months
+  +0.00033  time_since_first_alarm_min/packet_loss_rate
+  +0.00031  zcritical_alarm_count+zmaintenance_ticket_count_90d
+  +0.00030  zerror_rate+zsite_access_time_min
+  +0.00029  distinct_alarm_types*days_since_maintenance
+  +0.00029  NOISE:0
+  +0.00027  zconnected_user_count*zlease_cost_index
+  +0.00027  critical_alarm_count*recent_configuration_change
+  +0.00026  redundancy_available*site_access_time_min
+  +0.00026  zweather_severity_index+zlease_cost_index
+  +0.00025  redundancy_available/rack_position_code
+  +0.00025  zfirmware_age_months-zlease_cost_index
+  +0.00024  ztime_since_first_alarm_min+zpacket_loss_5m
+  +0.00024  rack_position_code/redundancy_available
+  +0.00023  redundancy_available*rack_position_code
+  +0.00021  critical_alarm_count/recent_configuration_change
+  +0.00021  zcritical_alarm_count*zmaintenance_ticket_count_90d
+  +0.00021  latency_p95_ms/alarm_count_15m
+  +0.00020  redundancy_available/site_access_time_min
+  +0.00019  zconnected_user_count+zlease_cost_index
+  +0.00018  zerror_rate-ztraffic_change_1h
+  +0.00015  alarm_count_15m*firmware_age_months
+  +0.00015  recent_configuration_change/critical_alarm_count
+  +0.00015  recent_configuration_change/redundancy_available
+  +0.00014  critical_alarm_count*maintenance_ticket_count_90d
+  +0.00014  zalarm_count_1h-zsite_access_time_min
+  +0.00014  zredundancy_available*zrack_position_code
+  +0.00013  zcritical_alarm_count*zrecent_configuration_change
+  +0.00013  zlatency_mean_ms*zrack_position_code
+  +0.00013  ztime_since_first_alarm_min*zfirmware_age_months
+  +0.00013  lease_cost_index-mean|vendor_family
+  +0.00013  packet_loss_5m/time_since_first_alarm_min
+  +0.00012  zlatency_mean_ms-zerror_rate
+  +0.00012  zconnected_user_count*zrack_position_code
+  +0.00011  zredundancy_available-zrack_position_code
+  +0.00011  lease_cost_indexz|vendor_family
+  +0.00011  zconnection_drop_rate-zlease_cost_index
+  +0.00009  znode_age_years*zlease_cost_index
+  +0.00009  site_access_time_min/redundancy_available
+  +0.00009  critical_alarm_count/redundancy_available
+  +0.00009  zdistinct_alarm_types+zlease_cost_index
+  +0.00009  zalarm_count_1h-zlatency_p95_ms
+  +0.00009  redundancy_available-mean|time_of_day_band
+raw/noise: NOISE:0:+0.00029, NOISE:3:+0.00008, RAW:redundancy_available:+0.00006, RAW:recent_configuration_change:+0.00003, RAW:region_type:-0.00001, RAW:weekday_weekend:-0.00004, RAW:critical_alarm_count:-0.00006, RAW:time_of_day_band:-0.00008, RAW:lease_cost_index:-0.00009, RAW:node_type:-0.00011, RAW:alarm_count_15m:-0.00015, RAW:maintenance_ticket_count_90d:-0.00017, RAW:latency_mean_ms:-0.00018, NOISE:1:-0.00023, RAW:distinct_alarm_types:-0.00031, RAW:technology_generation:-0.00033, RAW:rack_position_code:-0.00035, NOISE:4:-0.00044, RAW:vendor_family:-0.00048, RAW:site_access_time_min:-0.00049, RAW:alarm_count_1h:-0.00050, RAW:days_since_maintenance:-0.00054, NOISE:2:-0.00054, RAW:latency_variability:-0.00063, RAW:spare_capacity_index:-0.00068, RAW:time_since_first_alarm_min:-0.00072, RAW:repeated_alarm_ratio:-0.00076, RAW:weather_severity_index:-0.00080, RAW:connection_drop_rate:-0.00086, RAW:utilization_15m_average:-0.00087, RAW:traffic_change_1h:-0.00094, RAW:firmware_age_months:-0.00095, RAW:node_age_years:-0.00098, RAW:traffic_volume:-0.00100, RAW:error_rate:-0.00106, RAW:packet_loss_rate:-0.00108, RAW:packet_loss_5m:-0.00114, RAW:latency_p95_ms:-0.00119, RAW:throughput_utilization:-0.00125, RAW:connected_user_count:-0.00132

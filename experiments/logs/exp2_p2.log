@@ -1,0 +1,15 @@
+p2 pairs added: [('debt_to_equity', 'estimated_debt_burden', 0.955), ('credit_utilization', 'utilization_3m_average', 0.959), ('average_account_balance', 'account_balance_last_month', 0.984)]
+lgb stumps +pairs it=955                 AUC=0.71951 LL=0.51237 cost@best=0.9975(t=0.089) cost@1/11=0.9990 5s
+lgb depth2 +pairs it=568                 AUC=0.72224 LL=0.51027 cost@best=0.9967(t=0.092) cost@1/11=0.9982 4s
+lgb depth3 +pairs it=402                 AUC=0.72210 LL=0.51078 cost@best=0.9946(t=0.086) cost@1/11=1.0025 4s
+lgb stumps lr.02 it=2400                 AUC=0.71927 LL=0.51265 cost@best=0.9946(t=0.088) cost@1/11=1.0033 9s
+lgb depth2 3 seeds it=591                AUC=0.72262 LL=0.51028 cost@best=0.9971(t=0.082) cost@1/11=1.0014 10s
+lgb depth2 colsample.5 lr.02 it=992      AUC=0.72190 LL=0.51063 cost@best=0.9979(t=0.071) cost@1/11=1.0080 4s
+lgb depth2 colsample.5 lr.02 +pairs it=945 AUC=0.72235 LL=0.51048 cost@best=0.9984(t=0.079) cost@1/11=1.0026 5s
+xgb depth2 lr.03 it=572                  AUC=0.72260 LL=0.51020 cost@best=0.9990(t=0.070) cost@1/11=1.0067 7s
+xgb depth3 +pairs it=368                 AUC=0.72300 LL=0.51026 cost@best=0.9990(t=0.084) cost@1/11=1.0014 7s
+cat depth4 +pairs it=359                 AUC=0.72180 LL=0.51089 cost@best=0.9995(t=0.060) cost@1/11=1.0055 21s
+cat depth3 it=455                        AUC=0.72242 LL=0.51049 cost@best=0.9986(t=0.089) cost@1/11=1.0025 20s
+blend st+d2+xgb3+cat4                    AUC=0.72328 LL=0.51000 cost@best=0.9973(t=0.087) cost@1/11=1.0008
+blend pairs: st+d2+d3+xgb3+cat4          AUC=0.72366 LL=0.50965 cost@best=0.9961(t=0.084) cost@1/11=0.9986
+blend pairs+plain all                    AUC=0.72362 LL=0.50972 cost@best=0.9961(t=0.088) cost@1/11=1.0014

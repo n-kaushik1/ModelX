@@ -1,0 +1,8 @@
+OK   tiny n=300                            27s thr=0.500 blend={'lgbm': 0.5, 'xgb+struct': 0.5} fams=['cat', 'et', 'gam', 'lgbm', 'xgb']
+OK   extreme imbalance 1%                  50s thr=0.062 blend={'gam': 0.3333333333333333, 'xgb+struct': 0.6666666666666666} fams=['cat', 'et', 'gam', 'lgbm', 'xgb']
+OK   many features p=150                  163s thr=0.500 blend={'lgbm+struct': 0.6666666666666666, 'lgbm': 0.3333333333333333} fams=['cat', 'et', 'lgbm', 'logreg', 'xgb']
+OK   high-card cats + string labels        45s thr=0.303 blend={'gam': 0.25, 'xgb': 0.25, 'cat': 0.5} fams=['cat', 'et', 'gam', 'lgbm', 'xgb']
+OK   large n=70k (subsample path)         416s thr=0.500 blend={'cat': 1.0} fams=['cat', 'et', 'gam', 'lgbm', 'xgb']
+OK   empty metadata, accuracy-like         39s thr=0.500 blend={'gam': 0.2, 'lgbm+struct': 0.2, 'cat': 0.6} fams=['cat', 'et', 'gam', 'lgbm', 'xgb']
+OK   all-categorical, no numerics          25s thr=0.500 blend={'lgbm+struct': 1.0} fams=['cat', 'et', 'lgbm', 'logreg', 'xgb']
+STRESS TEST DONE

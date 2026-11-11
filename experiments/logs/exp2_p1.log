@@ -1,0 +1,15 @@
+p1 pairs added: [('raw_material_density', 'material_density_estimate', 0.972), ('process_temperature', 'temperature_sensor_2', 0.978)]
+lgb stumps +pairs it=1729                AUC=0.85405 LL=0.41872 cost@best=0.8176(t=0.085) cost@1/11=0.8254 6s
+lgb depth2 +pairs it=891                 AUC=0.85333 LL=0.41940 cost@best=0.8162(t=0.081) cost@1/11=0.8319 5s
+lgb depth3 +pairs it=531                 AUC=0.85271 LL=0.42032 cost@best=0.8214(t=0.093) cost@1/11=0.8248 4s
+lgb stumps lr.02 it=3785                 AUC=0.85426 LL=0.41886 cost@best=0.8117(t=0.087) cost@1/11=0.8241 10s
+lgb depth2 3 seeds it=888                AUC=0.85391 LL=0.41883 cost@best=0.8159(t=0.089) cost@1/11=0.8257 11s
+lgb depth2 colsample.5 lr.02 it=1419     AUC=0.85373 LL=0.41945 cost@best=0.8166(t=0.100) cost@1/11=0.8280 5s
+lgb depth2 colsample.5 lr.02 +pairs it=1375 AUC=0.85294 LL=0.42037 cost@best=0.8210(t=0.079) cost@1/11=0.8293 5s
+xgb depth2 lr.03 it=917                  AUC=0.85332 LL=0.41958 cost@best=0.8122(t=0.083) cost@1/11=0.8204 8s
+xgb depth3 +pairs it=557                 AUC=0.85238 LL=0.42118 cost@best=0.8212(t=0.090) cost@1/11=0.8227 6s
+cat depth4 +pairs it=402                 AUC=0.85163 LL=0.42207 cost@best=0.8210(t=0.080) cost@1/11=0.8269 28s
+cat depth3 it=554                        AUC=0.85330 LL=0.41993 cost@best=0.8126(t=0.089) cost@1/11=0.8184 23s
+blend st+d2+xgb3+cat4                    AUC=0.85488 LL=0.41783 cost@best=0.8136(t=0.087) cost@1/11=0.8174
+blend pairs: st+d2+d3+xgb3+cat4          AUC=0.85411 LL=0.41863 cost@best=0.8148(t=0.096) cost@1/11=0.8237
+blend pairs+plain all                    AUC=0.85462 LL=0.41811 cost@best=0.8156(t=0.083) cost@1/11=0.8274

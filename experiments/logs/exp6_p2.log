@@ -1,0 +1,18 @@
+p2 n monotone 6 top pairs [('operating_margin', 'debt_service_ratio'), ('business_age_years', 'debt_to_equity'), ('operating_margin', 'credit_utilization'), ('business_age_years', 'estimated_debt_burden'), ('debt_to_equity', 'cash_flow_volatility'), ('business_age_years', 'operating_margin')]
+lgb d2 inter4 + mono it=750              AUC=0.72202 LL=0.50954 cost@best=0.9950(t=0.080) cost@1/11=1.0051 5s
+lgb d2 inter8 + mono it=704              AUC=0.72184 LL=0.50970 cost@best=0.9974(t=0.086) cost@1/11=1.0011 5s
+lgb d2 inter12 + mono it=690             AUC=0.72300 LL=0.50924 cost@best=0.9963(t=0.080) cost@1/11=1.0039 5s
+lgb d2 inter16 + mono it=685             AUC=0.72348 LL=0.50925 cost@best=0.9974(t=0.074) cost@1/11=1.0096 5s
+lgb d2 inter24 + mono it=660             AUC=0.72283 LL=0.50943 cost@best=0.9979(t=0.082) cost@1/11=1.0047 5s
+lgb d3 inter8 + mono it=524              AUC=0.72061 LL=0.51053 cost@best=0.9982(t=0.100) cost@1/11=1.0007 6s
+lgb d3 inter16 + mono it=469             AUC=0.72188 LL=0.50988 cost@best=0.9976(t=0.081) cost@1/11=1.0055 5s
+lgb d2 inter8 + mono colsample1 lr.02 it=1027 AUC=0.72193 LL=0.50954 cost@best=0.9951(t=0.085) cost@1/11=1.0025 7s
+lgb d2 inter8 + mono 3 seeds it=681      AUC=0.72180 LL=0.50973 cost@best=0.9973(t=0.085) cost@1/11=0.9998 15s
+xgb d2 inter8 + mono it=715              AUC=0.72077 LL=0.51006 cost@best=0.9981(t=0.080) cost@1/11=0.9989 7s
+xgb d3 inter8 + mono it=584              AUC=0.72031 LL=0.51041 cost@best=0.9945(t=0.081) cost@1/11=1.0033 7s
+xgb d3 mono only it=390                  AUC=0.72079 LL=0.51124 cost@best=0.9981(t=0.070) cost@1/11=1.0051 6s
+cat d4 + mono it=314                     AUC=0.72125 LL=0.51134 cost@best=0.9991(t=0.082) cost@1/11=1.0035 29s
+OLD blend lgb_d2+xgb_d3+cat_d4           AUC=0.72377 LL=0.50976 cost@best=0.9976(t=0.085) cost@1/11=1.0023
+NEW blend c8_d2m+x_c8_d3m+cat_d4m        AUC=0.72278 LL=0.50938 cost@best=0.9961(t=0.088) cost@1/11=0.9984
+NEW blend c8_d2m+c16_d3m+x_c8_d2m+x_c8_d3m+cat_d4m AUC=0.72263 LL=0.50934 cost@best=0.9976(t=0.086) cost@1/11=0.9997
+MIX blend c8_d2m+x_c8_d3m+cat_d4m+lgb_d2+xgb_d3+cat_d4 AUC=0.72369 LL=0.50932 cost@best=0.9963(t=0.089) cost@1/11=0.9976

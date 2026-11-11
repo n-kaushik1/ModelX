@@ -1,0 +1,17 @@
+===== p1 ===== (repeated 5-fold x 3 fold seeds; higher is better: AUC or -logloss)
+B structured d2 inter8 mono                      auc=0.85402 sd=0.00039 per-seed=[0.85455, 0.8539, 0.85362] 18s
+B inter_k=16                                     auc=0.85410 sd=0.00045 per-seed=[0.85451, 0.85432, 0.85348] 12s
+B inter_k=4                                      auc=0.85403 sd=0.00053 per-seed=[0.85478, 0.85365, 0.85368] 13s
+B dart (drop_rate .1)                            auc=0.85145 sd=0.00036 per-seed=[0.85192, 0.85141, 0.85104] 349s
+B num_leaves=3                                   auc=0.85424 sd=0.00054 per-seed=[0.855, 0.85396, 0.85376] 13s
+B depth3 leaves6 inter16                         auc=0.85403 sd=0.00057 per-seed=[0.85401, 0.85473, 0.85334] 14s
+B min_sum_hessian 5                              auc=0.85407 sd=0.00034 per-seed=[0.85452, 0.85399, 0.85371] 13s
+B cat_l2 30 cat_smooth 50                        auc=0.85397 sd=0.00036 per-seed=[0.85447, 0.85379, 0.85364] 12s
+hinge-GAM k=7 C=0.05                             auc=0.84880 sd=0.00074 per-seed=[0.84964, 0.84783, 0.84893] 10s
+hinge-GAM k=7 C=0.2                              auc=0.84923 sd=0.00076 per-seed=[0.85021, 0.84835, 0.84913] 9s
+blend B + hinge-GAM (1:1)                        auc=0.85362 per-seed=[0.85437, 0.85309, 0.85341]
+blend B + hinge-GAM (3:1)                        auc=0.85439 per-seed=[0.85503, 0.85405, 0.85409]
+blend B + B16 + B4                               auc=0.85441 per-seed=[0.85494, 0.85429, 0.854]
+optuna best on fold-seed 0: 0.85520 params={'lr': 0.026296762385994606, 'depth': 2, 'mcs': 6, 'subsample': 0.5754223718047384, 'colsample': 0.668915177261219, 'l2': 0.06268622760798344, 'l1': 0.27142009142138207, 'inter_k': 24, 'mono': 0, 'leaves': 3} (195s)
+optuna-best checked on fold seeds 0,1,2          auc=0.85428 sd=0.00068 per-seed=[0.8552, 0.85403, 0.85359] 11s
+blend B + optuna-best                            auc=0.85452 per-seed=[0.85523, 0.85436, 0.85397]
