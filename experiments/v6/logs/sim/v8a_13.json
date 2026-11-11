@@ -1,0 +1,1 @@
+{"tag": "v8a", "pid": 13, "name": "weak_balanced", "obj": "log_loss", "fit_s": 182.3, "size_mb": 2.05, "auc": 0.6894748284746111, "ll": 0.6363315542088682, "bayes_auc": 0.6993579164799124, "bayes_ll": 0.6300874044187944, "blend": {"gam+struct": 0.1414, "gam": 0.2525, "lgbm+struct": 0.1178, "lgbm": 0.0606, "xgb": 0.4276}, "regret": 0.006244149790073816}

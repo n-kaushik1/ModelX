@@ -70,3 +70,20 @@ v7c        13 weak_balanced  log_loss      regret=0.00627 auc=0.6895 ll=0.6364 f
 v7c         4 small_cost20   decision_cost regret=0.02413 auc=0.7871 ll=0.1692 cost=0.5564 thr=0.048 costBayesThr=0.5564 fit=69s size=0.5MB
 v7c         3 small_auc      roc_auc       regret=0.01496 auc=0.8125 ll=0.3893 fit=77s size=4.1MB
 QUEUE DONE jobs_sim4.txt
+v8a        12 extreme_imb    roc_auc       regret=0.01637 auc=0.6977 ll=0.0674 fit=424s size=7.0MB
+v8a         5 large_ll       log_loss      regret=0.00253 auc=0.7480 ll=0.2749 fit=631s size=1.3MB
+v8a         8 highcard       roc_auc       regret=0.01345 auc=0.8062 ll=0.3958 fit=483s size=4.6MB
+v8a         2 p3_like        decision_cost regret=0.03104 auc=0.8216 ll=0.1822 cost=0.6216 thr=0.091 costBayesThr=0.6216 fit=425s size=3.6MB
+v8a         0 p1_like        roc_auc       regret=0.01077 auc=0.8112 ll=0.4712 fit=383s size=3.5MB
+v8a         1 p2_like        log_loss      regret=0.00845 auc=0.7745 ll=0.4822 fit=387s size=1.9MB
+v8a         6 strong_inter   roc_auc       regret=0.01704 auc=0.7874 ll=0.5164 fit=344s size=3.0MB
+v8a        14 catnum_inter   log_loss      regret=0.01366 auc=0.7906 ll=0.4531 fit=362s size=6.1MB
+v8a         9 many_noise     log_loss      regret=0.01146 auc=0.7175 ll=0.5405 fit=366s size=3.4MB
+v8a        10 mnar_heavy     roc_auc       regret=0.01181 auc=0.7958 ll=0.4819 fit=249s size=3.1MB
+v8a        15 cost5_mid      decision_cost regret=0.03539 auc=0.6385 ll=0.4009 cost=0.8379 thr=0.167 costBayesThr=0.8379 fit=164s size=3.0MB
+v8a        11 fp_costly      decision_cost regret=0.00352 auc=0.6901 ll=0.6128 cost=0.9706 thr=0.833 costBayesThr=0.9706 fit=237s size=1.7MB
+v8a         7 linearish      log_loss      regret=0.00707 auc=0.7952 ll=0.4512 fit=142s size=2.7MB
+v8a        13 weak_balanced  log_loss      regret=0.00624 auc=0.6895 ll=0.6363 fit=182s size=2.1MB
+v8a         4 small_cost20   decision_cost regret=0.02392 auc=0.7871 ll=0.1692 cost=0.5561 thr=0.048 costBayesThr=0.5561 fit=69s size=0.5MB
+v8a         3 small_auc      roc_auc       regret=0.01553 auc=0.8119 ll=0.3901 fit=78s size=3.9MB
+QUEUE DONE jobs_sim5.txt

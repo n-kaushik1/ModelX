@@ -103,6 +103,51 @@ def gam_boost_f(P, pairs=2, C=0.05):
     return f
 
 
+def gam_rich_f(C=0.05, knots=7, steps=0, num_pairs=0, cat_pairs=0, and_pairs=0, and_q=(0.25, 0.5, 0.75)):
+    """Diagnostic GAM with switchable bases: hinge (framework), step indicators at `steps` quantiles, products of
+    the top numeric pairs, category x numeric slopes for the top cat-num pairs, AND-rule terms
+    (1[a > qa] * 1[b > qb]) for the top numeric pairs.  All extra columns standardised."""
+    def f(Xtr, ytr, Xva):
+        enc = S.TabularEncoder("linear").fit(Xtr, nums, cats)
+        Ztr, Zva = enc.transform(Xtr), enc.transform(Xva)
+        nn = len(nums); st = struct(Xtr, ytr)
+        g = S.SplineLogit(nn, C=C, n_knots=knots, basis="hinge")
+        base_tr, base_va = g._design(Ztr, fitting=True), g._design(Zva)
+        npairs = [tuple(q) for q in st["pairs"] if q[0] < nn and q[1] < nn]
+        cpairs = [tuple(q) for q in st["pairs"] if (q[0] < nn) != (q[1] < nn)]
+        cols = [j for j in range(nn) if len(np.unique(Ztr[:, j])) > 10]
+        sq = np.linspace(0, 1, steps + 2)[1:-1] if steps else []
+        SK = {j: np.quantile(Ztr[:, j], sq) for j in cols} if steps else {}
+        AQ = {}
+        for a, b in npairs[:and_pairs]:
+            AQ[(a, b)] = (np.quantile(Ztr[:, a], and_q), np.quantile(Ztr[:, b], and_q))
+        Xtr_raw, Xva_raw = Xtr.reset_index(drop=True), Xva.reset_index(drop=True)
+        levels = {}
+        for a, b in cpairs[:cat_pairs]:
+            ci, ni = (a, b) if a >= nn else (b, a)
+            cname = cats[ci - nn]
+            levels[(ci, ni)] = (cname, list(Xtr_raw[cname].value_counts().index[:8]))
+        def extra(Z, Xr):
+            B = []
+            for j in SK:
+                B.append((Z[:, [j]] > SK[j][None, :]).astype(float))
+            for a, b in npairs[:num_pairs]:
+                B.append(np.clip(Z[:, a] * Z[:, b], -10, 10)[:, None])
+            for (a, b), (qa, qb) in AQ.items():
+                B.append(((Z[:, [a]] > qa[None, :])[:, :, None] & (Z[:, [b]] > qb[None, :])[:, None, :]).reshape(len(Z), -1).astype(float))
+            for (ci, ni), (cname, lv) in levels.items():
+                col = Xr[cname].astype(object).to_numpy()
+                B.append(np.column_stack([(col == l).astype(float) * Z[:, ni] for l in lv]))
+            return np.hstack(B) if B else np.zeros((len(Z), 0))
+        Etr, Eva = extra(Ztr, Xtr_raw), extra(Zva, Xva_raw)
+        mu, sd = Etr.mean(0), Etr.std(0) + 1e-9
+        Dtr = np.hstack([base_tr, (Etr - mu) / sd]); Dva = np.hstack([base_va, (Eva - mu) / sd])
+        with S._blas_limit():
+            lr = LogisticRegression(C=C, max_iter=5000).fit(Dtr, ytr)
+        return lr.predict_proba(Dva)[:, 1]
+    return f
+
+
 def ebm_f(k_pairs):
     MAIN = dict(learning_rate=0.02, num_leaves=3, min_child_samples=20, subsample=0.85, subsample_freq=1, reg_lambda=0.0)
     PAIR = dict(learning_rate=0.02, num_leaves=4, max_depth=2, min_child_samples=30, subsample=0.85, subsample_freq=1, reg_lambda=1.0)
@@ -253,6 +298,12 @@ V = {
     "cat_d3m_lr015": cat_f(dict(C3, learning_rate=0.015), mono=True), "xgb_d2k8m_lr01": xgb_f(dict(X2, inter_k=8, mono=1, learning_rate=0.01)),
     "lgb_linear_lr01": lgb_f(dict(L2, inter_k=8, mono=1, learning_rate=0.01), linear=True), "lgb_B_lr005": lgb_f(dict(L2, inter_k=8, mono=1, learning_rate=0.005)),
     "gamboost_p2": gam_boost_f(dict(L2, learning_rate=0.01, inter_k=8)), "gamboost_p2_d3": gam_boost_f(dict(L3, learning_rate=0.01)),
+    "grich_base": gam_rich_f(), "grich_step10": gam_rich_f(steps=10), "grich_step20": gam_rich_f(steps=20),
+    "grich_p2": gam_rich_f(num_pairs=2), "grich_cat2": gam_rich_f(cat_pairs=2), "grich_and4": gam_rich_f(and_pairs=4),
+    "grich_all": gam_rich_f(steps=10, num_pairs=2, cat_pairs=2, and_pairs=4),
+    "grich_all_c02": gam_rich_f(C=0.02, steps=10, num_pairs=2, cat_pairs=2, and_pairs=4),
+    "grich_c1": gam_rich_f(cat_pairs=1), "grich_c4": gam_rich_f(cat_pairs=4), "grich_c2p2": gam_rich_f(cat_pairs=2, num_pairs=2),
+    "grich_c2p4": gam_rich_f(cat_pairs=2, num_pairs=4), "grich_c4p4": gam_rich_f(cat_pairs=4, num_pairs=4), "grich_c2p6": gam_rich_f(cat_pairs=2, num_pairs=6),
     "rf_l5": forest_f(RandomForestClassifier, 5, 0.3), "hgb_d3": hgb_f(3), "xgb_d4": xgb_f(dict(X3, max_depth=4)),
 }
 if name == "list":

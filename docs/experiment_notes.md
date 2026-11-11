@@ -379,3 +379,15 @@ Leaderboard check of the v5 build: P1 0.8617, P2 0.5034, P3 0.6800 (leaders 0.86
 
 Final paired outer CV (mean of two fold seeds): v7 P1 AUC 0.85481, P2 log loss 0.50752, P3 normalized cost 0.7145
 vs v6 0.85474 / 0.50828 / 0.7183 and v5 0.85461 / 0.50851 / 0.7182.
+
+
+## Submission v8 = framework version 10 (final)
+
+Details: `submission/v8/V8_NOTES.md`. A diagnostic GAM with switchable bases showed what the GAM still missed on P1
+/ P3: not steps or AND-rules (both over-fit), but **category × numeric interactions** (P3: `throughput_utilization
+× node_type`, `firmware_age_months × region_type`; P1: `cycle_time × operator_experience_band`). A GAM with a
+separate slope per category level for the measured pairs, plus numeric products, reached P3 log loss 0.1982 (plain
+GAM 0.2004, trees 0.1972) and helped P3 in the ensemble study (log loss −0.0004, cost −0.003). In the whole
+framework: P3 log loss 0.19707 vs 0.19722 (both fold seeds better), ties on P1 / P2 / P3 cost; on the synthetic
+suite the log-loss regret falls from 0.00879 to 0.00824 (the numeric × category problem: 0.0164 → 0.0137).
+Rejected in the same round: XGBoost at lr 0.01, LightGBM at lr 0.005, averaging whole framework versions.
