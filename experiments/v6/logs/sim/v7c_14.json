@@ -1,0 +1,1 @@
+{"tag": "v7c", "pid": 14, "name": "catnum_inter", "obj": "log_loss", "fit_s": 359.8, "size_mb": 6.12, "auc": 0.7874387466593963, "ll": 0.4558447510435325, "bayes_auc": 0.8064360501091532, "bayes_ll": 0.4394029673788831, "blend": {"gam+struct": 0.1911, "lgbm+struct": 0.4029, "cat": 0.406}, "regret": 0.01644178366464938}

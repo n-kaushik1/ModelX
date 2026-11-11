@@ -1,0 +1,12 @@
+p2 xgb_d2k8m_lr01 LL=0.51020 per-seed=[0.50933, 0.51108] LL=0.51020 47s
+p1 xgb_d2k8m_lr01 AUC=0.85284 per-seed=[0.85273, 0.85296] LL=0.42063 51s
+p3 xgb_d2k8m_lr01 LL=0.19739 per-seed=[0.19691, 0.19788] LL=0.19739 41s
+p1 lgb_linear_lr01 AUC=0.85381 per-seed=[0.85407, 0.85354] LL=0.41877 49s
+p3 lgb_linear_lr01 LL=0.19714 per-seed=[0.19669, 0.19759] LL=0.19714 39s
+p2 lgb_linear_lr01 LL=0.50959 per-seed=[0.5088, 0.51037] LL=0.50959 51s
+p2 cat_d3m_lr015  LL=0.51083 per-seed=[0.51055, 0.51112] LL=0.51083 219s
+p2 lgb_B_lr005    LL=0.50989 per-seed=[0.50914, 0.51064] LL=0.50989 91s
+p1 lgb_B_lr005    AUC=0.85354 per-seed=[0.85333, 0.85374] LL=0.41923 104s
+p1 cat_d3m_lr015  AUC=0.85275 per-seed=[0.85358, 0.85191] LL=0.42283 275s
+p3 lgb_B_lr005    LL=0.19733 per-seed=[0.1969, 0.19776] LL=0.19733 62s
+p3 cat_d3m_lr015  LL=0.19821 per-seed=[0.19742, 0.19899] LL=0.19821 284s

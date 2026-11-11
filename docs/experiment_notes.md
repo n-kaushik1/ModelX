@@ -358,3 +358,24 @@ Details and raw logs: `submission/v6/V6_NOTES.md`, `experiments/v6/`, `experimen
 
 Final paired outer CV (mean of two fold seeds): v6 P1 AUC 0.85474, P2 log loss 0.50828, P3 normalized cost 0.7183
 vs v5 0.85461 / 0.50851 / 0.7182.
+
+
+## Submission v7 = framework version 9 (final)
+
+Leaderboard check of the v5 build: P1 0.8617, P2 0.5034, P3 0.6800 (leaders 0.8621 / 0.5023 / 0.6636). Details:
+`submission/v7/V7_NOTES.md`, `experiments/v7/`.
+
+- **Honest model zoo.** 42 candidates on two 5-fold partitions per problem, each fold model early-stopped on an
+  inner split of its own training part; ensemble value measured on held-out halves (40 random splits).
+- **Pair-term GAM.** The framework's hinge GAM plus the products of the top 2 measured numeric pairs is the best
+  single P2 model (log loss 0.50848 vs 0.51009 without pairs and 0.51040 for the best tree) and improves the
+  ensemble by 0.0008. The gain is from the product terms (standardising the design alone is worse). P2's top pair,
+  `operating_margin × debt_service_ratio`, acts as a bilinear interaction that trees approximate poorly.
+- **Learning rate 0.01** for the structured LightGBM: best single P1 model (AUC 0.85397 vs 0.85330 at 0.03) and
+  +0.00035 AUC in the ensemble; lr 0.005 is worse.
+- **Rejected:** linear-tree LightGBM (helps P1 slightly, raises P3 decision cost by 0.003 and doubled the regret
+  on an extremely imbalanced synthetic problem), class weighting, EBM-style models, extra CatBoost variants,
+  random forests, a GAM-then-boost hybrid, and "use every model" (worse than a focused library).
+
+Final paired outer CV (mean of two fold seeds): v7 P1 AUC 0.85481, P2 log loss 0.50752, P3 normalized cost 0.7145
+vs v6 0.85474 / 0.50828 / 0.7183 and v5 0.85461 / 0.50851 / 0.7182.

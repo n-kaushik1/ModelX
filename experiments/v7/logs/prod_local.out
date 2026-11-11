@@ -1,0 +1,9 @@
+p1 lgb_B_prod2    AUC=0.85310 per-seed=[0.85309, 0.85311] LL=0.41941 34s
+p2 lgb_B_prod2    LL=0.50991 per-seed=[0.50883, 0.51099] LL=0.50991 36s
+p3 lgb_B_prod2    LL=0.19844 per-seed=[0.19834, 0.19854] LL=0.19844 37s
+p1 lgb_B_prod4    AUC=0.85296 per-seed=[0.85248, 0.85345] LL=0.41973 36s
+p2 lgb_B_prod4    LL=0.50953 per-seed=[0.50874, 0.51033] LL=0.50953 38s
+p3 lgb_B_prod4    LL=0.19783 per-seed=[0.19754, 0.19813] LL=0.19783 36s
+p2 lgb_d2_prod2   LL=0.50983 per-seed=[0.50883, 0.51083] LL=0.50983 23s
+p3 lgb_d2_prod2   LL=0.19848 per-seed=[0.19822, 0.19874] LL=0.19848 22s
+p1 lgb_d2_prod2   AUC=0.85209 per-seed=[0.85193, 0.85225] LL=0.42087 24s

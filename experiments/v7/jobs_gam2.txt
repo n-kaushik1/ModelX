@@ -1,0 +1,12 @@
+p2 gam_sl_p2 2
+p1 gam_sl_p2 2
+p3 gam_sl_p2 2
+p2 gam_sl_p4 2
+p1 gam_sl_p4 2
+p3 gam_sl_p4 2
+p2 gam_sl_p6 2
+p1 gam_sl_p6 2
+p3 gam_sl_p6 2
+p2 gam_sl_p4_c2 2
+p1 gam_sl_p4_c2 2
+p3 gam_sl_p4_c2 2

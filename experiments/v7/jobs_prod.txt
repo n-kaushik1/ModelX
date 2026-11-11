@@ -1,0 +1,9 @@
+p2 lgb_B_prod2 2
+p1 lgb_B_prod2 2
+p3 lgb_B_prod2 2
+p2 lgb_B_prod4 2
+p1 lgb_B_prod4 2
+p3 lgb_B_prod4 2
+p2 lgb_d2_prod2 2
+p1 lgb_d2_prod2 2
+p3 lgb_d2_prod2 2

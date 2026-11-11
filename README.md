@@ -14,10 +14,10 @@ escalation) and later on three hidden ones.
 
 | What | Where |
 |---|---|
-| **Zip to upload to the leaderboard** | [`submission/v6/submission.zip`](submission/v6/submission.zip) (framework version 8) |
-| Status, changes and evidence of the final version | [`submission/v6/V6_NOTES.md`](submission/v6/V6_NOTES.md) |
-| Framework code | [`submission/v6/solution.py`](submission/v6/solution.py) |
-| Previous versions | `submission/v5/` (framework 7), `submission/v4/` (6), `submission/sub2/` (5), `submission/improved/` (2), `submission/baseline/` (1) |
+| **Zip to upload to the leaderboard** | [`submission/v7/submission.zip`](submission/v7/submission.zip) (framework version 9) |
+| Status, changes and evidence of the final version | [`submission/v7/V7_NOTES.md`](submission/v7/V7_NOTES.md) (and `submission/v6/V6_NOTES.md` for v6) |
+| Framework code | [`submission/v7/solution.py`](submission/v7/solution.py) |
+| Previous versions | `submission/v6/` (framework 8), `submission/v5/` (7, the build on the leaderboard: P1 0.8617, P2 0.5034, P3 0.6800), `submission/v4/` (6), `submission/sub2/` (5), `submission/improved/` (2), `submission/baseline/` (1) |
 | What was tried and why | [`docs/experiment_notes.md`](docs/experiment_notes.md) |
 | How the framework works | [`docs/framework_design.md`](docs/framework_design.md) |
 | Draft content for the final report | [`docs/report_draft.md`](docs/report_draft.md) |
@@ -28,16 +28,18 @@ self-check.
 **Local results: paired outer 5-fold CV of the whole framework** (fit on 4/5 → joblib save/reload → predict the
 raw 1/5, pooled; P3 uses each fold's own threshold), mean of two fold seeds. Not leaderboard scores.
 
-| Problem | Metric | framework 6 (v4) | framework 7 (v5) | **framework 8 (v6, final)** |
+| Problem | Metric | framework 7 (v5) | framework 8 (v6) | **framework 9 (v7, final)** |
 |---|---|---|---|---|
-| P1 Manufacturing | ROC-AUC ↑ | 0.85460 | 0.85461 | **0.85474** |
-| P2 Credit | Log loss ↓ | 0.50857 | 0.50851 | **0.50828** |
-| P3 Telecom | Normalized cost ↓ | 0.7198 | **0.7182** | 0.7183 |
+| P1 Manufacturing | ROC-AUC ↑ | 0.85461 | 0.85474 | **0.85481** |
+| P2 Credit | Log loss ↓ | 0.50851 | 0.50828 | **0.50752** |
+| P3 Telecom | Normalized cost ↓ | 0.7182 | 0.7183 | **0.7145** |
 
 On a suite of 16 synthetic problems built to test generalisation (different sizes, imbalance, interactions,
-costs), v6 also has the lowest regret to the Bayes-optimal score for every objective type (`V6_NOTES.md` §3).
+costs), v7 has the lowest regret to the Bayes-optimal score for AUC and cost problems and ties v6 on log loss
+(`V7_NOTES.md` §4).
 
-What v6 adds: noisy copies of other columns are detected from the data's covariance structure and dropped (twin
+What v7 adds (from an honest 42-model ensemble study): a GAM with bilinear terms for the measured feature
+pairs (P2 −0.0008) and a learning-rate-0.01 structured LightGBM (P1 +0.0003). What v6 added: noisy copies of other columns are detected from the data's covariance structure and dropped (twin
 readings are averaged instead), and the P3-style decision threshold is the cost-derived Bayes threshold on
 calibrated probabilities unless the data show it is miscalibrated. Earlier steps: k-fold bagging of a library of
 tuned, structure-constrained boosters, a GAM and CatBoost; bagged ensemble selection; Platt calibration.
@@ -76,8 +78,9 @@ ModelX/
 ├── public_data.zip            the three development CSVs (unzipped into data/ by the setup script)
 ├── starting_kit.zip           the official starting kit, unchanged
 ├── submission/
-│   ├── v6/                    ← the final submission = framework version 8 (redundancy detection, Bayes threshold)
-│   │   ├── solution.py, submission.zip, V6_NOTES.md, and the official kit files
+│   ├── v7/                    ← the final submission = framework version 9 (pair-term GAM, low-learning-rate LightGBM)
+│   │   ├── solution.py, submission.zip, V7_NOTES.md, and the official kit files
+│   ├── v6/                    framework version 8 (redundancy detection, Bayes threshold)
 │   ├── v5/                    framework version 7 (bagged ensemble selection, robust cleaner)
 │   ├── v4/                    framework version 6 (k-fold bagging, library ensemble; see V4_NOTES.md)
 │   ├── sub2/                  framework versions 3-5 (complexity ladder, measured-structure constraints, GAM; sub2.zip)
@@ -87,6 +90,7 @@ ModelX/
 │   │   └── make_submission.py, local_test.py, problems.py, requirements.txt   (official kit files)
 │   └── baseline/              the first version, kept frozen for comparison (same structure)
 ├── experiments/               scripts behind the numbers in docs/experiment_notes.md
+│   ├── v7/                    model zoo (42 candidates, honest OOF) and ensemble study (zoo.py, blend_zoo.py; + logs/)
 │   ├── v6/                    synthetic generalisation suite (simgen / sim_run / sim_agg), threshold study, pruning test (+ logs/)
 │   ├── v5/                    outer-CV harness (outer_fold / outer_agg / runq.sh), offline combiner study, bag-design and
 │   │                          CatBoost experiments, private-problem stress test (+ logs/)
@@ -145,7 +149,7 @@ The last lines it prints should show `python 3.11.x`, the versions above, and th
 ### 1. Check that the framework still works (about 20 min on 16+ cores)
 
 ```bash
-.venv/bin/python experiments/v5/stress_test.py submission/v6
+.venv/bin/python experiments/v5/stress_test.py submission/v7
 ```
 
 It fits on synthetic data with awkward properties (tiny / huge / imbalanced data, odd columns, dates, empty
@@ -156,8 +160,8 @@ shuffled columns. It must end with `STRESS TEST PASSED`.
 
 ```bash
 cd experiments/v5
-for f in 0 1 2 3 4; do ../../.venv/bin/python outer_fold.py ../../submission/v6/solution.py mytag p1 4 0 $f; done
-../../.venv/bin/python outer_agg.py mytag v6b            # compare with the saved v6 folds
+for f in 0 1 2 3 4; do ../../.venv/bin/python outer_fold.py ../../submission/v7/solution.py mytag p1 4 0 $f; done
+../../.venv/bin/python outer_agg.py mytag v7c            # compare with the saved v7 folds
 ```
 
 Each fold fits the whole framework on 4/5 of the rows, saves and reloads it, and scores the raw held-out 1/5.
@@ -167,7 +171,7 @@ below about 0.0005 (AUC or log loss) are fold-seed noise.
 ### 3. Build the zip to upload (about 10 min)
 
 ```bash
-cd submission/v6
+cd submission/v7
 ../../.venv/bin/python make_submission.py ../../data
 ```
 

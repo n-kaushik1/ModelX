@@ -1,0 +1,63 @@
+=== p2: singles (scored with Platt on half A)
+cat_d3m                            LL=0.51041
+cat_d3m_cw                         LL=0.51037
+cat_d4                             LL=0.51138
+cat_d4_lgv                         LL=0.51040
+cat_d6                             LL=0.51243
+ebm_k0                             LL=0.51212
+ebm_k16                            LL=0.51200
+ebm_k8                             LL=0.51190
+et_l15                             LL=0.51665
+et_l5                              LL=0.51594
+gam_c05                            LL=0.51074
+gam_c2                             LL=0.51087
+gam_p4                             LL=0.50995
+gam_p8                             LL=0.51200
+gam_spline                         LL=0.51478
+hgb_d3                             LL=0.51362
+lgb_B                              LL=0.51172
+lgb_B_cw10                         LL=0.53749
+lgb_B_cw3                          LL=0.53394
+lgb_B_lr01                         LL=0.51093
+lgb_B_ss05                         LL=0.51077
+lgb_d1                             LL=0.51298
+lgb_d2                             LL=0.51074
+lgb_d3_cw5                         LL=0.53044
+lgb_d3k16m                         LL=0.51256
+lgb_d4                             LL=0.51188
+lgb_extra_d3                       LL=0.51141
+lgb_linear                         LL=0.51166
+lgb_single                         LL=0.51239
+rf_l5                              LL=0.51728
+xgb_d2k8m                          LL=0.51134
+xgb_d3                             LL=0.51141
+xgb_d3k16m                         LL=0.51172
+xgb_d4                             LL=0.51220
+=== framework-like library (11): ['lgb_B', 'lgb_d3k16m', 'lgb_d2', 'lgb_d4', 'xgb_d2k8m', 'xgb_d3', 'cat_d3m', 'cat_d4', 'gam_c05', 'gam_c2', 'et_l5']
+FW                                 LL=0.50894
+FW + cat_d3m_cw                    LL=0.50894 d=+0.00000 (se 0.00000)
+FW + cat_d4_lgv                    LL=0.50891 d=-0.00003 (se 0.00001)
+FW + cat_d6                        LL=0.50894 d=+0.00000 (se 0.00001)
+FW + ebm_k0                        LL=0.50895 d=+0.00001 (se 0.00001)
+FW + ebm_k16                       LL=0.50895 d=+0.00001 (se 0.00001)
+FW + ebm_k8                        LL=0.50895 d=+0.00001 (se 0.00000)
+FW + et_l15                        LL=0.50894 d=+0.00000 (se 0.00000)
+FW + gam_p4                        LL=0.50836 d=-0.00059 (se 0.00004)
+FW + gam_p8                        LL=0.50894 d=+0.00000 (se 0.00004)
+FW + gam_spline                    LL=0.50894 d=-0.00000 (se 0.00000)
+FW + hgb_d3                        LL=0.50892 d=-0.00003 (se 0.00001)
+FW + lgb_B_cw10                    LL=0.50894 d=+0.00000 (se 0.00000)
+FW + lgb_B_cw3                     LL=0.50894 d=+0.00000 (se 0.00000)
+FW + lgb_B_lr01                    LL=0.50892 d=-0.00002 (se 0.00001)
+FW + lgb_B_ss05                    LL=0.50894 d=-0.00000 (se 0.00001)
+FW + lgb_d1                        LL=0.50894 d=+0.00000 (se 0.00000)
+FW + lgb_d3_cw5                    LL=0.50894 d=+0.00000 (se 0.00000)
+FW + lgb_extra_d3                  LL=0.50895 d=+0.00001 (se 0.00001)
+FW + lgb_linear                    LL=0.50898 d=+0.00003 (se 0.00002)
+FW + lgb_single                    LL=0.50894 d=+0.00000 (se 0.00000)
+FW + rf_l5                         LL=0.50895 d=+0.00000 (se 0.00000)
+FW + xgb_d3k16m                    LL=0.50893 d=-0.00001 (se 0.00001)
+FW + xgb_d4                        LL=0.50890 d=-0.00004 (se 0.00002)
+ALL                                LL=0.50836 d=-0.00058 (se 0.00004)
+FW + gam_p4+lgb_linear+lgb_B_lr01  LL=0.50840 d=-0.00055 (se 0.00004)
+FW + gam_p4+lgb_linear+lgb_B_lr01+ebm_k8+lgb_B_ss05 LL=0.50838 d=-0.00056 (se 0.00004)

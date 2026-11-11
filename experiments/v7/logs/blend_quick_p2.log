@@ -1,0 +1,10 @@
+=== framework-like library (11): ['lgb_B', 'lgb_d3k16m', 'lgb_d2', 'lgb_d4', 'xgb_d2k8m', 'xgb_d3', 'cat_d3m', 'cat_d4', 'gam_c05', 'gam_c2', 'et_l5']
+FW                                 LL=0.50894
+FW + gam_sl_p2                     LL=0.50813 d=-0.00082 (se 0.00005)
+FW + gam_sl_p4                     LL=0.50811 d=-0.00084 (se 0.00004)
+FW + gam_sl_p2+gam_sl_p4           LL=0.50813 d=-0.00082 (se 0.00005)
+FW + gam_sl_p2+lgb_linear          LL=0.50817 d=-0.00077 (se 0.00005)
+FW + gam_sl_p2+lgb_linear+lgb_B_lr01 LL=0.50817 d=-0.00078 (se 0.00005)
+FW + gam_sl_p2+gam_sl_p6+lgb_linear+lgb_B_lr01+xgb_d2k8m LL=0.50819 d=-0.00076 (se 0.00005)
+FW + lgb_linear                    LL=0.50898 d=+0.00003 (se 0.00002)
+FW + lgb_B_lr01                    LL=0.50892 d=-0.00002 (se 0.00001)

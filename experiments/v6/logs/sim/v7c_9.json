@@ -1,0 +1,1 @@
+{"tag": "v7c", "pid": 9, "name": "many_noise", "obj": "log_loss", "fit_s": 368.7, "size_mb": 3.44, "auc": 0.7174575111648341, "ll": 0.5405439581251258, "bayes_auc": 0.733928557782096, "bayes_ll": 0.5290888797972908, "blend": {"logreg": 0.0222, "lgbm+struct": 0.8858, "xgb+struct": 0.0301, "cat": 0.0619}, "regret": 0.011455078327834989}

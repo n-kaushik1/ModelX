@@ -1,0 +1,19 @@
+p1 gam_std        AUC=0.84757 per-seed=[0.84835, 0.84678] LL=0.42722 9s
+p1 gam_std_c2     AUC=0.84864 per-seed=[0.8495, 0.84779] LL=0.42550 11s
+p3 gam_std        LL=0.20172 per-seed=[0.2014, 0.20203] LL=0.20172 13s
+p2 gam_std        LL=0.51112 per-seed=[0.51078, 0.51145] LL=0.51112 13s
+p2 gam_std_c2     LL=0.51204 per-seed=[0.51175, 0.51233] LL=0.51204 14s
+p1 gam_p4_c2      AUC=0.84850 per-seed=[0.84932, 0.84769] LL=0.42569 10s
+p3 gam_std_c2     LL=0.20246 per-seed=[0.2021, 0.20282] LL=0.20246 15s
+p2 gam_p4_c2      LL=0.51060 per-seed=[0.51028, 0.51093] LL=0.51060 15s
+p2 gam_p2         LL=0.50954 per-seed=[0.50912, 0.50996] LL=0.50954 12s
+p3 gam_p4_c2      LL=0.20194 per-seed=[0.20184, 0.20203] LL=0.20194 14s
+p1 gam_p2         AUC=0.84744 per-seed=[0.84825, 0.84662] LL=0.42740 8s
+p1 gam_p6         AUC=0.84717 per-seed=[0.84801, 0.84632] LL=0.42779 9s
+p2 gam_p6         LL=0.50970 per-seed=[0.50928, 0.51013] LL=0.50970 11s
+p3 gam_p2         LL=0.20200 per-seed=[0.20173, 0.20227] LL=0.20200 12s
+p3 gam_p6         LL=0.20105 per-seed=[0.20051, 0.20158] LL=0.20105 12s
+p2 gam_p4_k12     LL=0.51134 per-seed=[0.51085, 0.51183] LL=0.51134 11s
+p1 gam_p4_k12     AUC=0.84671 per-seed=[0.84745, 0.84598] LL=0.42810 6s
+p3 gam_p4_k12     LL=0.20163 per-seed=[0.20149, 0.20178] LL=0.20163 8s
+done

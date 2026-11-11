@@ -1,0 +1,6 @@
+p3 gamboost_p2    LL=0.20064 per-seed=[0.20043, 0.20085] LL=0.20064 15s
+p2 gamboost_p2    LL=0.50830 per-seed=[0.5079, 0.5087] LL=0.50830 16s
+p2 gamboost_p2_d3 LL=0.50843 per-seed=[0.50802, 0.50884] LL=0.50843 16s
+p1 gamboost_p2    AUC=0.85266 per-seed=[0.8537, 0.85162] LL=0.42029 16s
+p3 gamboost_p2_d3 LL=0.20067 per-seed=[0.20048, 0.20086] LL=0.20067 9s
+p1 gamboost_p2_d3 AUC=0.85248 per-seed=[0.85335, 0.8516] LL=0.42059 10s

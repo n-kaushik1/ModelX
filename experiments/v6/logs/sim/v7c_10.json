@@ -1,0 +1,1 @@
+{"tag": "v7c", "pid": 10, "name": "mnar_heavy", "obj": "roc_auc", "fit_s": 244.4, "size_mb": 3.11, "auc": 0.7958373702009018, "ll": 0.48186537999901574, "bayes_auc": 0.807650245305807, "bayes_ll": 0.4707460793537997, "blend": {"gam": 0.2493, "gam+struct": 0.21, "lgbm+struct": 0.06, "lgbm": 0.1604, "xgb": 0.0561, "cat": 0.2642}, "regret": 0.01181287510490514}

@@ -1,0 +1,63 @@
+=== p3: singles (scored with Platt on half A)
+cat_d3m                            LL=0.19905 cost@1/11=0.7232
+cat_d3m_cw                         LL=0.20067 cost@1/11=0.7246
+cat_d4                             LL=0.19913 cost@1/11=0.7396
+cat_d4_lgv                         LL=0.19915 cost@1/11=0.7288
+cat_d6                             LL=0.20034 cost@1/11=0.7361
+ebm_k0                             LL=0.20101 cost@1/11=0.7461
+ebm_k16                            LL=0.20049 cost@1/11=0.7418
+ebm_k8                             LL=0.20051 cost@1/11=0.7339
+et_l15                             LL=0.20183 cost@1/11=0.7421
+et_l5                              LL=0.20270 cost@1/11=0.7483
+gam_c05                            LL=0.20088 cost@1/11=0.7363
+gam_c2                             LL=0.20123 cost@1/11=0.7300
+gam_p4                             LL=0.20106 cost@1/11=0.7325
+gam_p8                             LL=0.20155 cost@1/11=0.7449
+gam_spline                         LL=0.20393 cost@1/11=0.7710
+hgb_d3                             LL=0.20158 cost@1/11=0.7628
+lgb_B                              LL=0.19819 cost@1/11=0.7219
+lgb_B_cw10                         LL=0.20548 cost@1/11=0.7677
+lgb_B_cw3                          LL=0.20667 cost@1/11=0.7703
+lgb_B_lr01                         LL=0.19821 cost@1/11=0.7193
+lgb_B_ss05                         LL=0.19897 cost@1/11=0.7226
+lgb_d1                             LL=0.20066 cost@1/11=0.7476
+lgb_d2                             LL=0.19896 cost@1/11=0.7277
+lgb_d3_cw5                         LL=0.20521 cost@1/11=0.7704
+lgb_d3k16m                         LL=0.19888 cost@1/11=0.7243
+lgb_d4                             LL=0.19988 cost@1/11=0.7315
+lgb_extra_d3                       LL=0.19943 cost@1/11=0.7223
+lgb_linear                         LL=0.19825 cost@1/11=0.7202
+lgb_single                         LL=0.20091 cost@1/11=0.7402
+rf_l5                              LL=0.20414 cost@1/11=0.7701
+xgb_d2k8m                          LL=0.19813 cost@1/11=0.7217
+xgb_d3                             LL=0.19912 cost@1/11=0.7273
+xgb_d3k16m                         LL=0.19912 cost@1/11=0.7242
+xgb_d4                             LL=0.19977 cost@1/11=0.7316
+=== framework-like library (11): ['lgb_B', 'lgb_d3k16m', 'lgb_d2', 'lgb_d4', 'xgb_d2k8m', 'xgb_d3', 'cat_d3m', 'cat_d4', 'gam_c05', 'gam_c2', 'et_l5']
+FW                                 LL=0.19794 cost@1/11=0.7186
+FW + cat_d3m_cw                    LL=0.19794 d=+0.00000 (se 0.00000) cost@1/11=0.7184 d=-0.0001
+FW + cat_d4_lgv                    LL=0.19793 d=-0.00001 (se 0.00002) cost@1/11=0.7179 d=-0.0006
+FW + cat_d6                        LL=0.19795 d=+0.00001 (se 0.00001) cost@1/11=0.7182 d=-0.0004
+FW + ebm_k0                        LL=0.19794 d=-0.00000 (se 0.00000) cost@1/11=0.7185 d=-0.0001
+FW + ebm_k16                       LL=0.19794 d=+0.00000 (se 0.00000) cost@1/11=0.7185 d=-0.0000
+FW + ebm_k8                        LL=0.19813 d=+0.00019 (se 0.00003) cost@1/11=0.7202 d=+0.0016
+FW + et_l15                        LL=0.19794 d=+0.00000 (se 0.00000) cost@1/11=0.7185 d=-0.0001
+FW + gam_p4                        LL=0.19794 d=-0.00000 (se 0.00001) cost@1/11=0.7183 d=-0.0002
+FW + gam_p8                        LL=0.19795 d=+0.00000 (se 0.00001) cost@1/11=0.7184 d=-0.0002
+FW + gam_spline                    LL=0.19794 d=+0.00000 (se 0.00000) cost@1/11=0.7185 d=-0.0001
+FW + hgb_d3                        LL=0.19797 d=+0.00003 (se 0.00001) cost@1/11=0.7200 d=+0.0014
+FW + lgb_B_cw10                    LL=0.19794 d=-0.00000 (se 0.00000) cost@1/11=0.7186 d=+0.0000
+FW + lgb_B_cw3                     LL=0.19794 d=-0.00000 (se 0.00000) cost@1/11=0.7186 d=+0.0000
+FW + lgb_B_lr01                    LL=0.19794 d=+0.00000 (se 0.00001) cost@1/11=0.7188 d=+0.0002
+FW + lgb_B_ss05                    LL=0.19797 d=+0.00003 (se 0.00001) cost@1/11=0.7194 d=+0.0008
+FW + lgb_d1                        LL=0.19794 d=-0.00000 (se 0.00000) cost@1/11=0.7186 d=+0.0000
+FW + lgb_d3_cw5                    LL=0.19794 d=-0.00000 (se 0.00000) cost@1/11=0.7186 d=-0.0000
+FW + lgb_extra_d3                  LL=0.19791 d=-0.00003 (se 0.00002) cost@1/11=0.7199 d=+0.0013
+FW + lgb_linear                    LL=0.19794 d=-0.00000 (se 0.00002) cost@1/11=0.7204 d=+0.0018
+FW + lgb_single                    LL=0.19794 d=+0.00000 (se 0.00000) cost@1/11=0.7185 d=-0.0000
+FW + rf_l5                         LL=0.19795 d=+0.00001 (se 0.00000) cost@1/11=0.7192 d=+0.0007
+FW + xgb_d3k16m                    LL=0.19795 d=+0.00001 (se 0.00001) cost@1/11=0.7185 d=-0.0000
+FW + xgb_d4                        LL=0.19795 d=+0.00001 (se 0.00000) cost@1/11=0.7182 d=-0.0004
+ALL                                LL=0.19811 d=+0.00017 (se 0.00004) cost@1/11=0.7219 d=+0.0033
+FW + gam_p4+lgb_linear+lgb_B_lr01  LL=0.19793 d=-0.00001 (se 0.00002) cost@1/11=0.7195 d=+0.0009
+FW + gam_p4+lgb_linear+lgb_B_lr01+ebm_k8+lgb_B_ss05 LL=0.19809 d=+0.00015 (se 0.00003) cost@1/11=0.7213 d=+0.0028

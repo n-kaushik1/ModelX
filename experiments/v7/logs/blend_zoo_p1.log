@@ -1,0 +1,63 @@
+=== p1: singles (scored with Platt on half A)
+cat_d3m                            AUC=0.85346
+cat_d3m_cw                         AUC=0.85280
+cat_d4                             AUC=0.85295
+cat_d4_lgv                         AUC=0.85257
+cat_d6                             AUC=0.85156
+ebm_k0                             AUC=0.85447
+ebm_k16                            AUC=0.85449
+ebm_k8                             AUC=0.85449
+et_l15                             AUC=0.83760
+et_l5                              AUC=0.83636
+gam_c05                            AUC=0.84780
+gam_c2                             AUC=0.84933
+gam_p4                             AUC=0.84803
+gam_p8                             AUC=0.84727
+gam_spline                         AUC=0.84382
+hgb_d3                             AUC=0.84955
+lgb_B                              AUC=0.85499
+lgb_B_cw10                         AUC=0.77236
+lgb_B_cw3                          AUC=0.85376
+lgb_B_lr01                         AUC=0.85536
+lgb_B_ss05                         AUC=0.85482
+lgb_d1                             AUC=0.85444
+lgb_d2                             AUC=0.85382
+lgb_d3_cw5                         AUC=0.79960
+lgb_d3k16m                         AUC=0.85491
+lgb_d4                             AUC=0.85036
+lgb_extra_d3                       AUC=0.85133
+lgb_linear                         AUC=0.85482
+lgb_single                         AUC=0.85465
+rf_l5                              AUC=0.84059
+xgb_d2k8m                          AUC=0.85382
+xgb_d3                             AUC=0.85151
+xgb_d3k16m                         AUC=0.85419
+xgb_d4                             AUC=0.85118
+=== framework-like library (11): ['lgb_B', 'lgb_d3k16m', 'lgb_d2', 'lgb_d4', 'xgb_d2k8m', 'xgb_d3', 'cat_d3m', 'cat_d4', 'gam_c05', 'gam_c2', 'et_l5']
+FW                                 AUC=0.85501
+FW + cat_d3m_cw                    AUC=0.85484 d=-0.00017 (se 0.00003)
+FW + cat_d4_lgv                    AUC=0.85501 d=-0.00000 (se 0.00000)
+FW + cat_d6                        AUC=0.85498 d=-0.00003 (se 0.00001)
+FW + ebm_k0                        AUC=0.85503 d=+0.00002 (se 0.00001)
+FW + ebm_k16                       AUC=0.85503 d=+0.00001 (se 0.00002)
+FW + ebm_k8                        AUC=0.85502 d=+0.00001 (se 0.00002)
+FW + et_l15                        AUC=0.85498 d=-0.00003 (se 0.00001)
+FW + gam_p4                        AUC=0.85501 d=+0.00000 (se 0.00000)
+FW + gam_p8                        AUC=0.85501 d=-0.00000 (se 0.00000)
+FW + gam_spline                    AUC=0.85500 d=-0.00002 (se 0.00001)
+FW + hgb_d3                        AUC=0.85503 d=+0.00002 (se 0.00001)
+FW + lgb_B_cw10                    AUC=0.85500 d=-0.00001 (se 0.00000)
+FW + lgb_B_cw3                     AUC=0.85501 d=+0.00000 (se 0.00000)
+FW + lgb_B_lr01                    AUC=0.85536 d=+0.00035 (se 0.00003)
+FW + lgb_B_ss05                    AUC=0.85505 d=+0.00004 (se 0.00001)
+FW + lgb_d1                        AUC=0.85503 d=+0.00002 (se 0.00001)
+FW + lgb_d3_cw5                    AUC=0.85500 d=-0.00001 (se 0.00000)
+FW + lgb_extra_d3                  AUC=0.85500 d=-0.00001 (se 0.00001)
+FW + lgb_linear                    AUC=0.85523 d=+0.00022 (se 0.00003)
+FW + lgb_single                    AUC=0.85505 d=+0.00004 (se 0.00001)
+FW + rf_l5                         AUC=0.85495 d=-0.00006 (se 0.00003)
+FW + xgb_d3k16m                    AUC=0.85502 d=+0.00001 (se 0.00001)
+FW + xgb_d4                        AUC=0.85499 d=-0.00002 (se 0.00001)
+ALL                                AUC=0.85516 d=+0.00015 (se 0.00005)
+FW + gam_p4+lgb_linear+lgb_B_lr01  AUC=0.85542 d=+0.00041 (se 0.00003)
+FW + gam_p4+lgb_linear+lgb_B_lr01+ebm_k8+lgb_B_ss05 AUC=0.85540 d=+0.00039 (se 0.00003)

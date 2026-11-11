@@ -1,0 +1,1 @@
+{"tag": "v7c", "pid": 6, "name": "strong_inter", "obj": "roc_auc", "fit_s": 346.1, "size_mb": 2.97, "auc": 0.7868778792232962, "ll": 0.5167768293320241, "bayes_auc": 0.8044035390791551, "bayes_ll": 0.4984532244337405, "blend": {"gam+struct": 0.2054, "xgb+struct": 0.0516, "cat": 0.743}, "regret": 0.017525659855858855}

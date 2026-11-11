@@ -1,0 +1,1 @@
+v6final p1 s0 f0 AUC=0.85225 fit=241s size=2.6MB comb=bagged_selection blend={"gam": 0.0795, "lgbm+struct": 0.4709, "xgb": 0.0225, "cat+struct": 0.4271}

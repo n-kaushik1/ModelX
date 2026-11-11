@@ -1,0 +1,12 @@
+p1 cat_d3m_lr015 2
+p2 cat_d3m_lr015 2
+p3 cat_d3m_lr015 2
+p1 xgb_d2k8m_lr01 2
+p2 xgb_d2k8m_lr01 2
+p3 xgb_d2k8m_lr01 2
+p1 lgb_linear_lr01 2
+p2 lgb_linear_lr01 2
+p3 lgb_linear_lr01 2
+p1 lgb_B_lr005 2
+p2 lgb_B_lr005 2
+p3 lgb_B_lr005 2

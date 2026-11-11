@@ -1,0 +1,14 @@
+     cleaner: num= ['n7', 'event_time__days', 'event_time__month', 'event_time__dow', 'event_time__hour', 'duration'] cat= ['c0', 'c1', 'machine_id', 'size_band'] dropped= {'id': ['order_id']}
+OK   ids, dates, bands, timedelta        42s thr=0.500 size=10.0MB blend={'gam': 0.2229, 'lgbm+struct': 0.0305, 'lgbm': 0.1701, 'xgb': 0.231, 'et': 0.3455} mode=kfold_bag
+OK   tiny n=300                          30s thr=0.500 size=1.7MB blend={'gam': 0.7831, 'gam+struct': 0.1128, 'lgbm+struct': 0.0405, 'cat': 0.0351, 'et': 0.0284} mode=kfold_bag
+OK   tiny n=120 imbalanced cost          28s thr=0.167 size=2.6MB blend={'gam': 0.5413, 'gam+struct': 0.18, 'lgbm+struct': 0.0613, 'lgbm': 0.04, 'xgb+struct': 0.0933, 'cat+struct': 0.0373, 'et': 0.0467} mode=kfold_bag
+OK   extreme imbalance 1%                52s thr=0.048 size=3.2MB blend={'gam+struct': 0.8239, 'lgbm+struct': 0.0781, 'lgbm': 0.0743, 'xgb': 0.0236} mode=kfold_bag
+OK   many features p=150                 84s thr=0.500 size=2.3MB blend={'lgbm+struct': 0.9734, 'lgbm': 0.0266} mode=kfold_bag
+OK   high-card cats + string labels      55s thr=0.312 size=2.1MB blend={'gam+struct': 0.8367, 'cat': 0.1633} mode=kfold_bag
+OK   large n=70k (subsample path)       180s thr=0.500 size=0.0MB blend={'gam+struct': 1.0} mode=refit
+OK   empty metadata                      42s thr=0.500 size=2.3MB blend={'gam+struct': 0.7645, 'lgbm': 0.0273, 'cat+struct': 0.0922, 'cat': 0.116} mode=kfold_bag
+OK   None metadata                       39s thr=0.500 size=13.6MB blend={'gam+struct': 0.2347, 'gam': 0.0977, 'lgbm': 0.0853, 'xgb': 0.2112, 'cat': 0.3508, 'et': 0.0203} mode=kfold_bag
+OK   all-categorical, no numerics        27s thr=0.500 size=0.7MB blend={'logreg': 0.0405, 'lgbm+struct': 0.4054, 'lgbm': 0.25, 'xgb': 0.1588, 'cat': 0.1453} mode=kfold_bag
+OK   weird columns                       43s thr=0.750 size=2.1MB blend={'gam+struct': 0.7707, 'lgbm+struct': 0.2086, 'xgb+struct': 0.0207} mode=kfold_bag
+OK   accuracy objective                  42s thr=0.531 size=5.3MB blend={'gam+struct': 0.3789, 'lgbm+struct': 0.139, 'xgb': 0.038, 'cat': 0.4441} mode=kfold_bag
+STRESS TEST PASSED
