@@ -1,0 +1,5 @@
+p2 lgbB  v6base       primary=-0.50993 per-seed=[-0.50875, -0.5105, -0.51054] LL=0.50993 19s
+p2 lgbB  v6-revenue_per_employee primary=-0.50927 per-seed=[-0.50822, -0.50954, -0.51004] LL=0.50927 16s
+p2 lgbB  v6-estimated_debt_burden primary=-0.50924 per-seed=[-0.50842, -0.50947, -0.50983] LL=0.50924 10s
+p2 lgbB  v6-liquidity_proxy primary=-0.50948 per-seed=[-0.50839, -0.50984, -0.51021] LL=0.50948 9s
+p2 lgbB  v6-allderived primary=-0.50909 per-seed=[-0.50831, -0.50925, -0.50972] LL=0.50909 9s

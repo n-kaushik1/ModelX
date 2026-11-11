@@ -1,0 +1,11 @@
+p1 lgbB  all          primary=0.85402 per-seed=[0.85455, 0.8539, 0.85362] LL=0.41889 12s
+p1 lgbB  drop_copies  primary=0.85433 per-seed=[0.85475, 0.85399, 0.85425] LL=0.41850 12s
+p1 gam   all          primary=0.84733 per-seed=[0.84811, 0.84638, 0.8475] LL=0.42785 36s
+p1 gam   drop_copies  primary=0.84738 per-seed=[0.8482, 0.84651, 0.84742] LL=0.42779 45s
+p1 lgbB  all          primary=0.85402 per-seed=[0.85455, 0.8539, 0.85362] LL=0.41889 15s
+p1 lgbB  drop:material_density_estimate primary=0.85433 per-seed=[0.85486, 0.85428, 0.85384] LL=0.41847 15s
+p1 lgbB  drop:temperature_sensor_2 primary=0.85474 per-seed=[0.85513, 0.8547, 0.8544] LL=0.41796 25s
+p1 lgbB  drop_copies  primary=0.85433 per-seed=[0.85475, 0.85399, 0.85425] LL=0.41850 15s
+p1 lgbB  drop_originals primary=0.83693 per-seed=[0.83694, 0.83695, 0.8369] LL=0.43726 10s
+p1 lgbB  drop_distract primary=0.85433 per-seed=[0.85451, 0.85395, 0.85453] LL=0.41841 14s
+p1 lgbB  drop_copies+distract primary=0.85439 per-seed=[0.85458, 0.85391, 0.85468] LL=0.41828 14s

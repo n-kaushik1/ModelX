@@ -332,3 +332,29 @@ Final paired outer CV, mean of two fold seeds: v5 P1 AUC 0.85461, P2 log loss 0.
 (log loss 0.19728) vs v4 0.85460 / 0.50857 / 0.7198 (0.19729). v5 ties v4 on the public problems and is kept for
 its robustness. The per-fold P3 cost of the same model ranges from 0.65 to 0.78, so leaderboard differences of a
 few hundredths on P3 (and of a few thousandths AUC / log loss on P1 / P2) are luck, not signal.
+
+
+## Submission v6 = framework version 8 (final)
+
+Details and raw logs: `submission/v6/V6_NOTES.md`, `experiments/v6/`, `experiments/v5/logs/exp_drop_*.log`.
+
+- **Noisy copies.** Each public problem has columns that are a copy of another column plus noise, in the same
+  units (`temperature_sensor_2`, `material_density_estimate`, `utilization_3m_average`,
+  `account_balance_last_month`, `utilization_15m_average`). A covariance decomposition shows the original is
+  noise-free (var = cov) and the copy carries 4–7 % extra variance. Dropping the copies improved a reference
+  booster on all three problems and every fold seed (P1 AUC 0.85402 → 0.85433, P2 log loss 0.50985 → 0.50918, P3
+  0.19775 → 0.19725); dropping the originals instead cost up to 0.017 AUC. The framework now detects copies from
+  the covariance structure alone (no target, no names): exact on the public data and on 31 of 32 synthetic
+  problems, never dropping an original. Twin readings (both noisy) are averaged instead.
+- **Rejected: pruning derived columns by CV** (e.g. `revenue_per_employee` = revenue / employees). Chosen with
+  hindsight it looked like −0.0008 log loss on P2; nested in the folds it made P2 worse (0.50875 → 0.51006).
+- **Threshold.** On 30 synthetic cost problems the cost-derived Bayes threshold c_fp/(c_fp+c_fn) on calibrated
+  probabilities beat the empirical OOF threshold by 0.0017 normalized cost (worse on 19 of 30 for the empirical
+  rule); on the public P3 outer-CV predictions it was better for every framework version. The framework uses it
+  unless the empirical threshold wins out of sample in ≥ 95 % of bootstrap rounds.
+- **Generalisation suite.** 16 synthetic problems in the style of the public data, each scored on 20k fresh rows
+  against the true probabilities. Mean regret v5 → v6: AUC 0.01484 → 0.01449, log loss 0.00900 → 0.00875, cost
+  0.0357 → 0.0328.
+
+Final paired outer CV (mean of two fold seeds): v6 P1 AUC 0.85474, P2 log loss 0.50828, P3 normalized cost 0.7183
+vs v5 0.85461 / 0.50851 / 0.7182.

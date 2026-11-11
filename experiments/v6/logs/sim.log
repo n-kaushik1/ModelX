@@ -1,0 +1,48 @@
+v5         12 extreme_imb    roc_auc       regret=0.01680 auc=0.6972 ll=0.0672 fit=358s size=10.6MB
+v5          0 p1_like        roc_auc       regret=0.01164 auc=0.8103 ll=0.4721 fit=361s size=2.9MB
+v5          2 p3_like        decision_cost regret=0.05046 auc=0.8132 ll=0.1850 cost=0.6410 thr=0.094 costBayesThr=0.6415 fit=421s size=4.3MB
+v5          8 highcard       roc_auc       regret=0.01426 auc=0.8053 ll=0.3965 fit=423s size=3.2MB
+v5          5 large_ll       log_loss      regret=0.00237 auc=0.7486 ll=0.2747 fit=519s size=1.3MB
+v5          6 strong_inter   roc_auc       regret=0.01804 auc=0.7864 ll=0.5172 fit=355s size=2.8MB
+v5          1 p2_like        log_loss      regret=0.00867 auc=0.7744 ll=0.4824 fit=373s size=0.8MB
+v5          9 many_noise     log_loss      regret=0.01152 auc=0.7163 ll=0.5406 fit=361s size=2.5MB
+v5         10 mnar_heavy     roc_auc       regret=0.01221 auc=0.7954 ll=0.4822 fit=271s size=2.5MB
+v5         14 catnum_inter   log_loss      regret=0.01720 auc=0.7868 ll=0.4566 fit=390s size=5.2MB
+v5          4 small_cost20   decision_cost regret=0.03470 auc=0.7874 ll=0.1689 cost=0.5669 thr=0.053 costBayesThr=0.5670 fit=72s size=0.7MB
+v5         15 cost5_mid      decision_cost regret=0.05332 auc=0.6338 ll=0.4017 cost=0.8558 thr=0.156 costBayesThr=0.8391 fit=167s size=0.9MB
+v5          7 linearish      log_loss      regret=0.00731 auc=0.7949 ll=0.4514 fit=155s size=1.2MB
+v5         11 fp_costly      decision_cost regret=0.00427 auc=0.6917 ll=0.6118 cost=0.9713 thr=0.840 costBayesThr=0.9721 fit=242s size=2.2MB
+v5         13 weak_balanced  log_loss      regret=0.00693 auc=0.6882 ll=0.6370 fit=177s size=2.2MB
+v5          3 small_auc      roc_auc       regret=0.01610 auc=0.8113 ll=0.3904 fit=86s size=3.5MB
+v6         12 extreme_imb    roc_auc       regret=0.01621 auc=0.6978 ll=0.0674 fit=400s size=7.0MB
+v6          2 p3_like        decision_cost regret=0.05419 auc=0.8125 ll=0.1852 cost=0.6447 thr=0.094 costBayesThr=0.6481 fit=445s size=4.7MB
+v6          8 highcard       roc_auc       regret=0.01349 auc=0.8061 ll=0.3957 fit=473s size=3.2MB
+v6          5 large_ll       log_loss      regret=0.00254 auc=0.7479 ll=0.2749 fit=664s size=1.3MB
+v6          0 p1_like        roc_auc       regret=0.01093 auc=0.8110 ll=0.4714 fit=374s size=4.1MB
+v6          1 p2_like        log_loss      regret=0.00860 auc=0.7744 ll=0.4823 fit=394s size=1.7MB
+v6          6 strong_inter   roc_auc       regret=0.01853 auc=0.7859 ll=0.5177 fit=395s size=6.4MB
+v6         14 catnum_inter   log_loss      regret=0.01685 auc=0.7873 ll=0.4563 fit=397s size=6.2MB
+v6         11 fp_costly      decision_cost regret=0.00427 auc=0.6898 ll=0.6128 cost=0.9713 thr=0.838 costBayesThr=0.9730 fit=273s size=1.7MB
+v6         10 mnar_heavy     roc_auc       regret=0.01206 auc=0.7956 ll=0.4821 fit=304s size=3.2MB
+v6          9 many_noise     log_loss      regret=0.01146 auc=0.7175 ll=0.5405 fit=375s size=3.4MB
+v6          4 small_cost20   decision_cost regret=0.04642 auc=0.7872 ll=0.1692 cost=0.5786 thr=0.057 costBayesThr=0.5565 fit=67s size=0.5MB
+v6         15 cost5_mid      decision_cost regret=0.03805 auc=0.6327 ll=0.4018 cost=0.8406 thr=0.176 costBayesThr=0.8464 fit=165s size=2.0MB
+v6          7 linearish      log_loss      regret=0.00712 auc=0.7952 ll=0.4512 fit=137s size=1.1MB
+v6          3 small_auc      roc_auc       regret=0.01691 auc=0.8105 ll=0.3908 fit=88s size=3.0MB
+v6         13 weak_balanced  log_loss      regret=0.00620 auc=0.6895 ll=0.6363 fit=180s size=2.6MB
+v6b        12 extreme_imb    roc_auc       regret=0.01621 auc=0.6978 ll=0.0674 fit=373s size=7.0MB
+v6b         8 highcard       roc_auc       regret=0.01349 auc=0.8061 ll=0.3957 fit=428s size=3.2MB
+v6b         5 large_ll       log_loss      regret=0.00254 auc=0.7479 ll=0.2749 fit=524s size=1.3MB
+v6b         2 p3_like        decision_cost regret=0.05759 auc=0.8125 ll=0.1852 cost=0.6481 thr=0.091 costBayesThr=0.6481 fit=401s size=4.7MB
+v6b         0 p1_like        roc_auc       regret=0.01162 auc=0.8104 ll=0.4721 fit=366s size=16.4MB
+v6b         1 p2_like        log_loss      regret=0.00861 auc=0.7744 ll=0.4823 fit=365s size=0.8MB
+v6b         6 strong_inter   roc_auc       regret=0.01852 auc=0.7859 ll=0.5178 fit=351s size=5.3MB
+v6b        14 catnum_inter   log_loss      regret=0.01664 auc=0.7875 ll=0.4560 fit=368s size=6.7MB
+v6b         9 many_noise     log_loss      regret=0.01146 auc=0.7175 ll=0.5405 fit=357s size=3.4MB
+v6b        10 mnar_heavy     roc_auc       regret=0.01183 auc=0.7958 ll=0.4819 fit=253s size=3.1MB
+v6b        11 fp_costly      decision_cost regret=0.00591 auc=0.6898 ll=0.6128 cost=0.9730 thr=0.833 costBayesThr=0.9730 fit=236s size=1.7MB
+v6b        15 cost5_mid      decision_cost regret=0.04385 auc=0.6327 ll=0.4018 cost=0.8464 thr=0.167 costBayesThr=0.8464 fit=166s size=2.0MB
+v6b         4 small_cost20   decision_cost regret=0.02376 auc=0.7871 ll=0.1692 cost=0.5560 thr=0.048 costBayesThr=0.5560 fit=70s size=0.5MB
+v6b         7 linearish      log_loss      regret=0.00712 auc=0.7952 ll=0.4512 fit=140s size=1.1MB
+v6b        13 weak_balanced  log_loss      regret=0.00616 auc=0.6896 ll=0.6362 fit=180s size=2.8MB
+v6b         3 small_auc      roc_auc       regret=0.01529 auc=0.8121 ll=0.3895 fit=78s size=4.1MB

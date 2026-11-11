@@ -1,0 +1,9 @@
+p2 lgbB  all          primary=-0.50985 per-seed=[-0.50887, -0.5103, -0.51039] LL=0.50985 16s
+p2 lgbB  drop:utilization_3m_average primary=-0.50969 per-seed=[-0.50883, -0.50997, -0.51028] LL=0.50969 16s
+p2 lgbB  drop:account_balance_last_month primary=-0.50961 per-seed=[-0.50892, -0.50973, -0.51019] LL=0.50961 22s
+p2 lgbB  drop:estimated_debt_burden primary=-0.50934 per-seed=[-0.50877, -0.50949, -0.50976] LL=0.50934 12s
+p2 lgbB  drop:revenue_per_employee primary=-0.50963 per-seed=[-0.50898, -0.50978, -0.51012] LL=0.50963 10s
+p2 lgbB  drop_copies  primary=-0.50918 per-seed=[-0.50839, -0.50945, -0.50969] LL=0.50918 14s
+p2 lgbB  drop_originals primary=-0.51226 per-seed=[-0.51137, -0.51238, -0.51303] LL=0.51226 15s
+p2 lgbB  drop_distract primary=-0.50975 per-seed=[-0.50898, -0.5099, -0.51037] LL=0.50975 10s
+p2 lgbB  drop_copies+distract primary=-0.50896 per-seed=[-0.50831, -0.50897, -0.5096] LL=0.50896 14s

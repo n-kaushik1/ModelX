@@ -1,0 +1,1 @@
+{"tag": "v5", "pid": 3, "name": "small_auc", "obj": "roc_auc", "fit_s": 86.4, "size_mb": 3.5, "auc": 0.8113313468382736, "ll": 0.3904156826460559, "bayes_auc": 0.827432057486061, "bayes_ll": 0.3764276976915887, "blend": {"gam": 0.2948, "lgbm+struct": 0.2505, "lgbm": 0.0386, "xgb+struct": 0.0484, "cat+struct": 0.0366, "cat": 0.1545, "et": 0.1767}, "regret": 0.016100710647787397}

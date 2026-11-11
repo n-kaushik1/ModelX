@@ -1,0 +1,1 @@
+{"tag": "v5", "pid": 13, "name": "weak_balanced", "obj": "log_loss", "fit_s": 177.5, "size_mb": 2.15, "auc": 0.6882061474469794, "ll": 0.6370176044144343, "bayes_auc": 0.6993579164799124, "bayes_ll": 0.6300874044187944, "blend": {"gam": 0.5374, "lgbm+struct": 0.386, "lgbm": 0.0567, "xgb": 0.02}, "regret": 0.00693019999563993}

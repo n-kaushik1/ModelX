@@ -1,0 +1,4 @@
+p3 lgbB  v6base       primary=-0.19731 per-seed=[-0.19656, -0.19742, -0.19794] LL=0.19731 18s
+p3 lgbB  v6-latency_p95_ms primary=-0.19710 per-seed=[-0.19644, -0.19717, -0.19769] LL=0.19710 15s
+p3 lgbB  v6-spare_capacity_index primary=-0.19708 per-seed=[-0.19635, -0.19701, -0.19788] LL=0.19708 9s
+p3 lgbB  v6-allderived primary=-0.19713 per-seed=[-0.19629, -0.19698, -0.19811] LL=0.19713 13s

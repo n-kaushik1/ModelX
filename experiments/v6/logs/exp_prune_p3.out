@@ -1,0 +1,3 @@
+[LightGBM] [Fatal] The output cannot be monotone with respect to categorical features
+[LightGBM] [Warning] The output cannot be monotone with respect to categorical features
+libc++abi: terminating due to uncaught exception of type std::runtime_error: The output cannot be monotone with respect to categorical features

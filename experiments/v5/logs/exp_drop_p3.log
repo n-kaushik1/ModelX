@@ -1,0 +1,12 @@
+p3 lgbB  all          primary=-0.19775 per-seed=[-0.19728, -0.1979, -0.19806] LL=0.19775 14s
+p3 lgbB  drop_copies  primary=-0.19725 per-seed=[-0.19659, -0.19734, -0.19781] LL=0.19725 33s
+p3 gam   all          primary=-0.20019 per-seed=[-0.20006, -0.20054, -0.19997] LL=0.20019 40s
+p3 gam   drop_copies  primary=-0.20010 per-seed=[-0.19993, -0.20049, -0.19987] LL=0.20010 28s
+p3 lgbB  all          primary=-0.19775 per-seed=[-0.19728, -0.1979, -0.19806] LL=0.19775 18s
+p3 lgbB  drop:packet_loss_5m primary=-0.19721 per-seed=[-0.19679, -0.19717, -0.19766] LL=0.19721 18s
+p3 lgbB  drop:utilization_15m_average primary=-0.19736 per-seed=[-0.19668, -0.19754, -0.19787] LL=0.19736 27s
+p3 lgbB  drop:latency_p95_ms primary=-0.19721 per-seed=[-0.19674, -0.19735, -0.19754] LL=0.19721 10s
+p3 lgbB  drop_copies  primary=-0.19725 per-seed=[-0.19659, -0.19734, -0.19781] LL=0.19725 16s
+p3 lgbB  drop_originals primary=-0.19837 per-seed=[-0.19795, -0.19851, -0.19866] LL=0.19837 17s
+p3 lgbB  drop_distract primary=-0.19892 per-seed=[-0.19837, -0.19891, -0.19948] LL=0.19892 10s
+p3 lgbB  drop_copies+distract primary=-0.19689 per-seed=[-0.19614, -0.19707, -0.19747] LL=0.19689 17s

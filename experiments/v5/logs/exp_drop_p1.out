@@ -1,0 +1,4 @@
+p1 lgbB  all          primary=0.85402 per-seed=[0.85455, 0.8539, 0.85362] LL=0.41889 12s
+p1 lgbB  drop_copies  primary=0.85433 per-seed=[0.85475, 0.85399, 0.85425] LL=0.41850 12s
+p1 gam   all          primary=0.84733 per-seed=[0.84811, 0.84638, 0.8475] LL=0.42785 36s
+p1 gam   drop_copies  primary=0.84738 per-seed=[0.8482, 0.84651, 0.84742] LL=0.42779 45s

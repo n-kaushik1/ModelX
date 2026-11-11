@@ -1,0 +1,1 @@
+p2 seed0 base=-0.50875 pruned=-0.51006 LL 0.50875->0.51006 drops=[['estimated_debt_burden'], ['revenue_per_employee', 'estimated_debt_burden'], ['annual_revenue', 'estimated_debt_burden'], ['revenue_per_employee', 'annual_revenue', 'estimated_debt_burden'], ['revenue_per_employee', 'annual_revenue', 'estimated_debt_burden']] 197s
