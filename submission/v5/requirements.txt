@@ -1,0 +1,28 @@
+# Libraries available when your submission runs on the leaderboard (exact versions).
+# Install the same versions locally:  pip install -r requirements.txt   (Python 3.11)
+numpy==1.26.4
+pandas==2.3.1
+scipy==1.17.1
+scikit-learn==1.7.1
+joblib==1.5.1
+lightgbm==4.6.0
+xgboost==3.1.1
+catboost==1.2.10
+optuna==4.7.0
+optuna-integration==4.7.0
+imbalanced-learn==0.14.0
+# Dependencies of the above, pinned to the versions tested with them.
+python-dateutil==2.9.0.post0
+pytz==2025.2
+tzdata==2025.2
+threadpoolctl==3.6.0
+SQLAlchemy==1.4.54
+alembic==1.18.2
+tqdm==4.67.1
+PyYAML==6.0.2
+colorlog==4.8.0
+packaging==25.0
+matplotlib==3.10.5
+graphviz==0.21
+plotly==6.3.0
+six==1.17.0

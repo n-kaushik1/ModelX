@@ -1,0 +1,7 @@
+p1 rep0 done
+p1 rep1 done
+p1 bag5     primary=0.85502 per-rep=[0.85582, 0.85423] LL=0.41801 calib-slope=1.072
+p1 bag10    primary=0.85469 per-rep=[0.85543, 0.85396] LL=0.41813 calib-slope=1.063
+p1 bag5x2   primary=0.85500 per-rep=[0.85571, 0.85428] LL=0.41791 calib-slope=1.069
+p1 bag5x3   primary=0.85499 per-rep=[0.85572, 0.85427] LL=0.41795 calib-slope=1.071
+p1 bag10x2  primary=0.85477 per-rep=[0.85549, 0.85406] LL=0.41804 calib-slope=1.065

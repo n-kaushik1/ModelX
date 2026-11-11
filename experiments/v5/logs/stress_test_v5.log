@@ -1,0 +1,14 @@
+     cleaner: num= ['n7', 'event_time__days', 'event_time__month', 'event_time__dow', 'event_time__hour', 'duration'] cat= ['c0', 'c1', 'machine_id', 'size_band'] dropped= {'id': ['order_id']}
+OK   ids, dates, bands, timedelta       652s thr=0.500 size=21.7MB blend={'gam': 0.1862, 'lgbm': 0.2799, 'xgb': 0.3257, 'et': 0.2082} mode=kfold_bag
+OK   tiny n=300                         440s thr=0.500 size=0.8MB blend={'gam': 0.9589, 'xgb': 0.0411} mode=kfold_bag
+OK   tiny n=120 imbalanced cost         348s thr=0.163 size=1.8MB blend={'gam': 0.665, 'xgb': 0.1051, 'cat+struct': 0.0916, 'et': 0.1383} mode=kfold_bag
+OK   extreme imbalance 1%               968s thr=0.043 size=2.1MB blend={'gam': 0.5894, 'lgbm': 0.1429, 'xgb': 0.2222, 'cat+struct': 0.0455} mode=kfold_bag
+OK   many features p=150                731s thr=0.500 size=0.6MB blend={'lgbm': 1.0} mode=kfold_bag
+OK   high-card cats + string labels    1017s thr=0.330 size=16.6MB blend={'gam': 0.3207, 'cat+struct': 0.6242, 'et': 0.055} mode=kfold_bag
+OK   large n=70k (subsample path)      1502s thr=0.500 size=440.7MB blend={'gam': 0.0569, 'xgb': 0.0434, 'cat+struct': 0.6274, 'et': 0.2724} mode=refit
+OK   empty metadata                     447s thr=0.500 size=0.5MB blend={'gam': 0.3967, 'cat+struct': 0.6033} mode=kfold_bag
+OK   None metadata                       50s thr=0.500 size=13.8MB blend={'gam': 0.3134, 'lgbm': 0.0234, 'xgb': 0.2343, 'cat': 0.3919, 'et': 0.0371} mode=kfold_bag
+OK   all-categorical, no numerics        31s thr=0.500 size=0.7MB blend={'logreg': 0.0405, 'lgbm+struct': 0.4054, 'lgbm': 0.25, 'xgb': 0.1588, 'cat': 0.1453} mode=kfold_bag
+OK   weird columns                       72s thr=0.730 size=4.0MB blend={'gam': 0.1886, 'lgbm+struct': 0.4965, 'xgb+struct': 0.0402, 'cat': 0.2318, 'cat+struct': 0.0429} mode=kfold_bag
+OK   accuracy objective                  54s thr=0.565 size=6.6MB blend={'gam': 0.2162, 'lgbm+struct': 0.0348, 'xgb': 0.0923, 'xgb+struct': 0.0292, 'cat': 0.6275} mode=kfold_bag
+STRESS TEST PASSED

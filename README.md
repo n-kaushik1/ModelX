@@ -14,24 +14,34 @@ escalation) and later on three hidden ones.
 
 | What | Where |
 |---|---|
-| **Zip to upload to the leaderboard** | [`submission/sub2/sub2.zip`](submission/sub2/sub2.zip) (version 5) |
-| Submission v4 (framework version 6): **in progress, not yet a submission** | [`submission/v4/`](submission/v4/); status, changes and evidence in [`V4_NOTES.md`](submission/v4/V4_NOTES.md) |
-| Previous zips (v3: `experiments/variants/sub2_v3.zip`, v2) | [`submission/improved/submission.zip`](submission/improved/submission.zip) |
-| Fallback / reference zip | [`submission/baseline/submission.zip`](submission/baseline/submission.zip) |
-| Framework code | [`submission/sub2/solution.py`](submission/sub2/solution.py) |
+| **Zip to upload to the leaderboard** | [`submission/v5/submission.zip`](submission/v5/submission.zip) (framework version 7) |
+| Status, changes and evidence of the final version | [`submission/v5/V5_NOTES.md`](submission/v5/V5_NOTES.md) |
+| Framework code | [`submission/v5/solution.py`](submission/v5/solution.py) |
+| Previous versions | `submission/v4/` (framework 6), `submission/sub2/` (framework 5, `sub2.zip`), `submission/improved/` (2), `submission/baseline/` (1) |
 | What was tried and why | [`docs/experiment_notes.md`](docs/experiment_notes.md) |
 | How the framework works | [`docs/framework_design.md`](docs/framework_design.md) |
 
-All zips were built with the official `make_submission.py` in the exact leaderboard environment and passed its
+The zip was built with the official `make_submission.py` in the exact leaderboard environment and passed its
 self-check.
 
-**Local results** (mean of 3 stratified 80/20 splits, seeds 42/1/2; not leaderboard scores):
+**Local results: paired outer 5-fold CV of the whole framework** (fit on 4/5 → joblib save/reload → predict the
+raw 1/5, pooled over all rows; P3 uses each fold's own learned threshold). Not leaderboard scores.
 
-| Problem | Metric | Baseline | Improved (v2) | **sub2 (v4)** |
+| Problem | Metric | sub2 (framework 5) | v4 (framework 6) | **v5 (framework 7, final)** |
 |---|---|---|---|---|
-| P1 Manufacturing | ROC-AUC (higher is better) | 0.8476 | 0.8458 | **0.8492** |
-| P2 Credit | Log loss (lower is better) | 0.5116 | 0.5099 | **0.5087** |
-| P3 Telecom | Normalized cost (lower is better) | 0.6837 | 0.6824 | **0.6802** |
+| P1 Manufacturing | ROC-AUC ↑ | 0.85459 | 0.85495 | **0.85510** |
+| P2 Credit | Log loss ↓ | 0.50857 | **0.50824** | **0.50824** |
+| P3 Telecom | Normalized cost ↓ | 0.7192 | 0.7180 | **0.7146** |
+
+(fold seed 0; on a second fold seed v4 and v5 are tied again: see `V5_NOTES.md` §4.)
+
+What changed since sub2: the final predictor is a k-fold bag of each selected configuration's fold models (better
+than a refit on all rows on every problem); a larger library of tuned configurations (incl. a monotone CatBoost);
+a deterministic search (a fixed number of configurations, so the result does not depend on the machine's speed);
+**bagged ensemble selection** as the combiner; and a cleaner that keeps identifier-named categoricals and turns
+date columns into features.
+
+### Earlier history (framework versions 3-5, `submission/sub2/`)
 
 Version 4 (`submission/sub2/`) is better than v2 on every split of P1 and P2 and on 2 of 3 splits of P3.
 Compared with v2 it:
@@ -65,17 +75,19 @@ ModelX/
 ├── public_data.zip            the three development CSVs (unzipped into data/ by the setup script)
 ├── starting_kit.zip           the official starting kit, unchanged
 ├── submission/
-│   ├── v4/                    submission v4 = framework version 6, in progress (k-fold bagging, library ensemble; see V4_NOTES.md)
-│   │   ├── solution.py, V4_NOTES.md, and the official kit files
-│   ├── sub2/                  ← the current submission (versions 3-5: complexity ladder, measured-structure constraints, logit blending, GAM)
-│   │   ├── solution.py, sub2.zip (version 5 build), and the official kit files
+│   ├── v5/                    ← the final submission = framework version 7 (bagged ensemble selection, robust cleaner)
+│   │   ├── solution.py, submission.zip, V5_NOTES.md, and the official kit files
+│   ├── v4/                    framework version 6 (k-fold bagging, library ensemble; see V4_NOTES.md)
+│   ├── sub2/                  framework versions 3-5 (complexity ladder, measured-structure constraints, GAM; sub2.zip)
 │   ├── improved/              version 2, kept for comparison
 │   │   ├── solution.py        the framework (StudentSolution)
 │   │   ├── submission.zip     built zip, ready to upload
 │   │   └── make_submission.py, local_test.py, problems.py, requirements.txt   (official kit files)
 │   └── baseline/              the first version, kept frozen for comparison (same structure)
 ├── experiments/               scripts behind the numbers in docs/experiment_notes.md
-│   ├── eval_splits.py         repeated 80/20 evaluation with joblib save/load (main comparison tool)
+│   ├── v5/                    outer-CV harness (outer_fold / outer_agg / runq.sh), offline combiner study, bag-design and
+│   │                          CatBoost experiments, private-problem stress test (+ logs/)
+│   ├── eval_splits.py         repeated 80/20 evaluation with joblib save/load (versions 1-5)
 │   ├── v4/                    submission-v4 experiments: feature screen, model variants, bagging, ensembles, outer CV (+ logs/)
 │   ├── sub2/                  v3 experiments: model families / depth ladder, feature pairs, Optuna, stacking
 │   ├── robust_test.py         unseen categories, missing values, shuffled/missing columns, fresh-process load
@@ -88,6 +100,7 @@ ModelX/
 ├── docs/
 │   ├── project_instructions.md   the course brief
 │   ├── framework_design.md       pipeline, step by step
+│   ├── report_draft.md           draft content for the final report (copy into the official template)
 │   └── experiment_notes.md       results, decisions, observations (input for the final report)
 └── scripts/
     ├── setup_env.sh           environment setup for Linux / macOS / Claude cloud
@@ -126,35 +139,36 @@ The last lines it prints should show `python 3.11.x`, the versions above, and th
 
 ## Everyday tasks
 
-### 1. Check that the framework still works (about 2 min)
+### 1. Check that the framework still works (about 20 min on 16+ cores)
 
 ```bash
-.venv/bin/python experiments/robust_test.py submission/sub2
+.venv/bin/python experiments/v5/stress_test.py submission/v5
 ```
 
-It fits on synthetic data with awkward properties and checks predictions in a fresh process, as the leaderboard
-does. It must end with `ROBUSTNESS TEST PASSED`.
+It fits on synthetic data with awkward properties (tiny / huge / imbalanced data, odd columns, dates, empty
+metadata, ...) and checks predictions after a joblib round trip with unseen categories and missing, extra or
+shuffled columns. It must end with `STRESS TEST PASSED`.
 
-### 2. Estimate scores locally (about 10 min per problem on 16 cores)
+### 2. Estimate scores locally: paired outer CV (about 5 min per fold with 4 threads)
 
 ```bash
-.venv/bin/python experiments/eval_splits.py submission/sub2 data p1 42 1 2
-.venv/bin/python experiments/eval_splits.py submission/sub2 data p2 42 1 2
-.venv/bin/python experiments/eval_splits.py submission/sub2 data p3 42 1 2
+cd experiments/v5
+for f in 0 1 2 3 4; do ../../.venv/bin/python outer_fold.py ../../submission/v5/solution.py mytag p1 4 0 $f; done
+../../.venv/bin/python outer_agg.py mytag v5new          # compare with the saved v5 folds
 ```
 
-Each line of output is one split: the score in the leaderboard metric, the chosen blend, and the per-family CV
-scores. Compare against the tables in `docs/experiment_notes.md` using the same seeds. Differences below about
-0.002 (AUC or log loss) or 0.01 (normalized cost) are noise.
+Each fold fits the whole framework on 4/5 of the rows, saves and reloads it, and scores the raw held-out 1/5.
+Use `runq.sh` with a job file to run folds in parallel. Compare versions on the same fold seeds; differences
+below about 0.0005 (AUC or log loss) are fold-seed noise.
 
 ### 3. Build the zip to upload (about 10 min)
 
 ```bash
-cd submission/sub2
-../../.venv/bin/python make_submission.py ../../data --out sub2.zip
+cd submission/v5
+../../.venv/bin/python make_submission.py ../../data
 ```
 
-This trains on the full development data, writes `sub2.zip`, then reloads it in a fresh process and
+This trains on the full development data, writes `submission.zip`, then reloads it in a fresh process and
 predicts, the same check the leaderboard runs. It must end with `self-check passed`. If it warns about a
 version mismatch, the environment is wrong; re-run the setup script.
 

@@ -1,0 +1,49 @@
+   auto_all: chose stack_C0.01  caruana_platt=-0.20054 equal_platt=-0.20051 stack_C1=-0.20077 stack_C0.01=-0.20045
+   auto_v4like: chose caruana_platt  caruana_platt=-0.20054 stack_C1=-0.20077
+   auto_eq_car: chose equal_platt  caruana_platt=-0.20054 equal_platt=-0.20051
+   auto_pref_eq: chose equal_platt  caruana_platt=-0.20054 equal_platt=-0.20051 stack_C0.01=-0.20045
+fold f0 members=9 weights=xgb:0.50, cat:0.50 | test slope after Platt=1.151
+   auto_all: chose caruana_platt  caruana_platt=-0.19474 equal_platt=-0.19558 stack_C1=-0.19486 stack_C0.01=-0.19498
+   auto_v4like: chose caruana_platt  caruana_platt=-0.19474 stack_C1=-0.19486
+   auto_eq_car: chose caruana_platt  caruana_platt=-0.19474 equal_platt=-0.19558
+   auto_pref_eq: chose caruana_platt  caruana_platt=-0.19474 equal_platt=-0.19558 stack_C0.01=-0.19498
+fold f1 members=9 weights=xgb:0.20, xgb:0.20, cat:0.20, cat:0.40 | test slope after Platt=0.888
+   auto_all: chose caruana_platt  caruana_platt=-0.19767 equal_platt=-0.19779 stack_C1=-0.19779 stack_C0.01=-0.19777
+   auto_v4like: chose caruana_platt  caruana_platt=-0.19767 stack_C1=-0.19779
+   auto_eq_car: chose caruana_platt  caruana_platt=-0.19767 equal_platt=-0.19779
+   auto_pref_eq: chose equal_platt  caruana_platt=-0.19767 equal_platt=-0.19779 stack_C0.01=-0.19777
+fold f2 members=9 weights=gam:0.17, lgbm:0.17, xgb:0.17, cat:0.50 | test slope after Platt=1.028
+   auto_all: chose equal_platt  caruana_platt=-0.19797 equal_platt=-0.19787 stack_C1=-0.19827 stack_C0.01=-0.19790
+   auto_v4like: chose caruana_platt  caruana_platt=-0.19797 stack_C1=-0.19827
+   auto_eq_car: chose equal_platt  caruana_platt=-0.19797 equal_platt=-0.19787
+   auto_pref_eq: chose equal_platt  caruana_platt=-0.19797 equal_platt=-0.19787 stack_C0.01=-0.19790
+fold f3 members=9 weights=lgbm:0.67, lgbm:0.17, cat:0.17 | test slope after Platt=1.019
+   auto_all: chose caruana_platt  caruana_platt=-0.19610 equal_platt=-0.19662 stack_C1=-0.19641 stack_C0.01=-0.19629
+   auto_v4like: chose caruana_platt  caruana_platt=-0.19610 stack_C1=-0.19641
+   auto_eq_car: chose caruana_platt  caruana_platt=-0.19610 equal_platt=-0.19662
+   auto_pref_eq: chose caruana_platt  caruana_platt=-0.19610 equal_platt=-0.19662 stack_C0.01=-0.19629
+fold f4 members=9 weights=xgb:0.17, cat:0.67, cat:0.17 | test slope after Platt=0.941
+v4 p3 best_single        LL=0.19853 cost@1/11=0.7246
+v4 p3 caruana_raw        LL=0.19819 cost@1/11=0.7089
+v4 p3 caruana_platt      LL=0.19798 cost@1/11=0.7122
+v4 p3 caruana_beta       LL=0.19815 cost@1/11=0.7165
+v4 p3 caruanaLL_platt    LL=0.19798 cost@1/11=0.7122
+v4 p3 stack_C1           LL=0.19824 cost@1/11=0.7178
+v4 p3 stack_C0.1         LL=0.19807 cost@1/11=0.7122
+v4 p3 stack_C0.01        LL=0.19789 cost@1/11=0.7092
+v4 p3 stack_nonneg       LL=0.19786 cost@1/11=0.7110
+v4 p3 equal              LL=0.19801 cost@1/11=0.7099
+v4 p3 half_platt         LL=0.19784 cost@1/11=0.7098
+v4 p3 carinit_platt      LL=0.19790 cost@1/11=0.7111
+v4 p3 carbag_platt       LL=0.19792 cost@1/11=0.7136
+v4 p3 auto_all           LL=0.19796 cost@1/11=0.7165
+v4 p3 auto_v4like        LL=0.19798 cost@1/11=0.7122
+v4 p3 auto_eq_car        LL=0.19791 cost@1/11=0.7155
+v4 p3 auto_pref_eq       LL=0.19799 cost@1/11=0.7140
+v4 p3 equal_platt        LL=0.19787 cost@1/11=0.7122
+mean test slope needed after train-Platt: 1.005
+P3 threshold rule learned(v4)  pooled normcost=0.7236 thr=[0.108 0.124 0.090 0.090 0.091]
+P3 threshold rule bayes_1/11   pooled normcost=0.7122 thr=[0.091 0.091 0.091 0.091 0.091]
+P3 threshold rule raw_opt      pooled normcost=0.7204 thr=[0.111 0.124 0.092 0.091 0.095]
+P3 threshold rule boot_median  pooled normcost=0.7238 thr=[0.106 0.124 0.089 0.088 0.087]
+P3 threshold rule boot_mean    pooled normcost=0.7293 thr=[0.103 0.112 0.091 0.088 0.087]

@@ -1,0 +1,4 @@
+p2 ref_d3m      primary=-0.51039 LL=0.51039 per-seed=[-0.50985, -0.51105, -0.51028] iters=860 101s
+p2 d2m          primary=-0.51121 LL=0.51121 per-seed=[-0.51084, -0.51163, -0.51115] iters=1150 98s
+p2 d3m_lgv      primary=-0.51025 LL=0.51025 per-seed=[-0.50996, -0.51065, -0.51015] iters=797 68s
+p2 d3m_l2_20    primary=-0.51037 LL=0.51037 per-seed=[-0.5098, -0.51084, -0.51047] iters=843 104s

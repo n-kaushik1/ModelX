@@ -1,0 +1,4 @@
+p3 ref_d3m      primary=-0.19751 LL=0.19751 per-seed=[-0.19695, -0.19803, -0.19755] cost@1/11cal=0.7221 iters=525 87s
+p3 d2m          primary=-0.19766 LL=0.19766 per-seed=[-0.19695, -0.19793, -0.19809] cost@1/11cal=0.7168 iters=844 90s
+p3 d3m_lgv      primary=-0.19756 LL=0.19756 per-seed=[-0.19721, -0.19809, -0.19739] cost@1/11cal=0.7201 iters=450 57s
+p3 d3m_l2_20    primary=-0.19767 LL=0.19767 per-seed=[-0.19728, -0.19846, -0.19727] cost@1/11cal=0.7178 iters=580 94s

@@ -301,6 +301,34 @@ plus repeated outer CV for the final-predictor question.
   still on P2 but worse on P1 and P3, so v4 chooses between them by nested CV.
 - **Monotone CatBoost** (depth 3, lr 0.03) is the most-weighted blend member on P1 and P3.
 
-Pending: outer 5-fold CV of v4 vs v5 on all three problems, offline holdout analysis (combiner, calibration of
-bagged predictions, P3 threshold), and the final build.
+Outer 5-fold CV of the whole framework (fold seed 0, paired): v4 beats v5/sub2 on all three problems (P1 AUC
+0.85495 vs 0.85459, better on all 5 folds; P2 log loss 0.50824 vs 0.50857; P3 normalized cost 0.7180 vs 0.7192,
+log loss 0.19667 vs 0.19696). Details in `submission/v5/V5_NOTES.md`.
 
+
+
+## Submission v5 = framework version 7 (final)
+
+Details, tables and raw logs: `submission/v5/V5_NOTES.md`, `experiments/v5/`. Protocol: paired outer 5-fold CV
+of the whole framework (fit on 4/5, joblib save/reload, predict the raw 1/5), two fold seeds; offline
+re-combination of the saved fold libraries for combiner / calibration / threshold questions.
+
+- **Combiner: bagged ensemble selection** (greedy Caruana selection on 25 bootstrap resamples of the OOF rows,
+  weights averaged). On the outer-CV holdout (two fold seeds, mean) it was first or second on all three problems
+  (P1 AUC 0.85460, P2 log loss 0.50847, P3 log loss 0.19729), where every alternative was last somewhere: a single
+  Caruana pass (0.85458 / 0.50865 / 0.19732), a logistic stack (0.85464 / 0.50863 / 0.19742, with negative member
+  weights), equal weights + Platt (0.85447 / **0.50831** / 0.19745: best on P2, last on P1 and P3). Choosing the combiner by
+  nested CV did not transfer (inner-CV gaps of 0.001 AUC vanished on the holdout).
+- **Bag design**: 5-fold bagging (models on 80 %) beats 10-fold (90 %) on P1 (0.85502 vs 0.85469); extra
+  partitions (5-fold × 2 or × 3) add < 0.0001. Kept at 5.
+- **CatBoost variants** (depth 2, Langevin boosting, l2 20): none consistently better than the monotone depth-3
+  rung. **P3 threshold rules** (learned, Bayes 1/11, bootstrap mean / median): all within 0.006 normalized cost,
+  far below the 0.015 noise of a pooled 15k-row estimate; the learned rule was kept.
+- **Robustness for the private problems**: identifier-named columns are only dropped when they are mostly unique
+  (a `machine_id` with a few levels is a categorical); date / time columns become numeric features (days, month,
+  day of week, hour) instead of being dropped; timedeltas become seconds.
+
+Final paired outer CV, mean of two fold seeds: v5 P1 AUC 0.85461, P2 log loss 0.50851, P3 normalized cost 0.7182
+(log loss 0.19728) vs v4 0.85460 / 0.50857 / 0.7198 (0.19729). v5 ties v4 on the public problems and is kept for
+its robustness. The per-fold P3 cost of the same model ranges from 0.65 to 0.78, so leaderboard differences of a
+few hundredths on P3 (and of a few thousandths AUC / log loss on P1 / P2) are luck, not signal.

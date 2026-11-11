@@ -28,25 +28,29 @@ bash scripts/setup_env.sh      # .venv (Python 3.11 + pinned versions) and data/
 
 ## Commands (run from the repo root)
 
-| Task | Command | Time (16 cores) |
+The current framework is `submission/v5/` (framework version 7; see `submission/v5/V5_NOTES.md`).
+
+| Task | Command | Time |
 |---|---|---|
-| Robustness smoke test | `.venv/bin/python experiments/robust_test.py submission/improved` | ~2 min |
-| Local estimate, 3 splits | `.venv/bin/python experiments/eval_splits.py submission/improved data p1 42 1 2` (also `p2`, `p3`) | ~10 min per problem |
-| Official quick check | `cd submission/improved && ../../.venv/bin/python local_test.py ../../data` | ~10 min |
-| Build the upload zip | `cd submission/improved && ../../.venv/bin/python make_submission.py ../../data` | ~10 min |
+| Private-problem stress test | `.venv/bin/python experiments/v5/stress_test.py submission/v5` | ~20 min (16+ cores) |
+| One outer-CV fold of a framework (fit 4/5, save/reload, score 1/5) | `cd experiments/v5 && ../../.venv/bin/python outer_fold.py ../../submission/v5/solution.py <tag> p1 <n_jobs> <fold_seed> <fold>` | ~5 min (4 threads) |
+| Run a queue of folds in parallel | `cd experiments/v5 && ./runq.sh jobs.txt <parallel>` (one `outer_fold.py` argument line per job) | |
+| Aggregate outer CV | `cd experiments/v5 && ../../.venv/bin/python outer_agg.py <tag> [<tag> ...]` | seconds |
+| Re-combine saved fold libraries offline (combiners, calibration, P3 threshold) | `cd experiments/v5 && ../../.venv/bin/python lib_study.py <tag> <key> [fold_seed]` | ~1 min |
+| Build the upload zip | `cd submission/v5 && ../../.venv/bin/python make_submission.py ../../data` | ~10 min |
 
 `make_submission.py` writes `submission.zip` next to itself and runs the leaderboard's own load-and-predict check.
-On the 4-vCPU cloud VM expect about twice these times. The cloud's foreground command limit is 10 minutes, so run
-long jobs in the background with output redirected to a log file.
+Build it on an otherwise idle machine: `time_budget` is a safety net that can cut the random refinement short
+when the CPU is heavily shared. Run long jobs in the background with output redirected to a log file.
 
 ## Conventions
 
-- `submission/baseline/` is frozen as the reference; work in `submission/improved/`. For a new variant, copy the
-  whole folder: `make_submission.py` zips every `.py` next to it, so keep only `solution.py` (+ helpers) and the
-  four kit files there.
-- Compare variants with `eval_splits.py` on the same seeds (`42 1 2`) and on the same machine, against
-  `docs/experiment_notes.md`. Tuning is time-boxed, so a slower machine tries fewer configurations and gets
-  slightly different models. Differences below about 0.002 AUC, 0.002 log loss or 0.01 normalized cost are noise.
+- `submission/baseline/` is frozen as the reference; the current framework is `submission/v5/`. For a new variant,
+  copy the whole folder: `make_submission.py` zips every `.py` next to it, so keep only `solution.py` (+ helpers)
+  and the four kit files there.
+- Compare framework versions with paired outer CV (`experiments/v5/outer_fold.py`, same fold seeds for both).
+  Fold-seed noise is about 0.0005 AUC / log loss; the public holdout itself is far noisier (about 0.006 AUC and
+  0.03 normalized cost on a 2-3k-row split).
 - When a change is accepted: rebuild `submission.zip`, add the results to `docs/experiment_notes.md`, put the raw
   output in `experiments/logs/`, and commit the zip so it can be downloaded and uploaded.
 - The leaderboard is an external check, not a validation set (3 submissions per day, 30 in total).

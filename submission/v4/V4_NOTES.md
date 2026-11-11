@@ -1,9 +1,9 @@
 # Submission v4 (framework version 6) — status, changes and evidence
 
-> **Status: work in progress (not yet a submission).** `solution.py` here is the current v4 development
-> version. It has passed a smoke test, but the decisive check (outer 5-fold CV of v4 vs. v5 on all three
-> problems) is still running, and `submission.zip` has not been built yet. Do not upload anything from this
-> folder until this note says so.
+> **Status: superseded by `submission/v5/` (framework version 7).** The pending outer 5-fold CV finished: v4 beat
+> sub2 on all three problems (P1 AUC 0.85495 vs 0.85459, P2 log loss 0.50824 vs 0.50857, P3 normalized cost 0.7180
+> vs 0.7192), and the offline holdout analysis led to v5's bagged ensemble selection. See `submission/v5/V5_NOTES.md`.
+> No zip was built from this folder; upload `submission/v5/submission.zip`.
 
 Environment for every number below: Python 3.11.9, the exact leaderboard versions (`.venv311`: numpy 1.26.4,
 pandas 2.3.1, scikit-learn 1.7.1, lightgbm 4.6.0, xgboost 3.1.1, catboost 1.2.10), Windows, 16 cores.
