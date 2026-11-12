@@ -400,7 +400,9 @@ class DataCleaner:
             # text-like column: numeric strings -> numeric; unique text -> identifier
             conv = pd.to_numeric(s, errors="coerce")
             nn = s.notna().sum()
-            if nn > 0 and conv.notna().sum() >= 0.95 * nn:
+            # numeric text, possibly with a few placeholder tokens ("n/a", "?", "-") that become missing values
+            bad = s[s.notna() & conv.isna()].astype(str).str.strip()
+            if nn > 0 and (conv.notna().sum() >= 0.95 * nn or (conv.notna().sum() >= 0.8 * nn and bad.nunique() <= 5)):
                 self.numeric_.append(c)
                 self.coerced_.append(c)
                 continue
@@ -1397,7 +1399,7 @@ class StudentSolution:
         search_log = []
         for fam in families:
             # every family gets its own time window (unused time still rolls over), so one slow family can
-            # never starve the ones after it; fam_hard stops even the ladder on a hopelessly slow machine
+            # never starve the ones after it; fam_hard caps the random refinements (the ladder always runs)
             fam_start = time.time()
             budget_end = max(budget_end, fam_start) + self.time_budget * share[fam]
             fam_hard = fam_start + 2.5 * self.time_budget * max(share[fam], 0.1)
@@ -1411,7 +1413,10 @@ class StudentSolution:
                 if it < len(ladder):
                     # the ladder always runs (unless hopelessly over time) so every family has a
                     # sensible model; the refinement is what the time box controls
-                    if it > 0 and now > fam_hard:
+                    # ladder rungs are never cut by the family's time window: the validated library members come
+                    # from them, so only the random refinements absorb time pressure on a slow machine (a far-out
+                    # guard only stops a hopelessly slow run)
+                    if it > 0 and now > t0 + 6 * self.time_budget:
                         break
                     params = ladder[it]
                 else:

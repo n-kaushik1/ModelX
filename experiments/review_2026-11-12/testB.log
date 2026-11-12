@@ -1,0 +1,1 @@
+RESULT {"fit_s": 1762, "size_mb": 1.3, "predict_s": 0.7, "threshold": 0.09090909090909091, "cost_model": 0.5067, "cost_bayes_optimal": 0.4912, "logloss_model": 0.20405, "logloss_optimal": 0.19917, "auc_model": 0.8429, "auc_optimal": 0.8537, "final_mode": "refit", "blend": {"lgbm+struct": 0.0227, "cat": 0.9773}, "dropped": {}, "n_numeric": 63, "n_cat": 6}

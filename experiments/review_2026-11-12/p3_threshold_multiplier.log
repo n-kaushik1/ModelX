@@ -1,0 +1,10 @@
+threshold 0.7       (0.0636): out-of-sample cost 0.7381  (se 0.0012); wins vs Bayes in 4% of splits
+threshold 0.8       (0.0727): out-of-sample cost 0.7306  (se 0.0012); wins vs Bayes in 6% of splits
+threshold 0.9       (0.0818): out-of-sample cost 0.7185  (se 0.0012); wins vs Bayes in 23% of splits
+threshold 1.0       (0.0909): out-of-sample cost 0.7120  (se 0.0011); wins vs Bayes in 0% of splits
+threshold 1.1       (0.1000): out-of-sample cost 0.7117  (se 0.0011); wins vs Bayes in 53% of splits
+threshold 1.2       (0.1091): out-of-sample cost 0.7119  (se 0.0010); wins vs Bayes in 51% of splits
+threshold 1.3       (0.1182): out-of-sample cost 0.7146  (se 0.0010); wins vs Bayes in 40% of splits
+threshold empirical (0.0000): out-of-sample cost 0.7167  (se 0.0011); wins vs Bayes in 36% of splits
+
+[exited with code 0]

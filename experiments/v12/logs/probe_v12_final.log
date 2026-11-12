@@ -1,0 +1,13 @@
+OK   labels {1,2}, no positive_label                102s thr=0.500 auc(train rows)=0.842 dropped={} num=6 cat=1 blend={'gam': 0.0768, 'gam+struct': 0.0838, 'hyb+struct': 0.0412, 'cat+struct': 0.5481, 'cat': 0.2502}
+OK   labels {-1,+1}                                  92s thr=0.500 auc(train rows)=0.774 dropped={} num=6 cat=1 blend={'gam+struct': 0.1864, 'gam': 0.1909, 'hyb+struct': 0.2981, 'lgbm': 0.0285, 'cat+struct': 0.2961}
+OK   string labels, positive_label='bad'             91s thr=0.500 auc(train rows)=0.839 dropped={} num=6 cat=1 blend={'gam+struct': 0.2603, 'gam': 0.0337, 'hyb+struct': 0.5749, 'xgb': 0.0357, 'cat': 0.0955}
+OK   bool labels                                    108s thr=0.500 auc(train rows)=0.848 dropped={} num=6 cat=1 blend={'gam+struct': 0.1158, 'hyb+struct': 0.099, 'xgb': 0.0254, 'cat+struct': 0.5496, 'cat': 0.0956, 'et': 0.1146}
+OK   unique integer id with non-id name             106s thr=0.500 auc(train rows)=0.844 dropped={} num=7 cat=1 blend={'gam': 0.0401, 'hyb+struct': 0.0786, 'xgb': 0.1196, 'cat': 0.7617}
+OK   2500-level categorical                         155s thr=0.500 auc(train rows)=0.796 dropped={} num=6 cat=2 blend={'gam+struct': 0.8554, 'cat': 0.1447}
+OK   numeric column with 'n/a' strings              114s thr=0.500 auc(train rows)=0.834 dropped={} num=7 cat=1 blend={'gam+struct': 0.0218, 'cat+struct': 0.3443, 'cat': 0.6339}
+OK   integer-coded categorical                      120s thr=0.500 auc(train rows)=0.850 dropped={} num=7 cat=1 blend={'gam': 0.0996, 'gam+struct': 0.1167, 'hyb+struct': 0.154, 'cat': 0.6297}
+OK   integer column names                            96s thr=0.500 auc(train rows)=0.845 dropped={} num=6 cat=1 blend={'gam': 0.0849, 'cat+struct': 0.6459, 'cat': 0.2692}
+OK   y as numpy float array                          91s thr=0.500 auc(train rows)=0.778 dropped={} num=6 cat=1 blend={'gam+struct': 0.2379, 'hyb+struct': 0.0377, 'cat': 0.7243}
+OK   decision_cost, fn cheaper than fp (1 vs 4)     101s thr=0.800 auc(train rows)=0.825 dropped={} num=6 cat=1 blend={'gam+struct': 0.3426, 'hyb+struct': 0.3987, 'cat+struct': 0.2587}
+OK   metadata metric spelled 'AUC-ROC' with extra keys   99s thr=0.500 auc(train rows)=0.835 dropped={} num=6 cat=1 blend={'hyb+struct': 0.5571, 'cat+struct': 0.4191, 'cat': 0.0238}
+PROBE PASSED

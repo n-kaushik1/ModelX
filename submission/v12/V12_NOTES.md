@@ -10,6 +10,8 @@ tied in the whole framework and was dropped.
 |---|---|---|
 | 1 | **Second GAM-then-boost hybrid**, built on P3's best sparse GAM (6 kinked pairs, C 0.05): the strongest single model on P2 (log loss 0.50683) and P3 (0.19670). Hybrid ladder: 2 rungs, library quota 2. | Zoo ensemble study on top of the v11 library: P2 −0.00025, P3 cost −0.0015, P1 +0.00008. Whole framework (v12a vs v11, 2 fold seeds): P1 0.85508 vs 0.85503, P2 **0.50636** vs 0.50659 (both seeds), P3 cost **0.7087** vs 0.7098, log loss 0.19651 vs 0.19654. |
 | 3 | **Default `time_budget` 300 → 600 s.** The search is a fixed number of configurations; the budget only cuts it on a slow machine. | A build on a 10-core laptop CPU with 300 s cut P1's LightGBM search to 12 of 32 configurations (the larger GAM / hybrid stages leave the boosters less time). With 600 s the full search runs there too; nothing changes on a fast machine. This also protects the private retraining on an unknown machine. |
+| 4 | **Ladder rungs are never cut by a family's time window**; only the random refinements absorb time pressure (a guard stops a run only after 6 × `time_budget`). | Independent review (`docs/review_v12_2026-11-12.md` §4): at 4 threads the per-family hard window cut ladder rungs, so on P3 the second hybrid (the v12 change) never ran. The validated library members all come from the ladder. |
+| 5 | **Numeric text with a few placeholder tokens** ("n/a", "?", "-") is coerced to numeric when ≥ 80 % of the values parse and the rest are ≤ 5 distinct tokens (which become missing values). | Review probe (§5): a numeric column with every 7th value "n/a" became a 2,000-level categorical capped at 30 levels, losing its information. No effect on the public data. |
 | 2 (dropped) | GAM members refit once on all rows instead of k-fold bagged; boosters and hybrids keep the bag. | Outer 5-fold × 2 seeds, fixed configurations: sparse GAM refit vs bag P1 AUC 0.85036 vs 0.84969, P2 0.50811 vs 0.50805, P3 **0.19739 vs 0.19794**; the hybrid is better bagged (P2 0.50622 vs 0.50686). A regularised GAM gains more from 25 % more rows than from averaging. **But in the whole framework v12b ties v12a** (P1 0.85506 vs 0.85508, P2 0.50638 vs 0.50636, P3 cost 0.7087 vs 0.7087, log loss 0.19647 vs 0.19651): the blend weights and the calibration are learned on bagged OOF predictions, so the deployed members stay bagged. |
 
 Tested and rejected in this round:
@@ -45,17 +47,26 @@ v12 is the best version on every public problem and on every objective type of t
 
 ## 3. Final build
 
-`submission/v12/submission.zip` (11.5 MB): official `make_submission.py ../../data` on the M4 Mac (Python 3.11.9,
-exact leaderboard library versions), log `experiments/v12/logs/make_submission_v12_mac.log`. (The Linux server was
-shared with other users' heavy jobs at the time.) The kit's self-check passed on macOS **and on Linux**; on Linux
-the same zip's predictions match the macOS ones to 1e-9. Every search ran in full.
+`submission/v12/submission.zip` (9.1 MB): official `make_submission.py ../../data` on the Linux server (Python
+3.11.16, exact leaderboard library versions, 30 dedicated cores), log
+`experiments/v12/logs/make_submission_v12_linux.log`. The kit's self-check passed on Linux and macOS; the zip's
+`solution.py` is byte-identical to this folder's. **Every search ran in full** on all three problems (GAM 11,
+hybrids 2, LightGBM 32, XGBoost 18, CatBoost 4, ExtraTrees 3).
 
-| | search | blend weights | Platt | OOF score (v11 build) | fit |
-|---|---|---|---|---|---|
-| P1 | GAM 11, hybrid 2, LightGBM 32, XGBoost 18, CatBoost 4, ExtraTrees 3 | structured LightGBM 0.45, hybrids 0.41, structured XGBoost 0.12, CatBoost 0.03 | yes | AUC 0.85573 (0.85548) | 603 s |
-| P2 | same | **hybrids 0.60**, CatBoost 0.21, sparse GAM 0.12, structured LightGBM 0.07 | no | log loss 0.50614 (0.50624) | 366 s |
-| P3 | same | **hybrids 0.39, sparse GAMs 0.29**, structured XGBoost 0.13, LightGBM 0.14, CatBoost 0.06 | no | log loss 0.19536 (0.19538) | 464 s |
+| | blend weights | Platt | OOF score (v11 build) | fit |
+|---|---|---|---|---|
+| P1 | structured LightGBM 0.42, hybrids 0.39, monotone CatBoost 0.10, structured XGBoost 0.08 | yes | AUC 0.85569 (0.85548) | 459 s |
+| P2 | **hybrids 0.63**, CatBoost 0.21, sparse GAM 0.12, structured LightGBM 0.04 | no | log loss 0.50615 (0.50624) | 317 s |
+| P3 | **hybrids 0.36, sparse GAMs 0.31**, XGBoost 0.26, CatBoost 0.05, LightGBM 0.03 | no | log loss **0.19529** (0.19538) | 445 s |
 
-P3 threshold 1/11; OOF cost 425.5 per 1000 cases (v11 build 427.6, v5 build 436.1).
+P3 threshold 1/11; OOF cost 425.6 per 1000 cases (v11 build 427.6, v5 build 436.1).
 
-**Stress test** (`experiments/v12/logs/stress_test_v12.log`): all 12 cases pass.
+Build history: a first build on a 10-core laptop CPU with the old `time_budget` (300 s) cut P1's LightGBM search to
+12 / 32 configurations; a second one (600 s, while that laptop was busy) still cut some P1 *refinements* (the
+ladder ran in full). Both were discarded; this one ran on a dedicated server. On an idle laptop at 4 threads the
+final code runs the full P3 search in 418 s (`experiments/v12/logs/time_p3_nj4_final.log`).
+
+**Stress test** (`experiments/v12/logs/stress_test_v12_final.log`, final code): all 12 cases pass. **Review probes**
+(`experiments/v12/logs/probe_v12_final.log`, 12 more cases: labels {1,2} / {−1,+1} / strings / booleans, unique
+integer ids, a 2,500-level categorical, numeric columns with "n/a" tokens, integer column names, ...): all pass;
+the "n/a" column is now numeric (AUC on that probe 0.834 vs 0.822).
