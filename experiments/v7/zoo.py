@@ -243,7 +243,7 @@ def gam_design_f(Xtr, ytr, Xva, pair_hinge=4, cat_hinge=2, nk=15, num_pairs=4, c
     return design(Ztr), design(Zva)
 
 
-def gam_l1_f(C=0.1, nk=15, steps=True, hinges=True, num_pairs=4, cat_pairs=2, l1_ratio=None, pair_hinge=0, cat_hinge=0, and_terms=0, hh_terms=0, tails=(), sq_walls=False, relax=None, knot_mode="quantile", dense_top=0, pair_source="struct"):
+def gam_l1_f(C=0.1, nk=15, steps=True, hinges=True, num_pairs=4, cat_pairs=2, l1_ratio=None, pair_hinge=0, cat_hinge=0, and_terms=0, hh_terms=0, tails=(), sq_walls=False, relax=None, knot_mode="quantile", dense_top=0, pair_source="struct", tree_knots=0):
     """Sparse GAM: L1 (or elastic-net) logistic regression on a large basis -- per numeric column the linear term,
     hinges and step indicators at `nk` quantiles (L1 on jumps / kinks = total-variation / trend-filtering
     penalty), products of the top measured numeric pairs, category x numeric slopes; all columns standardised."""
@@ -257,6 +257,20 @@ def gam_l1_f(C=0.1, nk=15, steps=True, hinges=True, num_pairs=4, cat_pairs=2, l1
             K = {j: np.linspace(*np.quantile(Ztr[:, j], [0.01, 0.99]), nk) for j in cols}
         else:
             K = {j: np.unique(np.quantile(Ztr[:, j], qs)) for j in cols}
+        if tree_knots:                                 # data-driven knots: split points a stump booster chooses
+            sb = lgb.LGBMClassifier(n_estimators=300, learning_rate=0.05, num_leaves=2, min_child_samples=50,
+                                    verbose=-1, n_jobs=NJ, random_state=0).fit(Ztr, ytr)
+            gains = {}
+            for tr_ in sb.booster_.dump_model()["tree_info"]:
+                nd = tr_["tree_structure"]
+                if "split_feature" in nd and nd["split_feature"] in K:
+                    gains.setdefault(nd["split_feature"], []).append((float(nd.get("split_gain", 0)), float(nd["threshold"])))
+            for j, lst in gains.items():
+                agg = {}
+                for g_, t_ in lst:
+                    agg[round(t_, 2)] = agg.get(round(t_, 2), 0) + g_
+                top = [t_ for t_, _ in sorted(agg.items(), key=lambda kv: -kv[1])[:tree_knots]]
+                K[j] = np.unique(np.r_[K[j], top])
         if dense_top:                                  # the most important columns get dense knots reaching the tails
             imp = []
             for j in cols:
@@ -543,6 +557,9 @@ V = {
     "l1cat_p3gam": l1_cat_f(dict(C=0.05, knots=15, basis="hinge", pairs=6, cpairs=2, penalty="l1", phinge=6, chinge=2)),
     "rulefit_gam": rulefit_f(C=0.1), "rulefit_gam_c005": rulefit_f(C=0.05), "rulefit_only": rulefit_f(C=0.1, gam=False, n_trees=100),
     "rulefit_gam_d2": rulefit_f(C=0.1, depth=2, n_trees=100),
+    "gl1h_ph4_tk6": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, tree_knots=6),
+    "gl1h_ph6_c005_tk6": gam_l1_f(C=0.05, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2, tree_knots=6),
+    "gl1h_ph4_tk12": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, tree_knots=12),
     "rf_l5": forest_f(RandomForestClassifier, 5, 0.3), "hgb_d3": hgb_f(3), "xgb_d4": xgb_f(dict(X3, max_depth=4)),
 }
 if name == "list":

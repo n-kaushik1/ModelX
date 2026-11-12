@@ -23,6 +23,8 @@ Tested and rejected in this round:
   single models and no ensemble value on top of the v12 library (±0.00006).
 - RuleFit (leaf indicators of a small boosted ensemble + the sparse GAM basis, one L1 fit): far worse everywhere
   (P2 0.533, P3 0.213) -- rules grown on the same rows carry in-sample optimism that L1 cannot undo.
+- Tree-guided knots (hinge knots at the split points of a shallow booster instead of quantiles): no gain
+  (P1 0.85093 vs 0.85102, P2 0.50764 vs 0.50746, P3 0.19716 vs 0.19703 log loss, best sparse GAM each).
 
 ## 2. Final comparison
 
@@ -64,7 +66,10 @@ P3 threshold 1/11; OOF cost 425.6 per 1000 cases (v11 build 427.6, v5 build 436.
 Build history: a first build on a 10-core laptop CPU with the old `time_budget` (300 s) cut P1's LightGBM search to
 12 / 32 configurations; a second one (600 s, while that laptop was busy) still cut some P1 *refinements* (the
 ladder ran in full). Both were discarded; this one ran on a dedicated server. On an idle laptop at 4 threads the
-final code runs the full P3 search in 418 s (`experiments/v12/logs/time_p3_nj4_final.log`).
+final code runs the full P3 search in 418 s (`experiments/v12/logs/time_p3_nj4_final.log`). At **2 threads** (two
+fits side by side on the laptop) the full search still runs on every family (GAM 11, hybrid 2, LightGBM 32,
+XGBoost 18, CatBoost 4, ExtraTrees 3): P1 470 s, P3 504 s (`time_p1_nj2_final.log`, `time_p3_nj2_final.log`).
+The 211 s first hybrid seen in the review was measured while a build shared the CPU; alone it takes 22 s.
 
 **Stress test** (`experiments/v12/logs/stress_test_v12_final.log`, final code): all 12 cases pass. **Review probes**
 (`experiments/v12/logs/probe_v12_final.log`, 12 more cases: labels {1,2} / {−1,+1} / strings / booleans, unique

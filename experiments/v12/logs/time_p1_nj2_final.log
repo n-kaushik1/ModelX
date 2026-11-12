@@ -1,0 +1,153 @@
+[framework] objective: {'metric': 'roc_auc', 'metric_defaulted': False}
+[framework] profile: {'n_rows': 10000, 'n_features': 25, 'n_numeric': 18, 'n_categorical': 7, 'positive_rate': 0.3052, 'minority_count': 3052, 'imbalanced': False, 'missing_rate_overall': 0.013488000000000002, 'n_cols_with_missing': 6, 'max_cardinality': 5, 'n_skewed_numeric': 2} dropped: {'redundant_copy': ['temperature_sensor_2', 'material_density_estimate']}
+[framework] gam   it00 roc_auc=0.84701 trees=None t=    3s
+[framework] gam   it01 roc_auc=0.84837 trees=None t=    7s
+[framework] gam   it02 roc_auc=0.84695 trees=None t=   10s
+[framework] gam   it03 roc_auc=0.84696 trees=None t=   12s
+[framework] gam   it04 roc_auc=0.84779 trees=None t=   14s
+[framework] gam   it05 roc_auc=0.84814 trees=None t=   16s
+[framework] gam   it06 roc_auc=0.85060 trees=None t=   26s
+[framework] gam   it07 roc_auc=0.85062 trees=None t=   34s
+[framework] gam   it08 roc_auc=0.84980 trees=None t=   39s
+[framework] gam   it09 roc_auc=0.85006 trees=None t=   45s
+[framework] gam   it10 roc_auc=0.85125 trees=None t=   58s
+[framework] hyb   it00 roc_auc=0.85331 trees=668 t=   69s
+[framework] hyb   it01 roc_auc=0.85453 trees=735 t=   76s
+[framework] lgbm  it00 roc_auc=0.85466 trees=1788 t=   79s
+[framework] lgbm  it01 roc_auc=0.85485 trees=876 t=   80s
+[framework] lgbm  it02 roc_auc=0.85581 trees=1116 t=   83s
+[framework] lgbm  it03 roc_auc=0.85606 trees=1025 t=   85s
+[framework] lgbm  it04 roc_auc=0.85556 trees=3181 t=   91s
+[framework] lgbm  it05 roc_auc=0.85424 trees=549 t=   93s
+[framework] lgbm  it06 roc_auc=0.85568 trees=754 t=   95s
+[framework] lgbm  it07 roc_auc=0.85320 trees=429 t=   97s
+[framework] lgbm  it08 roc_auc=0.85189 trees=470 t=  101s
+[framework] lgbm  it09 roc_auc=0.85504 trees=1313 t=  103s
+[framework] lgbm  it10 roc_auc=0.85481 trees=1356 t=  107s
+[framework] lgbm  it11 roc_auc=0.85559 trees=456 t=  109s
+[framework] lgbm  it12 roc_auc=0.85450 trees=1040 t=  110s
+[framework] lgbm  it13 roc_auc=0.85501 trees=947 t=  112s
+[framework] lgbm  it14 roc_auc=0.85628 trees=862 t=  115s
+[framework] lgbm  it15 roc_auc=0.85471 trees=350 t=  117s
+[framework] lgbm  it16 roc_auc=0.85328 trees=429 t=  119s
+[framework] lgbm  it17 roc_auc=0.85324 trees=455 t=  121s
+[framework] lgbm  it18 roc_auc=0.85553 trees=1055 t=  124s
+[framework] lgbm  it19 roc_auc=0.85494 trees=369 t=  126s
+[framework] lgbm  it20 roc_auc=0.85557 trees=1583 t=  129s
+[framework] lgbm  it21 roc_auc=0.85515 trees=1970 t=  132s
+[framework] lgbm  it22 roc_auc=0.85556 trees=987 t=  136s
+[framework] lgbm  it23 roc_auc=0.85439 trees=597 t=  138s
+[framework] lgbm  it24 roc_auc=0.85557 trees=1443 t=  143s
+[framework] lgbm  it25 roc_auc=0.85438 trees=3449 t=  148s
+[framework] lgbm  it26 roc_auc=0.85415 trees=502 t=  151s
+[framework] lgbm  it27 roc_auc=0.85415 trees=1583 t=  156s
+[framework] lgbm  it28 roc_auc=0.85548 trees=620 t=  157s
+[framework] lgbm  it29 roc_auc=0.85544 trees=1481 t=  163s
+[framework] lgbm  it30 roc_auc=0.85460 trees=3151 t=  167s
+[framework] lgbm  it31 roc_auc=0.85415 trees=329 t=  170s
+[framework] xgb   it00 roc_auc=0.85427 trees=1950 t=  174s
+[framework] xgb   it01 roc_auc=0.85397 trees=918 t=  177s
+[framework] xgb   it02 roc_auc=0.85459 trees=1061 t=  180s
+[framework] xgb   it03 roc_auc=0.85342 trees=507 t=  182s
+[framework] xgb   it04 roc_auc=0.85428 trees=714 t=  185s
+[framework] xgb   it05 roc_auc=0.85163 trees=405 t=  187s
+[framework] xgb   it06 roc_auc=0.85093 trees=468 t=  190s
+[framework] xgb   it07 roc_auc=0.85410 trees=1857 t=  195s
+[framework] xgb   it08 roc_auc=0.85352 trees=1281 t=  199s
+[framework] xgb   it09 roc_auc=0.84978 trees=1112 t=  202s
+[framework] xgb   it10 roc_auc=0.85052 trees=451 t=  204s
+[framework] xgb   it11 roc_auc=0.85415 trees=1728 t=  208s
+[framework] xgb   it12 roc_auc=0.85276 trees=1000 t=  210s
+[framework] xgb   it13 roc_auc=0.85331 trees=367 t=  212s
+[framework] xgb   it14 roc_auc=0.85456 trees=973 t=  215s
+[framework] xgb   it15 roc_auc=0.85408 trees=382 t=  216s
+[framework] xgb   it16 roc_auc=0.85401 trees=572 t=  218s
+[framework] xgb   it17 roc_auc=0.85422 trees=558 t=  221s
+[framework] cat   it00 roc_auc=0.85376 trees=962 t=  251s
+[framework] cat   it01 roc_auc=0.85278 trees=441 t=  267s
+[framework] cat   it02 roc_auc=0.85173 trees=279 t=  284s
+[framework] cat   it03 roc_auc=0.85317 trees=763 t=  310s
+[framework] et    it00 roc_auc=0.83503 trees=None t=  320s
+[framework] et    it01 roc_auc=0.83705 trees=None t=  329s
+[framework] et    it02 roc_auc=0.83425 trees=None t=  338s
+[framework] library gam   roc_auc=0.85057 roc_auc=0.85057 gam(C=0.1821, knots=25, basis=hinge, pairs=6, cpairs=1, penalty=l1, ph t=355s
+[framework] library gam   roc_auc=0.84736 roc_auc=0.84736 gam(C=0.2, knots=7, basis=hinge, class_weight=None) t=357s
+[framework] library gam   roc_auc=0.84764 roc_auc=0.84764 gam(C=0.05, knots=7, basis=hinge, pairs=2, cpairs=1, class_weight=None t=359s
+[framework] library gam   roc_auc=0.85121 roc_auc=0.85121 gam(C=0.1, knots=15, basis=hinge, pairs=6, cpairs=2, penalty=l1, phing t=368s
+[framework] library hyb   roc_auc=0.85448 roc_auc=0.85448 hyb(C=0.05, knots=15, pairs=6, cpairs=2, phinge=6, chinge=2, depth=2,  t=376s
+[framework] library hyb   roc_auc=0.85337 roc_auc=0.85337 hyb(C=0.1, knots=15, pairs=4, cpairs=2, phinge=4, chinge=2, depth=2, l t=387s
+[framework] library lgbm  roc_auc=0.85476 roc_auc=0.85476 lgbm(depth=3, leaves=6, lr=0.02303, min_leaf=11, subsample=0.608, cols t=390s
+[framework] library lgbm  roc_auc=0.85369 roc_auc=0.85369 lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8, colsample t=391s
+[framework] library lgbm  roc_auc=0.85400 roc_auc=0.85400 lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8, colsample t=393s
+[framework] library xgb   roc_auc=0.85393 roc_auc=0.85393 xgb(depth=2, lr=0.03, mcw=5, subsample=0.8, colsample=0.8, l2=1, inter t=395s
+[framework] library xgb   roc_auc=0.85203 roc_auc=0.85203 xgb(depth=1, lr=0.05, mcw=5, subsample=1, colsample=1, l2=1, class_wei t=397s
+[framework] library cat   roc_auc=0.85240 roc_auc=0.85240 cat(depth=3, lr=0.03, l2=5, random_strength=1, bagging_temperature=1,  t=428s
+[framework] library cat   roc_auc=0.85263 roc_auc=0.85263 cat(depth=4, lr=0.02535, l2=6.849, random_strength=1.306, bagging_temp t=452s
+[framework] library et    roc_auc=0.83620 roc_auc=0.83620 et(n_estimators=300, min_leaf=15, max_features=0.5, class_weight=None) t=462s
+[framework] done in 470s; blend={'hyb+struct': 0.4061, 'lgbm+struct': 0.4482, 'xgb+struct': 0.1185, 'cat+struct': 0.0273} threshold=0.5000
+TOTAL FIT SECONDS 469.9918420314789 n_jobs 2
+{
+ "objective": {
+  "metric": "roc_auc",
+  "metric_defaulted": false
+ },
+ "profile": {
+  "n_rows": 10000,
+  "n_features": 25,
+  "n_numeric": 18,
+  "n_categorical": 7,
+  "positive_rate": 0.3052,
+  "minority_count": 3052,
+  "imbalanced": false,
+  "missing_rate_overall": 0.013488000000000002,
+  "n_cols_with_missing": 6,
+  "max_cardinality": 5,
+  "dropped": {
+   "redundant_copy": [
+    "temperature_sensor_2",
+    "material_density_estimate"
+   ]
+  },
+  "n_skewed_numeric": 2
+ },
+ "redundant_dropped": [
+  "temperature_sensor_2",
+  "material_density_estimate"
+ ],
+ "twin_features": [],
+ "baseline_prior": {
+  "roc_auc": 0.5
+ },
+ "family_scores": {
+  "gam+struct": 0.8512072644494093,
+  "gam": 0.8473562453455024,
+  "hyb+struct": 0.8544750801875154,
+  "lgbm+struct": 0.8547641589157727,
+  "lgbm": 0.8536921625616545,
+  "xgb+struct": 0.8539286836646844,
+  "xgb": 0.8520304078754666,
+  "cat+struct": 0.852404276742942,
+  "cat": 0.8526262967515283,
+  "et": 0.8362027108699639
+ },
+ "combiner": "bagged_selection",
+ "blend_weights": {
+  "hyb+struct": 0.4061,
+  "lgbm+struct": 0.4482,
+  "xgb+struct": 0.1185,
+  "cat+struct": 0.0273
+ },
+ "blend_oof_score": 0.8557462720633563,
+ "blend_oof_logloss": 0.41640400615725814,
+ "logloss_blend_raw": 0.41640400615725814,
+ "logloss_blend_calibrated": 0.4162900320679687,
+ "final_mode": "kfold_bag",
+ "selected": [
+  "cat(depth=3, lr=0.03, l2=5, random_strength=1, bagging_temperature=1, mono=1, class_weight=None, n_estimators=962)",
+  "hyb(C=0.05, knots=15, pairs=6, cpairs=2, phinge=6, chinge=2, depth=2, leaves=4, lr=0.01, min_leaf=20, subsample=0.8, colsample=0.8, l2=1, class_weight=None, n_estimators=735)",
+  "lgbm(depth=3, leaves=6, lr=0.02303, min_leaf=11, subsample=0.608, colsample=0.7243, l2=1.715, l1=0.4301, class_weight=None, inter_k=24, mono=1, n_estimators=862)",
+  "xgb(depth=2, lr=0.03, mcw=5, subsample=0.8, colsample=0.8, l2=1, inter_k=8, mono=1, class_weight=None, n_estimators=1061)"
+ ],
+ "fit_seconds": 469.9910969734192,
+ "threshold": 0.5
+}

@@ -1,0 +1,9 @@
+p1 gl1h_ph4_tk6 2
+p2 gl1h_ph4_tk6 2
+p3 gl1h_ph4_tk6 2
+p1 gl1h_ph6_c005_tk6 2
+p2 gl1h_ph6_c005_tk6 2
+p3 gl1h_ph6_c005_tk6 2
+p1 gl1h_ph4_tk12 2
+p2 gl1h_ph4_tk12 2
+p3 gl1h_ph4_tk12 2
