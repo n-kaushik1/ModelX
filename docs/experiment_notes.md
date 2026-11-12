@@ -391,3 +391,19 @@ GAM 0.2004, trees 0.1972) and helped P3 in the ensemble study (log loss −0.000
 framework: P3 log loss 0.19707 vs 0.19722 (both fold seeds better), ties on P1 / P2 / P3 cost; on the synthetic
 suite the log-loss regret falls from 0.00879 to 0.00824 (the numeric × category problem: 0.0164 → 0.0137).
 Rejected in the same round: XGBoost at lr 0.01, LightGBM at lr 0.005, averaging whole framework versions.
+
+
+## Submission v11 = framework version 13 (final)
+
+Details: `submission/v10/V10_NOTES.md` (sparse-GAM study), `submission/v11/V11_NOTES.md`.
+
+- **Shapes are piecewise linear with a few kinks.** An L1-penalised GAM on hinges at 15 interior quantiles per
+  column (trend filtering) beats the smooth L2 GAM by 0.0034 AUC on P1; step bases hurt even under L1.
+- **Interactions are kinked too.** Adding `max(a − k, 0)·b`-type terms for the measured pairs (and
+  category-specific hinges) makes the sparse GAM the best single P2 model (0.5075 vs 0.5099 for the best trees)
+  and the best single P3 model at C 0.05 (0.1970 vs 0.1972).
+- **Hybrid for P1.** On P1 the trees beat the GAM only on `cycle_time`'s very steep U-walls; a booster fitted on
+  the sparse GAM's residual adds +0.0003 AUC to the ensemble.
+- Whole framework, paired outer CV (2 fold seeds): v11 P1 AUC 0.85503, P2 log loss 0.50659, P3 cost 0.7098 /
+  log loss 0.19654 vs v8 0.85484 / 0.50757 / 0.7143 / 0.19707; synthetic log-loss regret 0.00824 → 0.00746.
+- Rejected: steps, AND-rules, hinge × hinge, tail knots, squared walls, relaxed lasso, > 6 kinked pairs.

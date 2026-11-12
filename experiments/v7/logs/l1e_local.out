@@ -1,0 +1,9 @@
+p2 gl1h_and4      LL=0.50788 per-seed=[0.50797, 0.50778] LL=0.50788 22s
+p1 gl1h_and4      AUC=0.85007 per-seed=[0.85063, 0.84951] LL=0.42342 22s
+p3 gl1h_and4      LL=0.19836 per-seed=[0.19814, 0.19857] LL=0.19836 41s
+p2 gl1h_hh4       LL=0.50750 per-seed=[0.5076, 0.50741] LL=0.50750 18s
+p1 gl1h_hh4       AUC=0.85068 per-seed=[0.85144, 0.84991] LL=0.42253 19s
+p2 gl1h_and4_hh4  LL=0.50786 per-seed=[0.50753, 0.50819] LL=0.50786 23s
+p1 gl1h_and4_hh4  AUC=0.84977 per-seed=[0.85031, 0.84923] LL=0.42384 24s
+p3 gl1h_hh4       LL=0.19774 per-seed=[0.19772, 0.19776] LL=0.19774 37s
+p3 gl1h_and4_hh4  LL=0.19835 per-seed=[0.19818, 0.19851] LL=0.19835 32s

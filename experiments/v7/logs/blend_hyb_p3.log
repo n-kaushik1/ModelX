@@ -1,0 +1,4 @@
+=== framework-like library (11): ['lgb_B', 'lgb_d3k16m', 'lgb_d2', 'lgb_d4', 'xgb_d2k8m', 'xgb_d3', 'cat_d3m', 'cat_d4', 'gam_c05', 'gam_c2', 'et_l5']
+FW                                 LL=0.19794 cost@1/11=0.7186
+FW + gam_sl_p2+lgb_B_lr01+grich_c2p4+gl1h_ph4_ch2+gl1h_ph6_ch2+gl1h_ph6_c005 LL=0.19695 d=-0.00099 (se 0.00006) cost@1/11=0.7114 d=-0.0072 (se 0.0011)
+FW + gam_sl_p2+lgb_B_lr01+grich_c2p4+gl1h_ph4_ch2+gl1h_ph6_ch2+gl1h_ph6_c005+l1boost_d2 LL=0.19695 d=-0.00099 (se 0.00006) cost@1/11=0.7114 d=-0.0072 (se 0.0011)

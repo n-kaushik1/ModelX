@@ -1,0 +1,1 @@
+{"tag": "v11a", "pid": 8, "name": "highcard", "obj": "roc_auc", "fit_s": 565.3, "size_mb": 6.43, "auc": 0.8062680971521282, "ll": 0.39564553808216363, "bayes_auc": 0.8196020249483629, "bayes_ll": 0.3846531005441742, "blend": {"hyb+struct": 0.0367, "lgbm+struct": 0.22, "cat": 0.6067, "cat+struct": 0.1367}, "regret": 0.013333927796234657}

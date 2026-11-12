@@ -1,0 +1,6 @@
+p2 gl1h_ph4_sq    LL=0.50818 per-seed=[0.50856, 0.50779] LL=0.50818 14s
+p1 gl1h_ph4_sq    AUC=0.85014 per-seed=[0.85117, 0.84911] LL=0.42309 18s
+p2 gl1h_ph6_sq    LL=0.50822 per-seed=[0.50855, 0.50789] LL=0.50822 15s
+p1 gl1h_ph6_sq    AUC=0.84974 per-seed=[0.85092, 0.84855] LL=0.42363 19s
+p3 gl1h_ph4_sq    LL=0.19809 per-seed=[0.19799, 0.1982] LL=0.19809 41s
+p3 gl1h_ph6_sq    LL=0.19775 per-seed=[0.19725, 0.19825] LL=0.19775 34s

@@ -1,0 +1,12 @@
+p2 gl1h_ph4_rel1  LL=0.51033 per-seed=[0.51021, 0.51046] LL=0.51033 18s
+p2 gl1h_ph4_rel01 LL=0.50975 per-seed=[0.50966, 0.50985] LL=0.50975 19s
+p1 gl1h_ph4_rel1  AUC=0.85016 per-seed=[0.85071, 0.84961] LL=0.42357 20s
+p2 gl1h_ph6_c005  LL=0.50767 per-seed=[0.50805, 0.50729] LL=0.50767 13s
+p1 gl1h_ph4_rel01 AUC=0.84885 per-seed=[0.84937, 0.84832] LL=0.42519 20s
+p3 gl1h_ph4_rel1  LL=0.20063 per-seed=[0.2007, 0.20056] LL=0.20063 42s
+p1 gl1h_ph6_c005  AUC=0.84949 per-seed=[0.85024, 0.84874] LL=0.42475 14s
+p2 gl1h_ph6_c005_rel01 LL=0.50912 per-seed=[0.50953, 0.50871] LL=0.50912 13s
+p3 gl1h_ph4_rel01 LL=0.20033 per-seed=[0.20027, 0.20039] LL=0.20033 42s
+p3 gl1h_ph6_c005  LL=0.19703 per-seed=[0.19667, 0.1974] LL=0.19703 31s
+p1 gl1h_ph6_c005_rel01 AUC=0.84805 per-seed=[0.8487, 0.8474] LL=0.42614 14s
+p3 gl1h_ph6_c005_rel01 LL=0.19885 per-seed=[0.19838, 0.19932] LL=0.19885 29s

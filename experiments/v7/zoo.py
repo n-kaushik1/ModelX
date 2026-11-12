@@ -148,6 +148,80 @@ def gam_rich_f(C=0.05, knots=7, steps=0, num_pairs=0, cat_pairs=0, and_pairs=0, 
     return f
 
 
+def gam_l1_f(C=0.1, nk=15, steps=True, hinges=True, num_pairs=4, cat_pairs=2, l1_ratio=None, pair_hinge=0, cat_hinge=0, and_terms=0, hh_terms=0, tails=(), sq_walls=False, relax=None):
+    """Sparse GAM: L1 (or elastic-net) logistic regression on a large basis -- per numeric column the linear term,
+    hinges and step indicators at `nk` quantiles (L1 on jumps / kinks = total-variation / trend-filtering
+    penalty), products of the top measured numeric pairs, category x numeric slopes; all columns standardised."""
+    def f(Xtr, ytr, Xva):
+        enc = S.TabularEncoder("linear").fit(Xtr, nums, cats)
+        Ztr, Zva = enc.transform(Xtr), enc.transform(Xva)
+        nn = len(nums); st = struct(Xtr, ytr)
+        cols = [j for j in range(nn) if len(np.unique(Ztr[:, j])) > 10]
+        qs = np.r_[np.linspace(0, 1, nk + 2)[1:-1], np.asarray(tails, float)]
+        K = {j: np.unique(np.quantile(Ztr[:, j], qs)) for j in cols}
+        npairs = [tuple(q) for q in st["pairs"] if q[0] < nn and q[1] < nn][:num_pairs]
+        cps = []
+        for q in st["pairs"]:
+            if len(cps) >= cat_pairs: break
+            if (q[0] < nn) == (q[1] < nn): continue
+            ni, ci = (q[0], q[1]) if q[0] < nn else (q[1], q[0])
+            oh = [k for k, nm in enumerate(enc.feature_names_) if nm.startswith(f"{cats[ci - nn]}=")]
+            if oh: cps.append((ni, oh))
+        PK = {j: np.quantile(Ztr[:, j], [0.2, 0.4, 0.6, 0.8]) for j in range(nn)}
+        def design(Z):
+            B = [Z]
+            for j in cols:
+                if sq_walls:                                     # smooth convex walls beyond the outer knots
+                    B.append(np.minimum(np.maximum(Z[:, [j]] - K[j][-1], 0) ** 2, 25)); B.append(np.minimum(np.maximum(K[j][0] - Z[:, [j]], 0) ** 2, 25))
+                if hinges: B.append(np.maximum(Z[:, [j]] - K[j][None, :], 0))
+                if steps: B.append((Z[:, [j]] > K[j][None, :]).astype(float))
+            for a, b in npairs: B.append(np.clip(Z[:, a] * Z[:, b], -10, 10)[:, None])
+            for n_, oh in cps: B.append(Z[:, oh] * Z[:, [n_]])
+            for a, b in npairs[:pair_hinge]:                     # kinked interactions: hinge(a) * b and a * hinge(b)
+                for u in PK[a]: B.append(np.clip(np.maximum(Z[:, a] - u, 0) * Z[:, b], -10, 10)[:, None])
+                for v in PK[b]: B.append(np.clip(Z[:, a] * np.maximum(Z[:, b] - v, 0), -10, 10)[:, None])
+            for n_, oh in cps[:cat_hinge]:                       # category-specific kinks
+                for u in PK[n_]: B.append(Z[:, oh] * np.maximum(Z[:, [n_]] - u, 0))
+            for a, b in npairs[:and_terms]:                      # AND rules: 1[a > u] * 1[b > v]
+                B.append(((Z[:, [a]] > PK[a][None, :])[:, :, None] & (Z[:, [b]] > PK[b][None, :])[:, None, :]).reshape(len(Z), -1).astype(float))
+            for a, b in npairs[:hh_terms]:                       # hinge x hinge
+                B.append((np.maximum(Z[:, [a]] - PK[a][None, :], 0)[:, :, None] * np.maximum(Z[:, [b]] - PK[b][None, :], 0)[:, None, :]).reshape(len(Z), -1))
+            return np.hstack(B)
+        Dtr, Dva = design(Ztr), design(Zva)
+        mu, sd = Dtr.mean(0), Dtr.std(0) + 1e-9
+        with S._blas_limit():
+            if l1_ratio is None:
+                lr = LogisticRegression(penalty="l1", C=C, solver="liblinear", max_iter=2000).fit((Dtr - mu) / sd, ytr)
+            else:
+                lr = LogisticRegression(penalty="elasticnet", l1_ratio=l1_ratio, C=C, solver="saga", max_iter=3000).fit((Dtr - mu) / sd, ytr)
+            if relax is not None:                               # relaxed lasso: L2 refit on the selected columns
+                keep = np.flatnonzero(np.abs(lr.coef_.ravel()) > 1e-8)
+                lr2 = LogisticRegression(C=relax, max_iter=3000).fit(((Dtr - mu) / sd)[:, keep], ytr)
+                return lr2.predict_proba(((Dva - mu) / sd)[:, keep])[:, 1]
+        return lr.predict_proba((Dva - mu) / sd)[:, 1]
+    return f
+
+
+def l1_boost_f(P, gam_kw):
+    """Hybrid: the v10 sparse GAM (kinked interactions), then a booster on its residual (GAM logit = init score)."""
+    def f(Xtr, ytr, Xva):
+        a_, b_ = split_es(ytr)
+        spec = S.ModelSpec("gam", gam_kw)
+        num, cat = nums, cats
+        g = S._fit_model(spec, Xtr, ytr, num, cat, None, NJ)
+        gtr, gva = logit(g.predict(Xtr)), logit(g.predict(Xva))
+        enc = S.TabularEncoder("native").fit(Xtr, num, cat)
+        Ztr, Zva = enc.transform(Xtr), enc.transform(Xva)
+        base = dict(verbose=-1, n_jobs=NJ, random_state=0, cat_smooth=20, min_data_per_group=50, **P)
+        m = lgb.LGBMClassifier(n_estimators=8000, **base).fit(Ztr[a_], ytr[a_], init_score=gtr[a_], eval_set=[(Ztr[b_], ytr[b_])],
+                                                         eval_init_score=[gtr[b_]], categorical_feature=enc.cat_idx_ or "auto",
+                                                         callbacks=[lgb.early_stopping(200, verbose=False)])
+        n = max(int(m.best_iteration_ * 1.1), 5)
+        m = lgb.LGBMClassifier(n_estimators=n, **base).fit(Ztr, ytr, init_score=gtr, categorical_feature=enc.cat_idx_ or "auto")
+        return sigmoid(gva + m.predict_proba(Zva, raw_score=True))
+    return f
+
+
 def ebm_f(k_pairs):
     MAIN = dict(learning_rate=0.02, num_leaves=3, min_child_samples=20, subsample=0.85, subsample_freq=1, reg_lambda=0.0)
     PAIR = dict(learning_rate=0.02, num_leaves=4, max_depth=2, min_child_samples=30, subsample=0.85, subsample_freq=1, reg_lambda=1.0)
@@ -304,6 +378,33 @@ V = {
     "grich_all_c02": gam_rich_f(C=0.02, steps=10, num_pairs=2, cat_pairs=2, and_pairs=4),
     "grich_c1": gam_rich_f(cat_pairs=1), "grich_c4": gam_rich_f(cat_pairs=4), "grich_c2p2": gam_rich_f(cat_pairs=2, num_pairs=2),
     "grich_c2p4": gam_rich_f(cat_pairs=2, num_pairs=4), "grich_c4p4": gam_rich_f(cat_pairs=4, num_pairs=4), "grich_c2p6": gam_rich_f(cat_pairs=2, num_pairs=6),
+    "gl1_c003": gam_l1_f(C=0.03), "gl1_c01": gam_l1_f(C=0.1), "gl1_c03": gam_l1_f(C=0.3),
+    "gl1_steps_c01": gam_l1_f(C=0.1, hinges=False), "gl1_hinge_c01": gam_l1_f(C=0.1, steps=False),
+    "gl1_nk30_c01": gam_l1_f(C=0.1, nk=30), "gl1_nopair_c01": gam_l1_f(C=0.1, num_pairs=0, cat_pairs=0),
+    "gl1h_nk15_c005": gam_l1_f(C=0.05, steps=False), "gl1h_nk15_c02": gam_l1_f(C=0.2, steps=False),
+    "gl1h_nk25_c01": gam_l1_f(C=0.1, nk=25, steps=False), "gl1h_nk40_c01": gam_l1_f(C=0.1, nk=40, steps=False),
+    "gl1h_nk25_c005": gam_l1_f(C=0.05, nk=25, steps=False), "gl1h_nk40_c005": gam_l1_f(C=0.05, nk=40, steps=False),
+    "gl1h_nk25_c01_p8": gam_l1_f(C=0.1, nk=25, steps=False, num_pairs=8, cat_pairs=4),
+    "gl1h_ph4": gam_l1_f(C=0.1, steps=False, pair_hinge=4), "gl1h_ph8": gam_l1_f(C=0.1, steps=False, num_pairs=8, pair_hinge=8),
+    "gl1h_ph4_ch2": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2),
+    "gl1h_ph6_ch2": gam_l1_f(C=0.1, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2),
+    "gl1h_ph4_ch4": gam_l1_f(C=0.1, steps=False, cat_pairs=4, pair_hinge=4, cat_hinge=4),
+    "gl1h_ph8_ch2": gam_l1_f(C=0.1, steps=False, num_pairs=8, pair_hinge=8, cat_hinge=2),
+    "gl1h_ph4_ch2_c02": gam_l1_f(C=0.2, steps=False, pair_hinge=4, cat_hinge=2),
+    "gl1h_ph4_ch2_c005": gam_l1_f(C=0.05, steps=False, pair_hinge=4, cat_hinge=2),
+    "l1boost_d2": l1_boost_f(dict(L2, learning_rate=0.01), dict(C=0.1, knots=15, basis="hinge", pairs=4, cpairs=2, penalty="l1", phinge=4, chinge=2)), "l1boost_d3": l1_boost_f(dict(L3, learning_rate=0.01), dict(C=0.1, knots=15, basis="hinge", pairs=4, cpairs=2, penalty="l1", phinge=4, chinge=2)),
+    "gl1h_and4": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, and_terms=4),
+    "gl1h_hh4": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, hh_terms=4),
+    "gl1h_and4_hh4": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, and_terms=4, hh_terms=4),
+    "gl1h_ph4_t4": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, tails=(0.005, 0.01, 0.02, 0.04, 0.96, 0.98, 0.99, 0.995)),
+    "gl1h_ph4_t2": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, tails=(0.01, 0.03, 0.97, 0.99)),
+    "gl1h_ph6_t4": gam_l1_f(C=0.1, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2, tails=(0.005, 0.01, 0.02, 0.04, 0.96, 0.98, 0.99, 0.995)),
+    "gl1h_ph4_sq": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, sq_walls=True),
+    "gl1h_ph6_sq": gam_l1_f(C=0.1, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2, sq_walls=True),
+    "gl1h_ph4_rel1": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, relax=1.0),
+    "gl1h_ph4_rel01": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, relax=0.1),
+    "gl1h_ph6_c005": gam_l1_f(C=0.05, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2),
+    "gl1h_ph6_c005_rel01": gam_l1_f(C=0.05, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2, relax=0.1),
     "rf_l5": forest_f(RandomForestClassifier, 5, 0.3), "hgb_d3": hgb_f(3), "xgb_d4": xgb_f(dict(X3, max_depth=4)),
 }
 if name == "list":

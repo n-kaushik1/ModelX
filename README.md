@@ -14,10 +14,10 @@ escalation) and later on three hidden ones.
 
 | What | Where |
 |---|---|
-| **Zip to upload to the leaderboard** | [`submission/v8/submission.zip`](submission/v8/submission.zip) (framework version 10) |
-| Status, changes and evidence of the final version | [`submission/v8/V8_NOTES.md`](submission/v8/V8_NOTES.md) (earlier: `submission/v7/V7_NOTES.md`, `submission/v6/V6_NOTES.md`) |
-| Framework code | [`submission/v8/solution.py`](submission/v8/solution.py) |
-| Previous versions | `submission/v7/` (framework 9), `submission/v6/` (framework 8), `submission/v5/` (7, the build on the leaderboard: P1 0.8617, P2 0.5034, P3 0.6800), `submission/v4/` (6), `submission/sub2/` (5), `submission/improved/` (2), `submission/baseline/` (1) |
+| **Zip to upload to the leaderboard** | [`submission/v11/submission.zip`](submission/v11/submission.zip) (framework version 13) |
+| Status, changes and evidence of the final version | [`submission/v11/V11_NOTES.md`](submission/v11/V11_NOTES.md) (the sparse-GAM study: `submission/v10/V10_NOTES.md`; earlier: `submission/v8`, `v7`, `v6`) |
+| Framework code | [`submission/v11/solution.py`](submission/v11/solution.py) |
+| Previous versions | `submission/v10/` (framework 12), `submission/v9/` (11), `submission/v8/` (10), `submission/v7/` (framework 9), `submission/v6/` (framework 8), `submission/v5/` (7, the build on the leaderboard: P1 0.8617, P2 0.5034, P3 0.6800), `submission/v4/` (6), `submission/sub2/` (5), `submission/improved/` (2), `submission/baseline/` (1) |
 | What was tried and why | [`docs/experiment_notes.md`](docs/experiment_notes.md) |
 | How the framework works | [`docs/framework_design.md`](docs/framework_design.md) |
 | Draft content for the final report | [`docs/report_draft.md`](docs/report_draft.md) |
@@ -28,17 +28,17 @@ self-check.
 **Local results: paired outer 5-fold CV of the whole framework** (fit on 4/5 → joblib save/reload → predict the
 raw 1/5, pooled; P3 uses each fold's own threshold), mean of two fold seeds. Not leaderboard scores.
 
-| Problem | Metric | framework 7 (v5) | framework 9 (v7) | **framework 10 (v8, final)** |
+| Problem | Metric | framework 7 (v5) | framework 10 (v8) | **framework 13 (v11, final)** |
 |---|---|---|---|---|
-| P1 Manufacturing | ROC-AUC ↑ | 0.85461 | 0.85481 | **0.85484** |
-| P2 Credit | Log loss ↓ | 0.50851 | **0.50752** | 0.50757 |
-| P3 Telecom | Normalized cost ↓ | 0.7182 | 0.7145 | **0.7143** |
+| P1 Manufacturing | ROC-AUC ↑ | 0.85461 | 0.85484 | **0.85503** |
+| P2 Credit | Log loss ↓ | 0.50851 | 0.50757 | **0.50659** |
+| P3 Telecom | Normalized cost ↓ | 0.7182 | 0.7143 | **0.7098** |
 
 On a suite of 16 synthetic problems built to test generalisation (different sizes, imbalance, interactions,
-costs), v8 has the lowest regret for AUC and log-loss problems and is within noise of v7 on cost problems
-(`V8_NOTES.md` §4).
+costs), v11 ties v8 on AUC and cost problems and is clearly better on log-loss problems (`V11_NOTES.md`).
 
-What v8 adds: category × numeric slope terms in the GAM for the measured pairs (P3 log loss −0.00015). What v7
+What v11 adds: a sparse (L1) GAM on a dense hinge basis with *kinked* interaction terms for the measured pairs
+(P2 −0.0010, P3 −0.0005 log loss) and a GAM-then-boost hybrid (P1). What v8 added: category × numeric slope terms in the GAM for the measured pairs (P3 log loss −0.00015). What v7
 added (from an honest 42-model ensemble study): a GAM with bilinear terms for the measured feature
 pairs (P2 −0.0008) and a learning-rate-0.01 structured LightGBM (P1 +0.0003). What v6 added: noisy copies of other columns are detected from the data's covariance structure and dropped (twin
 readings are averaged instead), and the P3-style decision threshold is the cost-derived Bayes threshold on
@@ -79,8 +79,10 @@ ModelX/
 ├── public_data.zip            the three development CSVs (unzipped into data/ by the setup script)
 ├── starting_kit.zip           the official starting kit, unchanged
 ├── submission/
-│   ├── v8/                    ← the final submission = framework version 10 (GAM with measured pair products and category slopes)
-│   │   ├── solution.py, submission.zip, V8_NOTES.md, and the official kit files
+│   ├── v11/                   ← the final submission = framework version 13 (sparse kinked-interaction GAM, GAM-then-boost hybrid)
+│   │   ├── solution.py, submission.zip, V11_NOTES.md, and the official kit files
+│   ├── v10/, v9/              framework versions 12 / 11 (sparse GAM study, intermediate)
+│   ├── v8/                    framework version 10 (GAM with measured pair products and category slopes)
 │   ├── v7/                    framework version 9 (pair-term GAM, low-learning-rate LightGBM)
 │   ├── v6/                    framework version 8 (redundancy detection, Bayes threshold)
 │   ├── v5/                    framework version 7 (bagged ensemble selection, robust cleaner)
@@ -151,7 +153,7 @@ The last lines it prints should show `python 3.11.x`, the versions above, and th
 ### 1. Check that the framework still works (about 20 min on 16+ cores)
 
 ```bash
-.venv/bin/python experiments/v5/stress_test.py submission/v8
+.venv/bin/python experiments/v5/stress_test.py submission/v11
 ```
 
 It fits on synthetic data with awkward properties (tiny / huge / imbalanced data, odd columns, dates, empty
@@ -162,8 +164,8 @@ shuffled columns. It must end with `STRESS TEST PASSED`.
 
 ```bash
 cd experiments/v5
-for f in 0 1 2 3 4; do ../../.venv/bin/python outer_fold.py ../../submission/v8/solution.py mytag p1 4 0 $f; done
-../../.venv/bin/python outer_agg.py mytag v8a            # compare with the saved v8 folds
+for f in 0 1 2 3 4; do ../../.venv/bin/python outer_fold.py ../../submission/v11/solution.py mytag p1 4 0 $f; done
+../../.venv/bin/python outer_agg.py mytag v11a           # compare with the saved v11 folds
 ```
 
 Each fold fits the whole framework on 4/5 of the rows, saves and reloads it, and scores the raw held-out 1/5.
@@ -173,7 +175,7 @@ below about 0.0005 (AUC or log loss) are fold-seed noise.
 ### 3. Build the zip to upload (about 10 min)
 
 ```bash
-cd submission/v8
+cd submission/v11
 ../../.venv/bin/python make_submission.py ../../data
 ```
 

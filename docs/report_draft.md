@@ -17,8 +17,9 @@ shorten as needed. Fill in the two bracketed leaderboard items yourself.
 3. **Measure the structure** (nested in every fold): a quick depth-2 booster ranks interacting feature pairs, and
    a quick additive booster gives each feature's shape and monotone direction. Boosters are searched with and
    without these as `interaction_constraints` / `monotone_constraints`.
-4. **Compare and tune families** (LightGBM, XGBoost, CatBoost, a hinge-basis GAM optionally with bilinear terms
-   for the measured feature pairs and category-dependent slopes, ExtraTrees) by stratified 5-fold
+4. **Compare and tune families** (LightGBM, XGBoost, CatBoost, ExtraTrees, and additive models: a hinge-basis GAM
+   with bilinear / category-dependent terms for the measured feature pairs, a sparse L1 GAM with kinked
+   interaction terms, and a GAM-then-boost hybrid) by stratified 5-fold
    OOF predictions on the problem's metric (log loss when a threshold is needed). Each family runs a
    **complexity ladder** (depth 1, 2, 3, 4, 6, trees by early stopping), then random refinement around the best
    rung.
@@ -43,9 +44,9 @@ repeated over fold seeds. The leaderboard was used only as an external check.
 | Key characteristics | Strongly non-linear but **additive**: hinge and U-shaped effects (cycle time, process temperature), a few interacting pairs; noisy duplicate sensors; several columns with no signal. Logistic regression reaches only ~0.72 AUC vs ~0.855 for boosting. | Mostly additive and **monotone** effects (well suited to a GAM); a derived ratio column (`revenue_per_employee` = revenue / employees); probability quality matters, not ranking. | Imbalanced; sharp hinge (throughput utilisation) and U-shape (traffic change); one dominant interaction pair; cost-sensitive decision. |
 | Preprocessing | Native NaN handling, category codes; noisy copies `temperature_sensor_2`, `material_density_estimate` dropped; no feature engineering (a screen of ~1,500 generated features found nothing above noise) | copies `utilization_3m_average`, `account_balance_last_month` dropped; the GAM uses log transforms and hinge bases | copy `utilization_15m_average` dropped; the two packet-loss readings averaged |
 | Models compared | LR / spline GAM / hinge GAM (with and without pair terms), LightGBM (incl. linear trees, low learning rate), XGBoost, CatBoost, ExtraTrees, RF, HGB, EBM-style GA²M, DART, class-weighted boosters | same | same |
-| Final model | Bag of fold models: structured LightGBM (depth 2, measured pairs, monotone) 0.65 + monotone CatBoost 0.16 + structured XGBoost 0.13 + interaction GAM 0.06; Platt | **GAM with bilinear terms for the 2 strongest measured pairs 0.49** + CatBoost 0.27 + structured LightGBM 0.18 + XGBoost 0.06 | **GAM with pair products and category-dependent slopes 0.32** + XGBoost 0.28 + CatBoost 0.29 + LightGBM 0.11; Platt; threshold 1/11 |
+| Final model | Bag of fold models: structured LightGBM (depth 2, measured pairs, monotone) 0.55 + GAM-then-boost hybrid 0.17 + monotone CatBoost 0.10 + sparse GAM 0.09 + structured XGBoost 0.08; Platt | **GAM-then-boost hybrid 0.51** + CatBoost 0.23 + sparse kinked-interaction GAM 0.19 + LightGBM 0.06 | **sparse kinked-interaction GAMs 0.54** + XGBoost 0.22 + LightGBM 0.13 + CatBoost 0.06 + hybrid 0.04; Platt; threshold 1/11 |
 | Tuning decisions | Depth 1–2 trees win (deep trees lose 0.004 AUC); search depth first; early stopping for the tree count | Depth 2–3; the GAM is a strong blend member | Selection by log loss, not by the noisy best-threshold cost |
-| Outer-CV score (final framework) | AUC 0.8548 (2 fold seeds) | log loss 0.5076 | normalized cost 0.714 |
+| Outer-CV score (final framework) | AUC 0.8550 (2 fold seeds) | log loss 0.5066 | normalized cost 0.710 |
 
 **P3 threshold.** Chosen from the development data only. The probabilities are calibrated on out-of-fold
 predictions (Platt), and the threshold that minimises the expected cost `FP + 10·FN` for calibrated
@@ -55,6 +56,9 @@ than the empirically tuned one (normalized cost 0.717 vs 0.722, averaged over th
 threshold adds variance once the probabilities are calibrated.
 
 **Key observations**
+- The effects are piecewise linear with a few sharp kinks, and so are the interactions ("above a threshold of A,
+  the slope of B changes"): a sparse (L1) GAM on a dense hinge basis with such kinked interaction terms became the
+  best single model on P2 (log loss 0.5075 vs 0.5099 for the best trees) and matched the trees on P3.
 - P2 behaves like an additive model plus a couple of bilinear interactions (top measured pair: operating margin
   × debt-service ratio). A GAM with the products of the two strongest measured pairs became the best single P2
   model (log loss 0.5085 vs 0.5101 without them) and improved the ensemble by 0.0008; trees approximate a product

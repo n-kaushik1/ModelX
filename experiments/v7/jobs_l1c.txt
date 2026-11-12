@@ -1,0 +1,9 @@
+p1 gl1h_ph4 2
+p2 gl1h_ph4 2
+p3 gl1h_ph4 2
+p1 gl1h_ph8 2
+p2 gl1h_ph8 2
+p3 gl1h_ph8 2
+p1 gl1h_ph4_ch2 2
+p2 gl1h_ph4_ch2 2
+p3 gl1h_ph4_ch2 2

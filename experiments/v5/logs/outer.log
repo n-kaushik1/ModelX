@@ -73,3 +73,33 @@ v5new p3 s1 f3 cost=0.7442 t=0.0891 LL=0.19695 fit=541s size=6.4MB comb=bagged_s
 v4 p3 s1 f3 cost=0.7442 t=0.0907 LL=0.19698 fit=519s size=6.2MB comb=blend blend={"lgbm+struct": 0.6, "lgbm": 0.2, "et": 0.2}
 v4 p3 s1 f4 cost=0.7050 t=0.0900 LL=0.20289 fit=464s size=0.8MB comb=blend blend={"xgb+struct": 0.1667, "cat": 0.6667, "cat+struct": 0.1667}
 v5new p3 s1 f4 cost=0.7028 t=0.0916 LL=0.20288 fit=495s size=1.7MB comb=bagged_selection blend={"gam": 0.0331, "lgbm+struct": 0.1174, "xgb+struct": 0.0774, "cat": 0.6257, "cat+struct": 0.1464}
+v11a p2 s0 f4 LL=0.49929 fit=275s size=1.4MB comb=bagged_selection blend={"gam+struct": 0.1805, "gam": 0.0798, "hyb+struct": 0.456, "lgbm+struct": 0.2837}
+v11a p2 s0 f1 LL=0.50026 fit=277s size=2.1MB comb=bagged_selection blend={"gam+struct": 0.5392, "hyb+struct": 0.2349, "lgbm+struct": 0.0505, "xgb": 0.0926, "cat": 0.0243, "cat+struct": 0.0585}
+v11a p2 s0 f3 LL=0.50273 fit=280s size=2.8MB comb=bagged_selection blend={"gam+struct": 0.5106, "lgbm+struct": 0.2184, "lgbm": 0.0224, "cat": 0.2485}
+v11a p2 s0 f0 LL=0.51723 fit=294s size=1.9MB comb=bagged_selection blend={"gam+struct": 0.4988, "gam": 0.0214, "hyb+struct": 0.2687, "xgb": 0.0228, "xgb+struct": 0.058, "cat": 0.1302}
+v11a p2 s0 f2 LL=0.51217 fit=298s size=2.7MB comb=bagged_selection blend={"gam+struct": 0.4407, "hyb+struct": 0.2569, "lgbm+struct": 0.0269, "lgbm": 0.0272, "cat": 0.2483}
+v11a p1 s0 f2 AUC=0.86288 fit=326s size=12.2MB comb=bagged_selection blend={"gam+struct": 0.0419, "hyb+struct": 0.199, "lgbm+struct": 0.2756, "lgbm": 0.0365, "xgb+struct": 0.0284, "cat+struct": 0.2111, "cat": 0.1834, "et": 0.0241}
+v11a p1 s0 f0 AUC=0.85216 fit=333s size=2.7MB comb=bagged_selection blend={"hyb+struct": 0.4837, "lgbm+struct": 0.168, "cat+struct": 0.3482}
+v11a p1 s0 f3 AUC=0.85465 fit=335s size=2.5MB comb=bagged_selection blend={"gam+struct": 0.021, "hyb+struct": 0.4501, "lgbm+struct": 0.1628, "xgb+struct": 0.0216, "cat+struct": 0.3445}
+v11a p1 s0 f1 AUC=0.84453 fit=359s size=8.9MB comb=bagged_selection blend={"gam+struct": 0.0957, "hyb+struct": 0.2268, "lgbm+struct": 0.5398, "xgb+struct": 0.021, "xgb": 0.0213, "cat+struct": 0.0742, "et": 0.0211}
+v11a p1 s0 f4 AUC=0.86470 fit=357s size=5.3MB comb=bagged_selection blend={"gam+struct": 0.2554, "hyb+struct": 0.101, "lgbm+struct": 0.3319, "lgbm": 0.117, "xgb": 0.0571, "cat+struct": 0.063, "cat": 0.0747}
+v11a p3 s0 f0 cost=0.7261 t=0.0909 LL=0.19730 fit=339s size=1.7MB comb=bagged_selection blend={"gam+struct": 0.4444, "hyb+struct": 0.1633, "lgbm+struct": 0.1097, "cat": 0.1533, "cat+struct": 0.1292}
+v11a p3 s0 f1 cost=0.7239 t=0.0909 LL=0.19254 fit=363s size=2.5MB comb=bagged_selection blend={"gam+struct": 0.508, "hyb+struct": 0.0507, "lgbm+struct": 0.11, "xgb+struct": 0.0623, "cat": 0.269}
+v11a p3 s0 f2 cost=0.7178 t=0.0909 LL=0.19757 fit=346s size=1.3MB comb=bagged_selection blend={"gam+struct": 0.3963, "lgbm+struct": 0.0337, "xgb+struct": 0.0742, "cat": 0.4351, "cat+struct": 0.0607}
+v11a p3 s0 f3 cost=0.6807 t=0.0909 LL=0.19362 fit=343s size=2.2MB comb=bagged_selection blend={"gam+struct": 0.436, "hyb+struct": 0.0313, "lgbm+struct": 0.278, "xgb+struct": 0.2313, "cat": 0.0233}
+v11a p3 s0 f4 cost=0.7094 t=0.0909 LL=0.19860 fit=392s size=3.9MB comb=bagged_selection blend={"gam+struct": 0.5224, "hyb+struct": 0.1929, "lgbm+struct": 0.2111, "xgb+struct": 0.0418, "cat": 0.0317}
+v11a p2 s1 f0 LL=0.50386 fit=290s size=3.2MB comb=bagged_selection blend={"gam+struct": 0.3674, "hyb+struct": 0.2727, "lgbm+struct": 0.1013, "xgb": 0.0666, "cat": 0.192}
+v11a p2 s1 f1 LL=0.51190 fit=273s size=3.6MB comb=bagged_selection blend={"gam+struct": 0.3899, "gam": 0.0284, "hyb+struct": 0.2142, "lgbm+struct": 0.2521, "lgbm": 0.0287, "xgb+struct": 0.0385, "cat": 0.0216, "cat+struct": 0.0267}
+v11a p2 s1 f2 LL=0.50849 fit=272s size=15.7MB comb=bagged_selection blend={"gam": 0.0216, "gam+struct": 0.2887, "hyb+struct": 0.3085, "lgbm+struct": 0.2107, "xgb+struct": 0.0372, "cat": 0.1112, "et": 0.022}
+v11a p2 s1 f3 LL=0.50783 fit=277s size=15.0MB comb=bagged_selection blend={"gam+struct": 0.3393, "gam": 0.0539, "hyb+struct": 0.2261, "lgbm": 0.3151, "lgbm+struct": 0.0451, "et": 0.0206}
+v11a p2 s1 f4 LL=0.50211 fit=285s size=1.8MB comb=bagged_selection blend={"gam": 0.0336, "gam+struct": 0.4995, "hyb+struct": 0.1852, "lgbm+struct": 0.0521, "xgb+struct": 0.0302, "cat+struct": 0.1993}
+v11a p1 s1 f2 AUC=0.85372 fit=314s size=2.5MB comb=bagged_selection blend={"hyb+struct": 0.4257, "lgbm+struct": 0.0788, "xgb+struct": 0.0757, "xgb": 0.0234, "cat+struct": 0.3964}
+v11a p1 s1 f0 AUC=0.85854 fit=326s size=3.7MB comb=bagged_selection blend={"gam+struct": 0.0522, "hyb+struct": 0.175, "lgbm+struct": 0.6335, "xgb+struct": 0.0246, "xgb": 0.0256, "cat+struct": 0.0892}
+v11a p1 s1 f1 AUC=0.85236 fit=339s size=5.4MB comb=bagged_selection blend={"gam+struct": 0.126, "hyb+struct": 0.2293, "lgbm+struct": 0.4743, "lgbm": 0.0234, "xgb+struct": 0.0209, "cat": 0.126}
+v11a p1 s1 f3 AUC=0.85272 fit=336s size=6.0MB comb=bagged_selection blend={"gam+struct": 0.0745, "hyb+struct": 0.2596, "lgbm+struct": 0.3203, "lgbm": 0.0283, "xgb": 0.2098, "cat+struct": 0.1075}
+v11a p1 s1 f4 AUC=0.85525 fit=307s size=3.7MB comb=bagged_selection blend={"gam+struct": 0.0595, "hyb+struct": 0.3642, "lgbm+struct": 0.21, "lgbm": 0.0306, "cat+struct": 0.2603, "cat": 0.0754}
+v11a p3 s1 f0 cost=0.6344 t=0.0909 LL=0.18597 fit=338s size=1.7MB comb=bagged_selection blend={"gam+struct": 0.3983, "hyb+struct": 0.0361, "lgbm": 0.1024, "lgbm+struct": 0.1804, "xgb": 0.194, "cat+struct": 0.0889}
+v11a p3 s1 f3 cost=0.7370 t=0.0909 LL=0.19558 fit=327s size=1.4MB comb=bagged_selection blend={"gam+struct": 0.4442, "hyb+struct": 0.1113, "lgbm+struct": 0.1285, "lgbm": 0.0928, "xgb+struct": 0.2233}
+v11a p3 s1 f2 cost=0.7406 t=0.0909 LL=0.19730 fit=346s size=8.7MB comb=bagged_selection blend={"gam+struct": 0.3754, "hyb+struct": 0.0504, "lgbm+struct": 0.3287, "lgbm": 0.02, "xgb": 0.02, "xgb+struct": 0.0973, "cat": 0.0317, "cat+struct": 0.0427, "et": 0.0338}
+v11a p3 s1 f1 cost=0.7411 t=0.0909 LL=0.20354 fit=391s size=3.0MB comb=bagged_selection blend={"gam+struct": 0.4374, "hyb+struct": 0.0628, "lgbm+struct": 0.0614, "xgb+struct": 0.1525, "cat": 0.2859}
+v11a p3 s1 f4 cost=0.6873 t=0.0909 LL=0.20335 fit=354s size=1.6MB comb=bagged_selection blend={"gam+struct": 0.4036, "lgbm+struct": 0.0318, "xgb+struct": 0.0237, "cat": 0.4551, "cat+struct": 0.0858}
