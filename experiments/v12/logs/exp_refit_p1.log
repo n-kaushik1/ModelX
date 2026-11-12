@@ -1,0 +1,6 @@
+p1 gam seed0 bag5=0.84993 refit=0.85061
+p1 gam seed1 bag5=0.84945 refit=0.85011
+p1 hyb seed0 bag5=0.85527 refit=0.85463
+p1 hyb seed1 bag5=0.85472 refit=0.85455
+p1 gam MEAN bag5=0.84969 refit=0.85036
+p1 hyb MEAN bag5=0.85499 refit=0.85459

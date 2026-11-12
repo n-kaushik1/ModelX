@@ -1,0 +1,12 @@
+p2 l1boost_p3gam_d3 2
+p3 l1boost_p3gam_d3 2
+p1 l1boost_p3gam_d3 2
+p2 l1boost_p3gam_lr02 2
+p3 l1boost_p3gam_lr02 2
+p1 l1boost_p3gam_lr02 2
+p2 l1boost_p3gam_ml50 2
+p3 l1boost_p3gam_ml50 2
+p1 l1boost_p3gam_ml50 2
+p2 l1cat_p3gam 2
+p3 l1cat_p3gam 2
+p1 l1cat_p3gam 2

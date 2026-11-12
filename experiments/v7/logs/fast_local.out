@@ -1,0 +1,6 @@
+p2 gl1h_ph4_fast  LL=0.50965 per-seed=[0.51031, 0.50899] LL=0.50965 46s
+p1 gl1h_ph4_fast  AUC=0.84995 per-seed=[0.85043, 0.84948] LL=0.42385 51s
+p3 gl1h_ph4_fast  LL=0.19952 per-seed=[0.19856, 0.20049] LL=0.19952 88s
+p2 gl1h_ph6_c005_fast LL=0.50949 per-seed=[0.51008, 0.5089] LL=0.50949 41s
+p3 gl1h_ph6_c005_fast LL=0.19980 per-seed=[0.19867, 0.20093] LL=0.19980 74s
+p1 gl1h_ph6_c005_fast AUC=0.84852 per-seed=[0.8489, 0.84813] LL=0.42628 39s

@@ -407,3 +407,13 @@ Details: `submission/v10/V10_NOTES.md` (sparse-GAM study), `submission/v11/V11_N
 - Whole framework, paired outer CV (2 fold seeds): v11 P1 AUC 0.85503, P2 log loss 0.50659, P3 cost 0.7098 /
   log loss 0.19654 vs v8 0.85484 / 0.50757 / 0.7143 / 0.19707; synthetic log-loss regret 0.00824 → 0.00746.
 - Rejected: steps, AND-rules, hinge × hinge, tail knots, squared walls, relaxed lasso, > 6 kinked pairs.
+
+
+## Submission v12 = framework version 14 (final)
+
+Details: `submission/v12/V12_NOTES.md`. A second GAM-then-boost hybrid, built on the strongest sparse GAM (6 kinked
+pairs, C 0.05), is the best single model on P2 and P3; in the whole framework it improves P2 (0.50636 vs 0.50659
+for v11, both fold seeds) and P3 cost (0.7087 vs 0.7098), and v12 has the lowest synthetic regret of all versions
+for every objective type. Rejected in this round: refitting GAM members on all rows (better alone, tie in the
+framework), FAST interaction ranking (worse pairs than the booster-gain ranking), value-spaced / dense knots,
+hybrid booster variants (depth 3, lr 0.02, CatBoost residual), RuleFit (much worse).

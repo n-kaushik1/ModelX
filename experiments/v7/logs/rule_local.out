@@ -1,0 +1,12 @@
+p1 rulefit_gam_c005 AUC=0.84402 per-seed=[0.84597, 0.84207] LL=0.43465 9s
+p1 rulefit_gam    AUC=0.83926 per-seed=[0.84133, 0.83718] LL=0.44427 13s
+p2 rulefit_gam    LL=0.54468 per-seed=[0.54371, 0.54564] LL=0.54468 23s
+p2 rulefit_gam_c005 LL=0.53339 per-seed=[0.53227, 0.53452] LL=0.53339 14s
+p3 rulefit_gam_c005 LL=0.21270 per-seed=[0.21019, 0.21522] LL=0.21270 18s
+p1 rulefit_only   AUC=0.82762 per-seed=[0.83019, 0.82504] LL=0.47206 11s
+p3 rulefit_gam    LL=0.22496 per-seed=[0.22201, 0.22791] LL=0.22496 40s
+p2 rulefit_only   LL=0.57967 per-seed=[0.57768, 0.58167] LL=0.57967 15s
+p1 rulefit_gam_d2 AUC=0.84696 per-seed=[0.84773, 0.84618] LL=0.43211 13s
+p3 rulefit_only   LL=0.24745 per-seed=[0.24331, 0.25159] LL=0.24745 27s
+p2 rulefit_gam_d2 LL=0.53365 per-seed=[0.53419, 0.53311] LL=0.53365 21s
+p3 rulefit_gam_d2 LL=0.21467 per-seed=[0.2145, 0.21485] LL=0.21467 27s

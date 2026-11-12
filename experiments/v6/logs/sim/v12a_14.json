@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 14, "name": "catnum_inter", "obj": "log_loss", "fit_s": 478.1, "size_mb": 8.07, "auc": 0.7940089090382854, "ll": 0.45015694688794594, "bayes_auc": 0.8064360501091532, "bayes_ll": 0.4394029673788831, "blend": {"gam+struct": 0.1621, "hyb+struct": 0.5604, "lgbm+struct": 0.1854, "cat": 0.0921}, "regret": 0.010753979509062817}

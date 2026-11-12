@@ -28,18 +28,18 @@ bash scripts/setup_env.sh      # .venv (Python 3.11 + pinned versions) and data/
 
 ## Commands (run from the repo root)
 
-The current framework is `submission/v11/` (framework version 13; see `submission/v11/V11_NOTES.md`).
+The current framework is `submission/v12/` (framework version 14; see `submission/v12/V12_NOTES.md`).
 
 | Task | Command | Time |
 |---|---|---|
-| Private-problem stress test | `.venv/bin/python experiments/v5/stress_test.py submission/v11` | ~20 min (16+ cores) |
-| Synthetic generalisation suite (one problem) | `cd experiments/v6 && ../../.venv/bin/python sim_run.py ../../submission/v11/solution.py <tag> <pid 0-15> <n_jobs>`; compare with `sim_agg.py <tagA> <tagB>` | ~5 min |
+| Private-problem stress test | `.venv/bin/python experiments/v5/stress_test.py submission/v12` | ~20 min (16+ cores) |
+| Synthetic generalisation suite (one problem) | `cd experiments/v6 && ../../.venv/bin/python sim_run.py ../../submission/v12/solution.py <tag> <pid 0-15> <n_jobs>`; compare with `sim_agg.py <tagA> <tagB>` | ~5 min |
 | One outer-CV fold of a framework (fit 4/5, save/reload, score 1/5) | `cd experiments/v5 && ../../.venv/bin/python outer_fold.py ../../submission/v5/solution.py <tag> p1 <n_jobs> <fold_seed> <fold>` | ~5 min (4 threads) |
 | Run a queue of folds in parallel | `cd experiments/v5 && ./runq.sh jobs.txt <parallel>` (one `outer_fold.py` argument line per job) | |
 | Aggregate outer CV | `cd experiments/v5 && ../../.venv/bin/python outer_agg.py <tag> [<tag> ...]` | seconds |
 | Re-combine saved fold libraries offline (combiners, calibration, P3 threshold) | `cd experiments/v5 && ../../.venv/bin/python lib_study.py <tag> <key> [fold_seed]` | ~1 min |
 | Ensemble value of a candidate model | `cd experiments/v7 && ../../.venv/bin/python zoo.py <key> <name> <n_jobs>` (add the candidate to `V` first), then `QUICK=1 ../../.venv/bin/python blend_zoo.py <key> <name>[+<name>...]` | minutes |
-| Build the upload zip | `cd submission/v11 && ../../.venv/bin/python make_submission.py ../../data` | ~10 min |
+| Build the upload zip | `cd submission/v12 && ../../.venv/bin/python make_submission.py ../../data` | ~10 min |
 
 `make_submission.py` writes `submission.zip` next to itself and runs the leaderboard's own load-and-predict check.
 Build it on an otherwise idle machine: `time_budget` is a safety net that can cut the random refinement short
@@ -47,7 +47,7 @@ when the CPU is heavily shared. Run long jobs in the background with output redi
 
 ## Conventions
 
-- `submission/baseline/` is frozen as the reference; the current framework is `submission/v11/`. For a new variant,
+- `submission/baseline/` is frozen as the reference; the current framework is `submission/v12/`. For a new variant,
   copy the whole folder: `make_submission.py` zips every `.py` next to it, so keep only `solution.py` (+ helpers)
   and the four kit files there.
 - Compare framework versions with paired outer CV (`experiments/v5/outer_fold.py`, same fold seeds for both).
@@ -59,5 +59,7 @@ when the CPU is heavily shared. Run long jobs in the background with output redi
 - When a change is accepted: rebuild `submission.zip`, add the results to `docs/experiment_notes.md`, put the raw
   output in `experiments/logs/`, and commit the zip so it can be downloaded and uploaded.
 - The leaderboard is an external check, not a validation set (3 submissions per day, 30 in total).
+- Pushing: the account with write access is `dhruv-decoder` (`gh auth switch --user dhruv-decoder`, then switch
+  back to `dt-safl`). Push to a new branch only; never push to or merge into `main`.
 - Commits and pull requests must not carry `Co-Authored-By: Claude` or "Generated with Claude Code" lines. This is
   the repo owner's preference, and `.claude/settings.json` already turns attribution off.

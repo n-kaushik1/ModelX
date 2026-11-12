@@ -1,0 +1,12 @@
+p1 rulefit_gam 2
+p2 rulefit_gam 2
+p3 rulefit_gam 2
+p1 rulefit_gam_c005 2
+p2 rulefit_gam_c005 2
+p3 rulefit_gam_c005 2
+p1 rulefit_only 2
+p2 rulefit_only 2
+p3 rulefit_only 2
+p1 rulefit_gam_d2 2
+p2 rulefit_gam_d2 2
+p3 rulefit_gam_d2 2

@@ -1,0 +1,12 @@
+p2 l1boost_p3gam_lr02 LL=0.50678 per-seed=[0.50707, 0.50649] LL=0.50678 18s
+p2 l1boost_p3gam_d3 LL=0.50684 per-seed=[0.5071, 0.50658] LL=0.50684 20s
+p1 l1boost_p3gam_d3 AUC=0.85398 per-seed=[0.85465, 0.85331] LL=0.41839 23s
+p1 l1boost_p3gam_lr02 AUC=0.85381 per-seed=[0.85471, 0.85292] LL=0.41859 20s
+p2 l1boost_p3gam_ml50 LL=0.50681 per-seed=[0.50715, 0.50647] LL=0.50681 19s
+p3 l1boost_p3gam_d3 LL=0.19678 per-seed=[0.19624, 0.19732] LL=0.19678 44s
+p3 l1boost_p3gam_lr02 LL=0.19672 per-seed=[0.1963, 0.19715] LL=0.19672 40s
+p1 l1boost_p3gam_ml50 AUC=0.85368 per-seed=[0.85448, 0.85288] LL=0.41889 22s
+p2 l1cat_p3gam    LL=0.50673 per-seed=[0.50703, 0.50643] LL=0.50673 34s
+p3 l1boost_p3gam_ml50 LL=0.19661 per-seed=[0.19628, 0.19693] LL=0.19661 43s
+p3 l1cat_p3gam    LL=0.19662 per-seed=[0.19599, 0.19724] LL=0.19662 54s
+p1 l1cat_p3gam    AUC=0.85314 per-seed=[0.85387, 0.85241] LL=0.41951 51s

@@ -148,17 +148,124 @@ def gam_rich_f(C=0.05, knots=7, steps=0, num_pairs=0, cat_pairs=0, and_pairs=0, 
     return f
 
 
-def gam_l1_f(C=0.1, nk=15, steps=True, hinges=True, num_pairs=4, cat_pairs=2, l1_ratio=None, pair_hinge=0, cat_hinge=0, and_terms=0, hh_terms=0, tails=(), sq_walls=False, relax=None):
+_FAST_CACHE = {}
+
+
+def fast_pairs(Xtr, ytr, max_feat=14):
+    """FAST-style interaction ranking (Lou et al. 2013): fit the additive sparse GAM, then for every candidate pair
+    fit a tiny depth-2 booster on (a, b) with the GAM logit as init score; rank pairs by held-out log-loss gain.
+    Returns pairs in the native index layout (numerics first, then categorical codes)."""
+    key = (len(ytr), int(ytr.sum()), float(np.nansum(Xtr[nums[0]].to_numpy())))
+    if key in _FAST_CACHE:
+        return _FAST_CACHE[key]
+    a_, b_ = split_es(ytr)
+    g = S._fit_model(S.ModelSpec("gam", dict(C=0.1, knots=15, basis="hinge", penalty="l1")), Xtr.iloc[a_], ytr[a_], nums, cats, None, NJ)
+    ga, gb = logit(g.predict(Xtr.iloc[a_])), logit(g.predict(Xtr.iloc[b_]))
+    enc = S.TabularEncoder("native").fit(Xtr, nums, cats)
+    Z = enc.transform(Xtr)
+    Za, Zb = Z[a_], Z[b_]
+    base = ll(ytr[b_], sigmoid(gb))
+    # candidates: numerics with the largest additive effect (spread of the GAM's partial effect) + all categoricals
+    sp = []
+    for j in range(len(nums)):
+        x = Za[:, j]; ok = np.isfinite(x)
+        sp.append((np.std(x[ok]) if ok.sum() > 10 else 0, j))
+    corr = [abs(np.corrcoef(np.nan_to_num(Za[:, j]), ga)[0, 1]) if np.nanstd(Za[:, j]) > 0 else 0 for j in range(len(nums))]
+    top = [j for _, j in sorted(zip(corr, range(len(nums))), reverse=True)[:max_feat]]
+    cand = top + list(range(len(nums), Z.shape[1]))
+    gains = []
+    for i, p in enumerate(cand):
+        for q in cand[i + 1:]:
+            if p >= len(nums) and q >= len(nums):
+                continue
+            m = lgb.LGBMClassifier(n_estimators=60, learning_rate=0.1, num_leaves=4, max_depth=2, min_child_samples=40, verbose=-1, n_jobs=NJ)
+            m.fit(Za[:, [p, q]], ytr[a_], init_score=ga)
+            gains.append((base - ll(ytr[b_], sigmoid(gb + m.predict_proba(Zb[:, [p, q]], raw_score=True))), (min(p, q), max(p, q))))
+    out = [list(pq) for g_, pq in sorted(gains, reverse=True)]
+    _FAST_CACHE[key] = out
+    return out
+
+
+def rulefit_f(C=0.1, n_trees=50, depth=3, gam=True, pair_hinge=4, cat_hinge=2):
+    """RuleFit-style sparse model: leaf indicators of a small boosted ensemble (rules) + the sparse GAM basis
+    (hinges, pair products, category slopes, kinked interactions), all standardised, one L1 logistic fit."""
+    def f(Xtr, ytr, Xva):
+        enc = S.TabularEncoder("native").fit(Xtr, nums, cats)
+        Ntr, Nva = enc.transform(Xtr), enc.transform(Xva)
+        rb = lgb.LGBMClassifier(n_estimators=n_trees, learning_rate=0.1, num_leaves=2 ** depth, max_depth=depth, min_child_samples=50,
+                                subsample=0.7, subsample_freq=1, colsample_bytree=0.7, verbose=-1, n_jobs=NJ, random_state=0)
+        rb.fit(Ntr, ytr, categorical_feature=enc.cat_idx_ or "auto")
+        Ltr, Lva = rb.predict(Ntr, pred_leaf=True), rb.predict(Nva, pred_leaf=True)
+        R = []
+        for t in range(Ltr.shape[1]):
+            for leaf in np.unique(Ltr[:, t]):
+                R.append((t, leaf))
+        Rtr = np.column_stack([(Ltr[:, t] == l) for t, l in R]).astype(float)
+        Rva = np.column_stack([(Lva[:, t] == l) for t, l in R]).astype(float)
+        Dtr, Dva = Rtr, Rva
+        if gam:
+            g = gam_design_f(Xtr, ytr, Xva, pair_hinge, cat_hinge)
+            Dtr, Dva = np.hstack([g[0], Rtr]), np.hstack([g[1], Rva])
+        mu, sd = Dtr.mean(0), Dtr.std(0) + 1e-9
+        with S._blas_limit():
+            lr = LogisticRegression(penalty="l1", C=C, solver="liblinear", max_iter=3000).fit((Dtr - mu) / sd, ytr)
+        return lr.predict_proba((Dva - mu) / sd)[:, 1]
+    return f
+
+
+def gam_design_f(Xtr, ytr, Xva, pair_hinge=4, cat_hinge=2, nk=15, num_pairs=4, cat_pairs=2):
+    """The sparse GAM's design matrices (train, valid) as built by gam_l1_f."""
+    enc = S.TabularEncoder("linear").fit(Xtr, nums, cats)
+    Ztr, Zva = enc.transform(Xtr), enc.transform(Xva)
+    nn = len(nums); st = struct(Xtr, ytr)
+    cols = [j for j in range(nn) if len(np.unique(Ztr[:, j])) > 10]
+    qs = np.linspace(0, 1, nk + 2)[1:-1]
+    K = {j: np.unique(np.quantile(Ztr[:, j], qs)) for j in cols}
+    PK = {j: np.quantile(Ztr[:, j], [0.2, 0.4, 0.6, 0.8]) for j in range(nn)}
+    npairs = [tuple(q) for q in st["pairs"] if q[0] < nn and q[1] < nn][:num_pairs]
+    cps = []
+    for q in st["pairs"]:
+        if len(cps) >= cat_pairs: break
+        if (q[0] < nn) == (q[1] < nn): continue
+        ni, ci = (q[0], q[1]) if q[0] < nn else (q[1], q[0])
+        oh = [k for k, nm in enumerate(enc.feature_names_) if nm.startswith(f"{cats[ci - nn]}=")]
+        if oh: cps.append((ni, oh))
+    def design(Z):
+        B = [Z] + [np.maximum(Z[:, [j]] - K[j][None, :], 0) for j in cols]
+        B += [np.clip(Z[:, a] * Z[:, b], -10, 10)[:, None] for a, b in npairs]
+        B += [Z[:, oh] * Z[:, [n_]] for n_, oh in cps]
+        for a, b in npairs[:pair_hinge]:
+            B += [np.clip(np.maximum(Z[:, a] - u, 0) * Z[:, b], -10, 10)[:, None] for u in PK[a]]
+            B += [np.clip(Z[:, a] * np.maximum(Z[:, b] - v, 0), -10, 10)[:, None] for v in PK[b]]
+        for n_, oh in cps[:cat_hinge]:
+            B += [Z[:, oh] * np.maximum(Z[:, [n_]] - u, 0) for u in PK[n_]]
+        return np.hstack(B)
+    return design(Ztr), design(Zva)
+
+
+def gam_l1_f(C=0.1, nk=15, steps=True, hinges=True, num_pairs=4, cat_pairs=2, l1_ratio=None, pair_hinge=0, cat_hinge=0, and_terms=0, hh_terms=0, tails=(), sq_walls=False, relax=None, knot_mode="quantile", dense_top=0, pair_source="struct"):
     """Sparse GAM: L1 (or elastic-net) logistic regression on a large basis -- per numeric column the linear term,
     hinges and step indicators at `nk` quantiles (L1 on jumps / kinks = total-variation / trend-filtering
     penalty), products of the top measured numeric pairs, category x numeric slopes; all columns standardised."""
     def f(Xtr, ytr, Xva):
         enc = S.TabularEncoder("linear").fit(Xtr, nums, cats)
         Ztr, Zva = enc.transform(Xtr), enc.transform(Xva)
-        nn = len(nums); st = struct(Xtr, ytr)
+        nn = len(nums); st = struct(Xtr, ytr) if pair_source == "struct" else {"pairs": fast_pairs(Xtr, ytr)}
         cols = [j for j in range(nn) if len(np.unique(Ztr[:, j])) > 10]
         qs = np.r_[np.linspace(0, 1, nk + 2)[1:-1], np.asarray(tails, float)]
-        K = {j: np.unique(np.quantile(Ztr[:, j], qs)) for j in cols}
+        if knot_mode == "value":                       # knots equally spaced in value between the 1st and 99th pct
+            K = {j: np.linspace(*np.quantile(Ztr[:, j], [0.01, 0.99]), nk) for j in cols}
+        else:
+            K = {j: np.unique(np.quantile(Ztr[:, j], qs)) for j in cols}
+        if dense_top:                                  # the most important columns get dense knots reaching the tails
+            imp = []
+            for j in cols:
+                zz = Ztr[:, j]; bins = np.quantile(zz, np.linspace(0, 1, 21))
+                b = np.clip(np.searchsorted(bins, zz, side="right") - 1, 0, 19)
+                rate = np.bincount(b, weights=ytr, minlength=20) / np.maximum(np.bincount(b, minlength=20), 1)
+                imp.append((np.var(rate), j))
+            for _, j in sorted(imp, reverse=True)[:dense_top]:
+                K[j] = np.unique(np.quantile(Ztr[:, j], np.r_[0.01, 0.02, 0.03, 0.045, np.linspace(0, 1, 2 * nk + 2)[1:-1], 0.955, 0.97, 0.98, 0.99]))
         npairs = [tuple(q) for q in st["pairs"] if q[0] < nn and q[1] < nn][:num_pairs]
         cps = []
         for q in st["pairs"]:
@@ -219,6 +326,25 @@ def l1_boost_f(P, gam_kw):
         n = max(int(m.best_iteration_ * 1.1), 5)
         m = lgb.LGBMClassifier(n_estimators=n, **base).fit(Ztr, ytr, init_score=gtr, categorical_feature=enc.cat_idx_ or "auto")
         return sigmoid(gva + m.predict_proba(Zva, raw_score=True))
+    return f
+
+
+def l1_cat_f(gam_kw, depth=3, lr=0.03):
+    """Hybrid with CatBoost on the sparse GAM's residual (baseline = GAM logit)."""
+    def f(Xtr, ytr, Xva):
+        a_, b_ = split_es(ytr)
+        g = S._fit_model(S.ModelSpec("gam", gam_kw), Xtr, ytr, nums, cats, None, NJ)
+        gtr, gva = logit(g.predict(Xtr)), logit(g.predict(Xva))
+        enc = S.TabularEncoder("frame", max_levels=1000).fit(Xtr, nums, cats)
+        Ztr, Zva = enc.transform(Xtr), enc.transform(Xva)
+        base = dict(depth=depth, learning_rate=lr, l2_leaf_reg=5, thread_count=NJ, verbose=0, allow_writing_files=False, random_seed=0)
+        ptr = cb.Pool(Ztr.iloc[a_], ytr[a_], cat_features=enc.cat_idx_ or None, baseline=gtr[a_])
+        pva = cb.Pool(Ztr.iloc[b_], ytr[b_], cat_features=enc.cat_idx_ or None, baseline=gtr[b_])
+        m = cb.CatBoostClassifier(iterations=5000, od_type="Iter", od_wait=200, **base).fit(ptr, eval_set=pva, use_best_model=True)
+        n = max(int((m.get_best_iteration() + 1) * 1.1), 10)
+        m = cb.CatBoostClassifier(iterations=n, **base).fit(cb.Pool(Ztr, ytr, cat_features=enc.cat_idx_ or None, baseline=gtr))
+        raw = m.predict(cb.Pool(Zva, cat_features=enc.cat_idx_ or None), prediction_type="RawFormulaVal")
+        return sigmoid(gva + raw)
     return f
 
 
@@ -405,6 +531,18 @@ V = {
     "gl1h_ph4_rel01": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, relax=0.1),
     "gl1h_ph6_c005": gam_l1_f(C=0.05, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2),
     "gl1h_ph6_c005_rel01": gam_l1_f(C=0.05, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2, relax=0.1),
+    "gl1h_value": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, knot_mode="value"),
+    "gl1h_dense1": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, dense_top=1),
+    "gl1h_dense3": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, dense_top=3),
+    "l1boost_p3gam": l1_boost_f(dict(L2, learning_rate=0.01), dict(C=0.05, knots=15, basis="hinge", pairs=6, cpairs=2, penalty="l1", phinge=6, chinge=2)),
+    "gl1h_ph4_fast": gam_l1_f(C=0.1, steps=False, pair_hinge=4, cat_hinge=2, pair_source="fast"),
+    "gl1h_ph6_c005_fast": gam_l1_f(C=0.05, steps=False, num_pairs=6, pair_hinge=6, cat_hinge=2, pair_source="fast"),
+    "l1boost_p3gam_d3": l1_boost_f(dict(L3, learning_rate=0.01), dict(C=0.05, knots=15, basis="hinge", pairs=6, cpairs=2, penalty="l1", phinge=6, chinge=2)),
+    "l1boost_p3gam_lr02": l1_boost_f(dict(L2, learning_rate=0.02), dict(C=0.05, knots=15, basis="hinge", pairs=6, cpairs=2, penalty="l1", phinge=6, chinge=2)),
+    "l1boost_p3gam_ml50": l1_boost_f(dict(L2, learning_rate=0.01, min_child_samples=50), dict(C=0.05, knots=15, basis="hinge", pairs=6, cpairs=2, penalty="l1", phinge=6, chinge=2)),
+    "l1cat_p3gam": l1_cat_f(dict(C=0.05, knots=15, basis="hinge", pairs=6, cpairs=2, penalty="l1", phinge=6, chinge=2)),
+    "rulefit_gam": rulefit_f(C=0.1), "rulefit_gam_c005": rulefit_f(C=0.05), "rulefit_only": rulefit_f(C=0.1, gam=False, n_trees=100),
+    "rulefit_gam_d2": rulefit_f(C=0.1, depth=2, n_trees=100),
     "rf_l5": forest_f(RandomForestClassifier, 5, 0.3), "hgb_d3": hgb_f(3), "xgb_d4": xgb_f(dict(X3, max_depth=4)),
 }
 if name == "list":

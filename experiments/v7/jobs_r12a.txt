@@ -1,0 +1,12 @@
+p1 gl1h_value 2
+p3 gl1h_value 2
+p2 gl1h_value 2
+p1 gl1h_dense1 2
+p3 gl1h_dense1 2
+p2 gl1h_dense1 2
+p1 gl1h_dense3 2
+p3 gl1h_dense3 2
+p2 gl1h_dense3 2
+p1 l1boost_p3gam 2
+p3 l1boost_p3gam 2
+p2 l1boost_p3gam 2

@@ -1,0 +1,12 @@
+p1 gl1h_dense1    AUC=0.85097 per-seed=[0.85181, 0.85013] LL=0.42218 21s
+p1 gl1h_value     AUC=0.85036 per-seed=[0.8513, 0.84942] LL=0.42303 22s
+p2 gl1h_value     LL=0.50867 per-seed=[0.50901, 0.50833] LL=0.50867 24s
+p3 gl1h_value     LL=0.19819 per-seed=[0.19809, 0.19828] LL=0.19819 32s
+p2 gl1h_dense1    LL=0.50753 per-seed=[0.50785, 0.50721] LL=0.50753 20s
+p1 gl1h_dense3    AUC=0.85085 per-seed=[0.8517, 0.84999] LL=0.42231 24s
+p3 gl1h_dense1    LL=0.19776 per-seed=[0.19779, 0.19773] LL=0.19776 49s
+p2 gl1h_dense3    LL=0.50757 per-seed=[0.50785, 0.5073] LL=0.50757 20s
+p1 l1boost_p3gam  AUC=0.85373 per-seed=[0.85452, 0.85293] LL=0.41874 20s
+p2 l1boost_p3gam  LL=0.50683 per-seed=[0.50711, 0.50655] LL=0.50683 17s
+p3 gl1h_dense3    LL=0.19788 per-seed=[0.19787, 0.19789] LL=0.19788 50s
+p3 l1boost_p3gam  LL=0.19670 per-seed=[0.19628, 0.19712] LL=0.19670 34s

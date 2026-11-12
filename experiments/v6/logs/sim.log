@@ -120,3 +120,19 @@ v11a       10 mnar_heavy     roc_auc       regret=0.01159 auc=0.7961 ll=0.4815 f
 v11a        4 small_cost20   decision_cost regret=0.02586 auc=0.7879 ll=0.1689 cost=0.5581 thr=0.048 costBayesThr=0.5581 fit=74s size=0.7MB
 v11a       11 fp_costly      decision_cost regret=0.00289 auc=0.6907 ll=0.6120 cost=0.9700 thr=0.833 costBayesThr=0.9700 fit=279s size=1.8MB
 v11a        3 small_auc      roc_auc       regret=0.01518 auc=0.8122 ll=0.3894 fit=83s size=4.6MB
+v12a       12 extreme_imb    roc_auc       regret=0.01663 auc=0.6974 ll=0.0672 fit=526s size=7.0MB
+v12a        5 large_ll       log_loss      regret=0.00235 auc=0.7482 ll=0.2747 fit=1054s size=1.6MB
+v12a        8 highcard       roc_auc       regret=0.01335 auc=0.8063 ll=0.3957 fit=610s size=6.5MB
+v12a        2 p3_like        decision_cost regret=0.02979 auc=0.8225 ll=0.1818 cost=0.6203 thr=0.091 costBayesThr=0.6203 fit=543s size=3.9MB
+v12a        0 p1_like        roc_auc       regret=0.01164 auc=0.8103 ll=0.4721 fit=501s size=2.0MB
+v12a        6 strong_inter   roc_auc       regret=0.01586 auc=0.7885 ll=0.5147 fit=436s size=5.3MB
+v12a        1 p2_like        log_loss      regret=0.00791 auc=0.7756 ll=0.4816 fit=506s size=1.4MB
+v12a        9 many_noise     log_loss      regret=0.01146 auc=0.7175 ll=0.5405 fit=382s size=3.4MB
+v12a       14 catnum_inter   log_loss      regret=0.01075 auc=0.7940 ll=0.4502 fit=478s size=8.1MB
+v12a       10 mnar_heavy     roc_auc       regret=0.01145 auc=0.7962 ll=0.4814 fit=354s size=5.2MB
+v12a       11 fp_costly      decision_cost regret=0.00289 auc=0.6907 ll=0.6120 cost=0.9700 thr=0.833 costBayesThr=0.9700 fit=337s size=1.9MB
+v12a       15 cost5_mid      decision_cost regret=0.02846 auc=0.6439 ll=0.3992 cost=0.8310 thr=0.167 costBayesThr=0.8310 fit=244s size=3.0MB
+v12a       13 weak_balanced  log_loss      regret=0.00623 auc=0.6895 ll=0.6363 fit=241s size=3.5MB
+v12a        4 small_cost20   decision_cost regret=0.02876 auc=0.7874 ll=0.1691 cost=0.5610 thr=0.048 costBayesThr=0.5610 fit=124s size=1.0MB
+v12a        7 linearish      log_loss      regret=0.00584 auc=0.7971 ll=0.4499 fit=211s size=2.7MB
+v12a        3 small_auc      roc_auc       regret=0.01520 auc=0.8122 ll=0.3894 fit=105s size=4.6MB
