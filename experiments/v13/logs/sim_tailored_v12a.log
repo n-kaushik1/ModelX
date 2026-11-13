@@ -1,0 +1,17 @@
+    2 t=0.091 logloss: regret 0.02904 KL 0.00601  beta12: regret 0.02894 KL 0.00612  beta24: regret 0.02951 KL 0.00626
+    4 t=0.048 logloss: regret 0.05768 KL 0.00953  beta12: regret 0.05768 KL 0.00942  beta24: regret 0.05676 KL 0.00927
+   11 t=0.833 logloss: regret 0.00208 KL nan  beta12: regret 0.00157 KL nan  beta24: regret 0.00201 KL nan
+   15 t=0.167 logloss: regret 0.01796 KL nan  beta12: regret 0.01807 KL nan  beta24: regret 0.01773 KL nan
+   18 t=0.091 logloss: regret 0.03732 KL 0.00655  beta12: regret 0.03700 KL 0.00647  beta24: regret 0.03740 KL 0.00649
+   20 t=0.048 logloss: regret 0.05004 KL 0.00665  beta12: regret 0.04917 KL 0.00662  beta24: regret 0.04941 KL 0.00663
+   27 t=0.833 logloss: regret 0.01416 KL 0.01004  beta12: regret 0.01665 KL 0.01113  beta24: regret 0.01888 KL 0.01232
+   31 t=0.167 logloss: regret 0.03084 KL 0.01183  beta12: regret 0.03088 KL 0.01180  beta24: regret 0.03082 KL 0.01172
+   34 t=0.091 logloss: regret 0.02058 KL 0.00455  beta12: regret 0.02040 KL 0.00456  beta24: regret 0.02058 KL 0.00456
+   36 t=0.048 logloss: regret 0.05018 KL 0.01071  beta12: regret 0.05000 KL 0.01106  beta24: regret 0.04947 KL 0.01086
+   43 t=0.833 logloss: regret 0.00720 KL 0.00628  beta12: regret 0.00715 KL 0.00636  beta24: regret 0.00711 KL 0.00629
+   47 t=0.167 logloss: regret 0.02002 KL 0.00793  beta12: regret 0.02026 KL 0.00799  beta24: regret 0.02101 KL 0.00804
+ 1004 t=0.020 logloss: regret 0.02850 KL 0.00267  beta12: regret 0.02946 KL 0.00277  beta24: regret 0.02853 KL 0.00269
+ 1012 t=0.020 logloss: regret 0.04035 KL 0.00395  beta12: regret 0.03971 KL 0.00397  beta24: regret 0.04064 KL 0.00403
+logloss  mean expected-cost regret 0.02900  vs logloss +0.00000 (se 0.00000, better on 0/14)
+beta12   mean expected-cost regret 0.02907  vs logloss +0.00007 (se 0.00021, better on 8/14)
+beta24   mean expected-cost regret 0.02928  vs logloss +0.00028 (se 0.00035, better on 7/14)

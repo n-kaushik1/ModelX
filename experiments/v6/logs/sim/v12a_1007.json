@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 1007, "name": "noisy_weak", "obj": "roc_auc", "fit_s": 247.1, "size_mb": 1.17, "auc": 0.6405276935847593, "ll": 0.5839783540501724, "bayes_auc": 0.6491675964172339, "bayes_ll": 0.5792486004068306, "blend": {"gam+struct": 0.0395, "lgbm+struct": 0.4698, "xgb": 0.3788, "xgb+struct": 0.0687, "cat": 0.0433}, "regret": 0.008639902832474622}

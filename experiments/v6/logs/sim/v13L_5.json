@@ -1,0 +1,1 @@
+{"tag": "v13L", "pid": 5, "name": "large_ll", "obj": "log_loss", "fit_s": 3109.4, "size_mb": 11.09, "auc": 0.7487109935478373, "ll": 0.2746066551309984, "bayes_auc": 0.7554200995412216, "bayes_ll": 0.27231864660129546, "blend": {"hyb+struct": 0.5291, "lgbm+struct": 0.356, "lgbm": 0.0274, "xgb+struct": 0.0298, "cat": 0.0578}, "regret": 0.002288008529702956}

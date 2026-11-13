@@ -19,3 +19,4 @@ catboost_info/
 experiments/v5/logs/outer/
 experiments/v5/logs/*.npy
 experiments/v7/logs/*.npy
+experiments/v6/logs/simlib/

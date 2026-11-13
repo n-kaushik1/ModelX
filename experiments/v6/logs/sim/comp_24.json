@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 24, "name": "highcard", "obj": "roc_auc", "fit_s": 197.9, "size_mb": 0.95, "auc": 0.8058851449208106, "ll": 0.39264763968548516, "bayes_auc": 0.8174699921323293, "bayes_ll": 0.3831445855284737, "blend": {"optuna_lgbm": 1.0}, "regret": 0.011584847211518645}

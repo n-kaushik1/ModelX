@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 1003, "name": "rare_ll", "obj": "log_loss", "fit_s": 1291.3, "size_mb": 2.94, "auc": 0.8466821853003466, "ll": 0.09822384126063163, "bayes_auc": 0.8666422866449309, "bayes_ll": 0.0939798904040023, "blend": {"gam+struct": 0.1685, "hyb+struct": 0.4553, "lgbm+struct": 0.2989, "xgb+struct": 0.0774}, "regret": 0.004243950856629333}

@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 1005, "name": "mostly_cat", "obj": "roc_auc", "fit_s": 773.4, "size_mb": 6.62, "auc": 0.7989703465469962, "ll": 0.4818058261917484, "bayes_auc": 0.8179493274212444, "bayes_ll": 0.46308759046966713, "blend": {"gam+struct": 0.0661, "lgbm+struct": 0.4116, "cat": 0.5224}, "regret": 0.018978980874248208}

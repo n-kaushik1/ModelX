@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 7, "name": "linearish", "obj": "log_loss", "fit_s": 138.5, "size_mb": 1.29, "auc": 0.7872428756653918, "ll": 0.4580852886597953, "bayes_auc": 0.8031387395413562, "bayes_ll": 0.4441030943045615, "blend": {"optuna_lgbm": 1.0}, "regret": 0.01398219435523379}

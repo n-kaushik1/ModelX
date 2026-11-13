@@ -1,0 +1,1 @@
+{"tag": "v13w", "pid": 25, "name": "many_noise", "obj": "log_loss", "fit_s": 994.6, "size_mb": 4.88, "auc": 0.7965909948640573, "ll": 0.48648084944772907, "bayes_auc": 0.8076160453691653, "bayes_ll": 0.47583971800502733, "blend": {"gam+struct": 0.286, "hyb+struct": 0.2174, "lgbm+struct": 0.3876, "cat": 0.109}, "regret": 0.010641131442701734}

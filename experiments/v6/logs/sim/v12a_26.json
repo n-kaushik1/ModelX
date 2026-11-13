@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 26, "name": "mnar_heavy", "obj": "roc_auc", "fit_s": 763.4, "size_mb": 2.54, "auc": 0.8020975932402986, "ll": 0.48317274103721886, "bayes_auc": 0.8132184038208895, "bayes_ll": 0.4720020118335552, "blend": {"gam+struct": 0.2361, "hyb+struct": 0.5239, "lgbm+struct": 0.036, "cat": 0.2041}, "regret": 0.01112081058059089}

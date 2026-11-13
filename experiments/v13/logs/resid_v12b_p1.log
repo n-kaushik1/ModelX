@@ -1,0 +1,42 @@
+
+===== v12b p1 seed 0: LL 0.41648 AUC 0.85568
+A reliability 20 bins: chi2=25.3 df=20 p=0.190 worst|z|=2.60 (bin 8)
+  nested Platt on held-out logits: LL 0.41648 -> 0.41664
+B per-feature misfit (Bonferroni over 27 features), top 6:
+   hours_since_maintenance          chi2=   25.0 df= 20 p=0.2024 padj=1.000 worst|z|=2.52 at 14
+   recent_minor_alarm_count         chi2=   20.3 df= 20 p=0.4412 padj=1.000 worst|z|=1.93 at 7
+   operator_experience_band         chi2=    3.6 df=  4 p=0.4623 padj=1.000 worst|z|=1.23 at Senior
+   process_temperature              chi2=   19.8 df= 20 p=0.4703 padj=1.000 worst|z|=2.17 at 2
+   ambient_humidity                 chi2=   19.7 df= 20 p=0.4799 padj=1.000 worst|z|=2.41 at 17
+   production_line                  chi2=    3.2 df=  4 p=0.5288 padj=1.000 worst|z|=1.45 at L4
+C pair misfit (Bonferroni over 190 pairs), top 5:
+   raw_material_moisture x cooling_rate: chi2=45.0 df=30 p=0.03829 padj=1.000 worst|z|=2.71
+   machine_age_years x tool_wear_index: chi2=44.4 df=30 p=0.04425 padj=1.000 worst|z|=3.52
+   tool_wear_index x previous_batch_failure_rate: chi2=49.8 df=36 p=0.06310 padj=1.000 worst|z|=2.80
+   energy_per_unit x cooling_rate: chi2=33.8 df=25 p=0.11124 padj=1.000 worst|z|=3.19
+   process_pressure x machine_age_years: chi2=33.8 df=25 p=0.11280 padj=1.000 worst|z|=2.81
+D residual lgbm d1: LL 0.41648->0.41650 AUC 0.85568->0.85567 trees=[2, 1, 1, 1, 1]
+D residual lgbm d2: LL 0.41648->0.41653 AUC 0.85568->0.85565 trees=[2, 1, 2, 1, 2]
+D residual lgbm d3: LL 0.41648->0.41655 AUC 0.85568->0.85564 trees=[1, 1, 2, 1, 2]
+D residual lgbm d6: LL 0.41648->0.41673 AUC 0.85568->0.85547 trees=[2, 2, 1, 1, 2]
+
+===== v12b p1 seed 1: LL 0.41802 AUC 0.85444
+A reliability 20 bins: chi2=18.1 df=20 p=0.583 worst|z|=1.93 (bin 19)
+  nested Platt on held-out logits: LL 0.41802 -> 0.41815
+B per-feature misfit (Bonferroni over 27 features), top 6:
+   hours_since_maintenance          chi2=   22.6 df= 20 p=0.3112 padj=1.000 worst|z|=2.42 at 14
+   operator_experience_band         chi2=    4.5 df=  4 p=0.3442 padj=1.000 worst|z|=1.52 at Junior
+   ambient_humidity                 chi2=   20.5 df= 20 p=0.4289 padj=1.000 worst|z|=2.49 at 17
+   production_line                  chi2=    3.5 df=  4 p=0.4794 padj=1.000 worst|z|=1.61 at L4
+   recent_minor_alarm_count         chi2=   19.6 df= 20 p=0.4851 padj=1.000 worst|z|=1.99 at 10
+   temperature_sensor_2             chi2=   18.6 df= 20 p=0.5499 padj=1.000 worst|z|=1.66 at 14
+C pair misfit (Bonferroni over 190 pairs), top 5:
+   raw_material_moisture x cooling_rate: chi2=44.0 df=30 p=0.04724 padj=1.000 worst|z|=2.67
+   tool_wear_index x previous_batch_failure_rate: chi2=50.4 df=36 p=0.05630 padj=1.000 worst|z|=2.94
+   machine_age_years x tool_wear_index: chi2=42.7 df=30 p=0.06186 padj=1.000 worst|z|=3.42
+   process_pressure x machine_age_years: chi2=34.2 df=25 p=0.10441 padj=1.000 worst|z|=2.77
+   material_purity_index x batch_weight: chi2=33.7 df=25 p=0.11348 padj=1.000 worst|z|=2.18
+D residual lgbm d1: LL 0.41802->0.41803 AUC 0.85444->0.85443 trees=[1, 1, 1, 1, 1]
+D residual lgbm d2: LL 0.41802->0.41805 AUC 0.85444->0.85441 trees=[2, 1, 2, 1, 2]
+D residual lgbm d3: LL 0.41802->0.41809 AUC 0.85444->0.85439 trees=[2, 1, 2, 1, 2]
+D residual lgbm d6: LL 0.41802->0.41830 AUC 0.85444->0.85416 trees=[1, 2, 1, 1, 2]

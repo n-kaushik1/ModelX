@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 1009, "name": "tiny_wide", "obj": "log_loss", "fit_s": 129.9, "size_mb": 1.97, "auc": 0.7559693015955875, "ll": 0.5158532713489993, "bayes_auc": 0.8157397420281008, "bayes_ll": 0.4643118201794706, "blend": {"gam+struct": 0.3419, "gam": 0.4716, "hyb+struct": 0.0203, "lgbm+struct": 0.0297, "lgbm": 0.0338, "xgb": 0.1027}, "regret": 0.051541451169528685}

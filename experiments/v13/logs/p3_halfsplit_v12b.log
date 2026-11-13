@@ -1,0 +1,15 @@
+s0 f0: n=6 beta12-logloss mean -0.0032 se 0.0024 wins 0.67 ties 0.00
+s0 f1: n=12 beta12-logloss mean -0.0010 se 0.0016 wins 0.58 ties 0.00
+s0 f2: n=18 beta12-logloss mean -0.0011 se 0.0014 wins 0.50 ties 0.00
+s0 f3: n=24 beta12-logloss mean -0.0006 se 0.0011 wins 0.46 ties 0.04
+s0 f4: n=30 beta12-logloss mean -0.0002 se 0.0010 wins 0.43 ties 0.07
+s1 f0: n=36 beta12-logloss mean -0.0003 se 0.0008 wins 0.44 ties 0.06
+s1 f1: n=42 beta12-logloss mean -0.0007 se 0.0009 wins 0.48 ties 0.05
+s1 f2: n=48 beta12-logloss mean -0.0006 se 0.0008 wins 0.46 ties 0.04
+s1 f3: n=54 beta12-logloss mean -0.0007 se 0.0007 wins 0.50 ties 0.04
+s1 f4: n=60 beta12-logloss mean -0.0006 se 0.0006 wins 0.50 ties 0.03
+logloss mean cost 0.7160
+beta12 mean cost 0.7154
+beta24 mean cost 0.7151
+beta12 - logloss: mean -0.0006 se 0.0006 better 0.50 worse 0.47
+beta24 - logloss: mean -0.0009 se 0.0007 better 0.48 worse 0.48

@@ -1,0 +1,83 @@
+[framework] objective: {'metric': 'roc_auc', 'metric_defaulted': False}
+[framework] profile: {'n_rows': 20000, 'n_features': 19, 'n_numeric': 15, 'n_categorical': 4, 'positive_rate': 0.2031, 'minority_count': 4062, 'imbalanced': False, 'missing_rate_overall': 0.009710526315789473, 'n_cols_with_missing': 6, 'max_cardinality': 148, 'n_skewed_numeric': 3} dropped: {'redundant_copy': ['x06_copy', 'x00_copy', 'x08_copy']}
+[framework] gam   it00 roc_auc=0.79307 trees=None t=   19s
+[framework] gam   it01 roc_auc=0.79294 trees=None t=   38s
+[framework] gam   it02 roc_auc=0.81253 trees=None t=   54s
+[framework] gam   it03 roc_auc=0.81251 trees=None t=   79s
+[framework] gam   it04 roc_auc=0.81194 trees=None t=  107s
+[framework] gam   it05 roc_auc=0.81219 trees=None t=  134s
+[framework] gam   it06 roc_auc=0.81190 trees=None t=  149s
+[framework] gam   it07 roc_auc=0.81167 trees=None t=  165s
+[framework] gam   it08 roc_auc=0.81186 trees=None t=  177s
+[framework] gam   it09 roc_auc=0.81238 trees=None t=  189s
+[framework] gam   it10 roc_auc=0.81164 trees=None t=  229s
+[framework] hyb   it00 roc_auc=0.81406 trees=1184 t=  255s
+[framework] hyb   it01 roc_auc=0.81403 trees=1226 t=  277s
+[framework] lgbm  it00 roc_auc=0.79271 trees=2128 t=  285s
+[framework] lgbm  it01 roc_auc=0.80924 trees=1037 t=  292s
+[framework] lgbm  it02 roc_auc=0.80439 trees=1152 t=  300s
+[framework] lgbm  it03 roc_auc=0.80418 trees=981 t=  306s
+[framework] lgbm  it04 roc_auc=0.80463 trees=3396 t=  328s
+[framework] lgbm  it05 roc_auc=0.80957 trees=667 t=  334s
+[framework] lgbm  it06 roc_auc=0.80585 trees=690 t=  342s
+[framework] lgbm  it07 roc_auc=0.80853 trees=452 t=  348s
+[framework] lgbm  it08 roc_auc=0.80674 trees=533 t=  361s
+[framework] lgbm  it09 roc_auc=0.80298 trees=1262 t=  370s
+[framework] lgbm  it10 roc_auc=0.79231 trees=1931 t=  379s
+[framework] lgbm  it11 roc_auc=0.80990 trees=1326 t=  395s
+[framework] lgbm  it12 roc_auc=0.80203 trees=217 t=  403s
+[framework] lgbm  it13 roc_auc=0.81100 trees=489 t=  408s
+[framework] lgbm  it14 roc_auc=0.80449 trees=1901 t=  420s
+[framework] lgbm  it15 roc_auc=0.80698 trees=1473 t=  432s
+[framework] lgbm  it16 roc_auc=0.80947 trees=1836 t=  443s
+[framework] lgbm  it17 roc_auc=0.80386 trees=713 t=  450s
+[framework] lgbm  it18 roc_auc=0.80534 trees=524 t=  458s
+[framework] lgbm  it19 roc_auc=0.79887 trees=1173 t=  467s
+[framework] lgbm  it20 roc_auc=0.80499 trees=1530 t=  478s
+[framework] lgbm  it21 roc_auc=0.79293 trees=784 t=  483s
+[framework] lgbm  it22 roc_auc=0.79903 trees=1944 t=  494s
+[framework] lgbm  it23 roc_auc=0.80474 trees=405 t=  502s
+[framework] lgbm  it24 roc_auc=0.80406 trees=516 t=  508s
+[framework] lgbm  it25 roc_auc=0.80114 trees=1214 t=  515s
+[framework] lgbm  it26 roc_auc=0.80233 trees=1552 t=  525s
+[framework] lgbm  it27 roc_auc=0.80715 trees=735 t=  531s
+[framework] lgbm  it28 roc_auc=0.80401 trees=502 t=  539s
+[framework] lgbm  it29 roc_auc=0.80250 trees=509 t=  544s
+[framework] xgb   it00 roc_auc=0.79199 trees=2497 t=  558s
+[framework] xgb   it01 roc_auc=0.80931 trees=1256 t=  567s
+[framework] xgb   it02 roc_auc=0.80334 trees=1246 t=  576s
+[framework] xgb   it03 roc_auc=0.80864 trees=779 t=  583s
+[framework] xgb   it04 roc_auc=0.80379 trees=773 t=  591s
+[framework] xgb   it05 roc_auc=0.80749 trees=463 t=  596s
+[framework] xgb   it06 roc_auc=0.80390 trees=545 t=  605s
+[framework] xgb   it07 roc_auc=0.80399 trees=2077 t=  619s
+[framework] xgb   it08 roc_auc=0.80820 trees=1710 t=  633s
+[framework] xgb   it09 roc_auc=0.78967 trees=989 t=  639s
+[framework] xgb   it10 roc_auc=0.80629 trees=740 t=  646s
+[framework] xgb   it11 roc_auc=0.79164 trees=1631 t=  656s
+[framework] xgb   it12 roc_auc=0.79140 trees=1244 t=  663s
+[framework] xgb   it13 roc_auc=0.80790 trees=652 t=  669s
+[framework] xgb   it14 roc_auc=0.80159 trees=942 t=  677s
+[framework] xgb   it15 roc_auc=0.80911 trees=548 t=  682s
+[framework] xgb   it16 roc_auc=0.80980 trees=734 t=  688s
+[framework] cat   it00 roc_auc=0.80369 trees=1041 t=  744s
+[framework] cat   it01 roc_auc=0.81482 trees=513 t=  810s
+[framework] cat   it02 roc_auc=0.81398 trees=395 t=  856s
+[framework] et    it00 roc_auc=0.79737 trees=None t=  878s
+[framework] et    it01 roc_auc=0.79871 trees=None t=  899s
+[framework] library gam   roc_auc=0.81236 roc_auc=0.81236 gam(C=0.05, knots=7, basis=hinge, pairs=2, class_weight=None) t=926s
+[framework] library gam   roc_auc=0.79266 roc_auc=0.79266 gam(C=0.05, knots=7, basis=hinge, class_weight=None) t=949s
+[framework] library gam   roc_auc=0.81254 roc_auc=0.81254 gam(C=0.05392, knots=25, basis=hinge, pairs=2, cpairs=1, penalty=l1, p t=962s
+[framework] library gam   roc_auc=0.81205 roc_auc=0.81205 gam(C=0.05, knots=7, basis=hinge, pairs=4, class_weight=None) t=969s
+[framework] library hyb   roc_auc=0.81295 roc_auc=0.81295 hyb(C=0.1, knots=15, pairs=4, cpairs=2, phinge=4, chinge=2, depth=2, l t=991s
+[framework] library hyb   roc_auc=0.81331 roc_auc=0.81331 hyb(C=0.05, knots=15, pairs=6, cpairs=2, phinge=6, chinge=2, depth=2,  t=1010s
+[framework] library lgbm  roc_auc=0.81026 roc_auc=0.81026 lgbm(depth=3, leaves=6, lr=0.05627, min_leaf=61, subsample=0.5449, col t=1014s
+[framework] library lgbm  roc_auc=0.80836 roc_auc=0.80836 lgbm(depth=3, leaves=8, lr=0.03, min_leaf=20, subsample=0.8, colsample t=1019s
+[framework] library lgbm  roc_auc=0.80918 roc_auc=0.80918 lgbm(depth=4, leaves=10, lr=0.02241, min_leaf=61, subsample=0.9486, co t=1033s
+[framework] library xgb   roc_auc=0.80854 roc_auc=0.80854 xgb(depth=3, lr=0.03778, mcw=2.726, subsample=0.6457, colsample=0.5416 t=1038s
+[framework] library xgb   roc_auc=0.80771 roc_auc=0.80771 xgb(depth=2, lr=0.03, mcw=5, subsample=0.8, colsample=0.8, l2=1, class t=1044s
+[framework] library cat   roc_auc=0.81297 roc_auc=0.81297 cat(depth=4, lr=0.05, l2=5, random_strength=1, bagging_temperature=1,  t=1075s
+[framework] library cat   roc_auc=0.81231 roc_auc=0.81231 cat(depth=6, lr=0.05, l2=3, random_strength=1, bagging_temperature=1,  t=1106s
+[framework] library et    roc_auc=0.80026 roc_auc=0.80026 et(n_estimators=300, min_leaf=15, max_features=0.5, class_weight=None) t=1123s
+[framework] done in 1131s; blend={'gam+struct': 0.3609, 'hyb+struct': 0.1287, 'cat': 0.5105} threshold=0.5000
+TOTAL FIT SECONDS 1130.6813077926636 kfold_bag {'gam+struct': 0.3609, 'hyb+struct': 0.1287, 'cat': 0.5105}

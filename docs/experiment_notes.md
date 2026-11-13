@@ -417,3 +417,18 @@ for v11, both fold seeds) and P3 cost (0.7087 vs 0.7098), and v12 has the lowest
 for every objective type. Rejected in this round: refitting GAM members on all rows (better alone, tie in the
 framework), FAST interaction ranking (worse pairs than the booster-gain ranking), value-spaced / dense knots,
 hybrid booster variants (depth 3, lr 0.02, CatBoost residual), RuleFit (much worse).
+
+
+## Submission v13 = framework version 15 (final)
+
+Details: `submission/v13/V13_NOTES.md`. The public problems are at their ceiling: on v12's outer-CV held-out
+predictions the calibration is clean, no feature or feature pair shows significant misfit, and a residual booster
+stops after 1-2 trees with a worse held-out score. The work therefore went into the private problems. Against a
+strong conventional pipeline (Optuna-tuned LightGBM, bagged, Platt, tuned threshold) on 64 synthetic problems of
+24 types, v12 had lower regret on 59 (AUC 0.0171 vs 0.0212, log loss 0.0124 vs 0.0167, cost 0.0282 vs 0.0425).
+The losses pointed at high-cardinality categoricals, which v13 target-encodes out of fold (regret roughly halved
+on all 5 such problems); v13 also keeps the GAM on data with more than 60 numerics (better on 7 of 7 wide
+problems) and fixes the seed of the sparse GAM's solver (fits are now reproducible). On the public problems v13
+is v12 (identical predictions with the seed fix). Rejected: a threshold-tailored scoring rule for the P3 blend
+(no gain on half-splits or on synthetic cost problems), the full-data library for > 60k rows (tiny gain, twice
+the fit time).

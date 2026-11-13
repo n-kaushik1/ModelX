@@ -29,6 +29,24 @@ SPECS = [
     dict(name="cost5_mid", n=8000, rate=0.15, obj="decision_cost", cost=(1, 5), nn=22, nc=5, sd=1.4, ni=2),
 ]
 
+# further private-style types (pids 1000 + k; 1000 + k + len(SPECS2) * r = fresh draws of type k)
+SPECS2 = [
+    dict(name="deep_inter", n=10000, rate=0.30, obj="roc_auc", nn=16, nc=3, sd=1.6, ni=2, ni3=3),
+    dict(name="tiny_wide", n=800, rate=0.30, obj="log_loss", nn=40, nc=4, sd=1.5, ni=1),
+    dict(name="hc_signal_ll", n=15000, rate=0.25, obj="log_loss", nn=12, nc=3, sd=1.5, ni=1, highcard=300),
+    dict(name="rare_ll", n=20000, rate=0.03, obj="log_loss", nn=20, nc=4, sd=1.6, ni=2),
+    dict(name="cost50_rare", n=25000, rate=0.02, obj="decision_cost", cost=(1, 50), nn=20, nc=4, sd=1.7, ni=2),
+    dict(name="mostly_cat", n=10000, rate=0.30, obj="roc_auc", nn=4, nc=12, sd=1.5, ni=1, cat_levels=16, catcat=3),
+    dict(name="near_separable", n=8000, rate=0.35, obj="log_loss", nn=16, nc=3, sd=3.5, ni=2),
+    dict(name="noisy_weak", n=8000, rate=0.30, obj="roc_auc", nn=20, nc=4, sd=0.6, ni=1),
+]
+
+# wide tables (pids 2000 + k)
+SPECS3 = [
+    dict(name="wide_rich_ll", n=12000, rate=0.25, obj="log_loss", nn=120, nc=4, sd=1.6, ni=2, informative=40),
+    dict(name="wide_auc", n=6000, rate=0.30, obj="roc_auc", nn=80, nc=3, sd=1.5, ni=2, informative=25),
+]
+
 
 def _marginal(rng, n, kind):
     if kind == "normal":
@@ -65,14 +83,16 @@ def _shape(rng, z, kind):
 
 
 def make(pid, n_test=20000):
-    sp = SPECS[pid]
+    # pid >= len(SPECS): a fresh random draw of problem type pid % len(SPECS) (new shapes, columns and data)
+    sp = (SPECS3[(pid - 2000) % len(SPECS3)] if pid >= 2000 else
+          SPECS2[(pid - 1000) % len(SPECS2)] if pid >= 1000 else SPECS[pid % len(SPECS)])
     rng = np.random.default_rng(7919 + 31 * pid)
     n = sp["n"] + n_test
     nn, nc = sp["nn"], sp["nc"]
     kinds = rng.choice(["normal", "normal", "skew", "bounded", "count", "uniform"], nn)
     X = pd.DataFrame({f"x{j:02d}": _marginal(rng, n, kinds[j]) for j in range(nn)})
     for j in range(nc):
-        L = int(rng.integers(2, 7))
+        L = int(rng.integers(2, sp.get("cat_levels", 7)))
         p = rng.dirichlet(np.ones(L) * 3)
         X[f"cat{j}"] = rng.choice([f"L{j}_{i}" for i in range(L)], n, p=p)
     if sp.get("highcard"):
@@ -106,6 +126,15 @@ def make(pid, n_test=20000):
             logit += s * Z[a] * Z[b]
         else:
             logit += 2 * s * (Z[a] > rng.uniform(-0.5, 1)) * (Z[b] > rng.uniform(-0.5, 1))
+    for _ in range(sp.get("ni3", 0)):                 # three-way products and sign (XOR-like) interactions
+        a, b, c = rng.choice(inf, 3, replace=False)
+        s = rng.uniform(0.4, 0.9) * rng.choice([-1, 1])
+        logit += s * (Z[a] * Z[b] * Z[c] if rng.random() < 0.5 else 1.5 * np.sign(Z[a]) * np.sign(Z[b]))
+    for _ in range(sp.get("catcat", 0)):              # category x category effects
+        j1, j2 = rng.choice(nc, 2, replace=False)
+        key = X[f"cat{j1}"].astype(str) + "|" + X[f"cat{j2}"].astype(str)
+        lv = key.unique()
+        logit += key.map(dict(zip(lv, rng.normal(0, 0.6, len(lv))))).to_numpy()
     if sp.get("catnum"):
         for j in range(min(2, nc)):
             c = rng.choice(inf)

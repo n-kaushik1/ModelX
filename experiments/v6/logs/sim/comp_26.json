@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 26, "name": "mnar_heavy", "obj": "roc_auc", "fit_s": 2668.0, "size_mb": 0.55, "auc": 0.7987993096406137, "ll": 0.4869722374334513, "bayes_auc": 0.8132184038208895, "bayes_ll": 0.4720020118335552, "blend": {"optuna_lgbm": 1.0}, "regret": 0.01441909418027576}

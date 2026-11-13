@@ -1,0 +1,14 @@
+     cleaner: num= ['n7', 'event_time__days', 'event_time__month', 'event_time__dow', 'event_time__hour', 'duration'] cat= ['c0', 'c1', 'machine_id', 'size_band'] dropped= {'id': ['order_id']}
+OK   ids, dates, bands, timedelta        54s thr=0.500 size=8.4MB blend={'gam+struct': 0.5682, 'lgbm': 0.0372, 'xgb': 0.2291, 'et': 0.1655} mode=kfold_bag
+OK   tiny n=300                          35s thr=0.500 size=3.0MB blend={'gam': 0.4232, 'gam+struct': 0.2526, 'hyb+struct': 0.1468, 'lgbm+struct': 0.0785, 'xgb+struct': 0.0648, 'et': 0.0341} mode=kfold_bag
+OK   tiny n=120 imbalanced cost          31s thr=0.167 size=2.2MB blend={'gam': 0.4425, 'gam+struct': 0.2645, 'lgbm': 0.0406, 'xgb+struct': 0.207, 'et': 0.0453} mode=kfold_bag
+OK   extreme imbalance 1%               103s thr=0.048 size=4.1MB blend={'gam+struct': 0.7147, 'hyb+struct': 0.1796, 'lgbm+struct': 0.0522, 'lgbm': 0.0535} mode=kfold_bag
+OK   many features p=150                135s thr=0.500 size=10.6MB blend={'gam+struct': 0.218, 'hyb+struct': 0.0546, 'lgbm+struct': 0.6575, 'lgbm': 0.0346, 'et': 0.0353} mode=kfold_bag
+OK   high-card cats + string labels      99s thr=0.315 size=2.4MB blend={'gam+struct': 0.7466, 'cat': 0.2534} mode=kfold_bag
+OK   large n=70k (subsample path)       519s thr=0.500 size=0.1MB blend={'gam+struct': 0.9018, 'hyb+struct': 0.0982} mode=refit
+OK   empty metadata                     112s thr=0.500 size=8.2MB blend={'gam+struct': 0.4926, 'hyb+struct': 0.2397, 'lgbm': 0.0754, 'xgb': 0.0368, 'cat': 0.1555} mode=kfold_bag
+OK   None metadata                      113s thr=0.500 size=16.9MB blend={'gam+struct': 0.2079, 'gam': 0.0316, 'hyb+struct': 0.5265, 'cat': 0.0547, 'cat+struct': 0.1426, 'et': 0.0367} mode=kfold_bag
+OK   all-categorical, no numerics        33s thr=0.500 size=1.2MB blend={'logreg': 0.15, 'lgbm': 0.5583, 'xgb': 0.1267, 'xgb+struct': 0.065, 'cat': 0.1} mode=kfold_bag
+OK   weird columns                      102s thr=0.750 size=0.7MB blend={'gam+struct': 0.0634, 'hyb+struct': 0.9366} mode=kfold_bag
+OK   accuracy objective                 101s thr=0.566 size=4.7MB blend={'gam+struct': 0.3667, 'hyb+struct': 0.2986, 'xgb': 0.0265, 'cat': 0.3082} mode=kfold_bag
+STRESS TEST PASSED

@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 1006, "name": "near_separable", "obj": "log_loss", "fit_s": 270.6, "size_mb": 2.94, "auc": 0.9184330548732571, "ll": 0.34121396426686496, "bayes_auc": 0.932080701278442, "bayes_ll": 0.3126399780783674, "blend": {"optuna_lgbm": 1.0}, "regret": 0.028573986188497547}

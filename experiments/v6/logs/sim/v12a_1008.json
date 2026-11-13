@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 1008, "name": "deep_inter", "obj": "roc_auc", "fit_s": 597.1, "size_mb": 7.96, "auc": 0.758283836428499, "ll": 0.5126739330176783, "bayes_auc": 0.7911838707030138, "bayes_ll": 0.4845369084599748, "blend": {"gam+struct": 0.0283, "lgbm": 0.1706, "xgb+struct": 0.0286, "cat": 0.7726}, "regret": 0.03290003427451482}

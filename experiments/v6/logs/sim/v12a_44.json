@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 44, "name": "extreme_imb", "obj": "roc_auc", "fit_s": 1248.2, "size_mb": 9.83, "auc": 0.8886030011128361, "ll": 0.04480927288904151, "bayes_auc": 0.9010592023967318, "bayes_ll": 0.04164125023312925, "blend": {"gam+struct": 0.1099, "hyb+struct": 0.4401, "lgbm+struct": 0.0946, "xgb+struct": 0.063, "cat": 0.1567, "et": 0.1357}, "regret": 0.012456201283895685}

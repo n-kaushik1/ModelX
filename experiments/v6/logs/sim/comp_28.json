@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 28, "name": "extreme_imb", "obj": "roc_auc", "fit_s": 200.9, "size_mb": 0.49, "auc": 0.8493925542559786, "ll": 0.06410302293021902, "bayes_auc": 0.8845013877492225, "bayes_ll": 0.05920041208766841, "blend": {"optuna_lgbm": 1.0}, "regret": 0.035108833493243896}

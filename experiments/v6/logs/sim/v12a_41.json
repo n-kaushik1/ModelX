@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 41, "name": "many_noise", "obj": "log_loss", "fit_s": 1808.9, "size_mb": 4.27, "auc": 0.793283039398823, "ll": 0.488419544273367, "bayes_auc": 0.8046640952166203, "bayes_ll": 0.47805281024673496, "blend": {"logreg": 0.2487, "lgbm+struct": 0.482, "lgbm": 0.14, "xgb+struct": 0.0893, "cat": 0.04}, "regret": 0.010366734026632018}

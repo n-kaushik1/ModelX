@@ -1,0 +1,1 @@
+{"tag": "v13w", "pid": 2001, "name": "wide_auc", "obj": "roc_auc", "fit_s": 810.5, "size_mb": 6.87, "auc": 0.735232757369797, "ll": 0.5322535829243822, "bayes_auc": 0.761325910062085, "bayes_ll": 0.5122227765418605, "blend": {"gam+struct": 0.1143, "gam": 0.1307, "lgbm+struct": 0.4142, "xgb": 0.1391, "cat+struct": 0.042, "et": 0.1596}, "regret": 0.02609315269228807}

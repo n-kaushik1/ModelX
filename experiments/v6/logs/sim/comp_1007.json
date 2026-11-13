@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 1007, "name": "noisy_weak", "obj": "roc_auc", "fit_s": 55.5, "size_mb": 0.26, "auc": 0.6363722264032361, "ll": 0.5862303420770196, "bayes_auc": 0.6491675964172339, "bayes_ll": 0.5792486004068306, "blend": {"optuna_lgbm": 1.0}, "regret": 0.012795370013997776}

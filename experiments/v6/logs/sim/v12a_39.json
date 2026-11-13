@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 39, "name": "linearish", "obj": "log_loss", "fit_s": 922.0, "size_mb": 0.6, "auc": 0.8022491177975575, "ll": 0.4460790183144918, "bayes_auc": 0.8065867355959889, "bayes_ll": 0.4418758295987537, "blend": {"gam+struct": 0.5067, "gam": 0.24, "hyb+struct": 0.2534}, "regret": 0.004203188715738104}

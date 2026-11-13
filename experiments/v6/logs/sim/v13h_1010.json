@@ -1,0 +1,1 @@
+{"tag": "v13h", "pid": 1010, "name": "hc_signal_ll", "obj": "log_loss", "fit_s": 1065.0, "size_mb": 1.16, "auc": 0.8088075485398665, "ll": 0.43220313123512105, "bayes_auc": 0.8210905014488942, "bayes_ll": 0.4204231554804231, "blend": {"gam+struct": 0.8272, "hyb+struct": 0.1728}, "regret": 0.011779975754697969}

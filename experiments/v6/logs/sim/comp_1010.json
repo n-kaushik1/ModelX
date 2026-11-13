@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 1010, "name": "hc_signal_ll", "obj": "log_loss", "fit_s": 200.6, "size_mb": 0.52, "auc": 0.8026604628276717, "ll": 0.4374144325254374, "bayes_auc": 0.8210905014488942, "bayes_ll": 0.4204231554804231, "blend": {"optuna_lgbm": 1.0}, "regret": 0.016991277045014297}

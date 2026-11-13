@@ -151,3 +151,5 @@ v12b p3 s1 f2 cost=0.7300 t=0.0909 LL=0.19727 fit=389s size=7.5MB comb=bagged_se
 v12b p3 s1 f3 cost=0.7309 t=0.0909 LL=0.19536 fit=376s size=6.9MB comb=bagged_selection blend={"gam+struct": 0.1, "hyb+struct": 0.5721, "lgbm+struct": 0.0776, "lgbm": 0.0917, "xgb+struct": 0.1278, "et": 0.0309}
 v12b p3 s1 f1 cost=0.7406 t=0.0909 LL=0.20362 fit=426s size=3.5MB comb=bagged_selection blend={"gam+struct": 0.3916, "hyb+struct": 0.1367, "lgbm+struct": 0.0433, "xgb+struct": 0.1632, "cat": 0.2652}
 v12b p3 s1 f4 cost=0.7017 t=0.0909 LL=0.20264 fit=383s size=1.4MB comb=bagged_selection blend={"gam+struct": 0.058, "hyb+struct": 0.4195, "cat": 0.3664, "cat+struct": 0.156}
+idv12mac p2 s0 f0 LL=0.51812 fit=20398s size=1.0MB comb=bagged_selection blend={"gam+struct": 0.1263, "hyb+struct": 0.8124, "cat+struct": 0.0612}
+idv13mac p2 s0 f0 LL=0.51807 fit=440s size=1.4MB comb=bagged_selection blend={"gam+struct": 0.1419, "hyb+struct": 0.7946, "cat+struct": 0.0634}

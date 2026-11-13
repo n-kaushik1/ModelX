@@ -1,0 +1,1 @@
+{"tag": "v13w", "pid": 2000, "name": "wide_rich_ll", "obj": "log_loss", "fit_s": 1461.7, "size_mb": 2.99, "auc": 0.7505284672948045, "ll": 0.4820129229301695, "bayes_auc": 0.7755930738515021, "bayes_ll": 0.4619733814329169, "blend": {"gam+struct": 0.556, "gam": 0.0249, "hyb+struct": 0.1978, "lgbm+struct": 0.1775, "cat+struct": 0.0436}, "regret": 0.020039541497252622}

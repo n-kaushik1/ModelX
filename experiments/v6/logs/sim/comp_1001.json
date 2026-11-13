@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 1001, "name": "tiny_wide", "obj": "log_loss", "fit_s": 50.1, "size_mb": 0.15, "auc": 0.7537958771426505, "ll": 0.5208092555534519, "bayes_auc": 0.818594455274671, "bayes_ll": 0.46224137222945794, "blend": {"optuna_lgbm": 1.0}, "regret": 0.058567883323993986}

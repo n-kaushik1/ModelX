@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 9, "name": "many_noise", "obj": "log_loss", "fit_s": 311.1, "size_mb": 0.52, "auc": 0.715984261413117, "ll": 0.541016383775495, "bayes_auc": 0.733928557782096, "bayes_ll": 0.5290888797972908, "blend": {"optuna_lgbm": 1.0}, "regret": 0.01192750397820419}

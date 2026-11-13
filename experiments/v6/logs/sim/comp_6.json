@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 6, "name": "strong_inter", "obj": "roc_auc", "fit_s": 320.4, "size_mb": 4.29, "auc": 0.7784579968797105, "ll": 0.5281896259572981, "bayes_auc": 0.8044035390791551, "bayes_ll": 0.4984532244337405, "blend": {"optuna_lgbm": 1.0}, "regret": 0.02594554219944456}

@@ -1,0 +1,2 @@
+idv12mac p2 s0 f0 LL=0.51812 fit=20398s size=1.0MB comb=bagged_selection blend={"gam+struct": 0.1263, "hyb+struct": 0.8124, "cat+struct": 0.0612}
+idv13mac p2 s0 f0 LL=0.51807 fit=440s size=1.4MB comb=bagged_selection blend={"gam+struct": 0.1419, "hyb+struct": 0.7946, "cat+struct": 0.0634}

@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 29, "name": "weak_balanced", "obj": "log_loss", "fit_s": 230.2, "size_mb": 0.39, "auc": 0.6809826206333804, "ll": 0.640434296881762, "bayes_auc": 0.6982121653856201, "bayes_ll": 0.6296961716709303, "blend": {"optuna_lgbm": 1.0}, "regret": 0.010738125210831728}

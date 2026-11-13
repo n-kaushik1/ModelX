@@ -1,0 +1,1 @@
+{"tag": "v12a", "pid": 1006, "name": "near_separable", "obj": "log_loss", "fit_s": 645.0, "size_mb": 5.88, "auc": 0.9230676733731857, "ll": 0.3315880614103389, "bayes_auc": 0.932080701278442, "bayes_ll": 0.3126399780783674, "blend": {"gam+struct": 0.0866, "hyb+struct": 0.5244, "lgbm+struct": 0.0739, "cat": 0.3152}, "regret": 0.01894808333197151}

@@ -1,0 +1,1 @@
+{"tag": "comp", "pid": 1013, "name": "mostly_cat", "obj": "roc_auc", "fit_s": 146.4, "size_mb": 0.87, "auc": 0.7601927140930921, "ll": 0.5121236711664057, "bayes_auc": 0.7935018905283576, "bayes_ll": 0.48391392750043416, "blend": {"optuna_lgbm": 1.0}, "regret": 0.03330917643526554}
