@@ -359,6 +359,59 @@ def _is_id_name(name):
     return bool(_ID_NAME.search(n))
 
 
+_CURRENCY = re.compile(r"[$\u20ac\u00a3\u00a5\u20b9]")
+_THOUSANDS = re.compile(r"^[-+]?\d{1,3}(,\d{3})+(\.\d+)?$")
+_DEC_COMMA = re.compile(r"^[-+]?\d{1,3}(\.\d{3})*,\d+$|^[-+]?\d+,\d+$")
+_UNIT = re.compile(r"^([-+]?[\d.,]*\d)\s*([A-Za-z\u00b0\u00b5/%]+)$")
+_CLOCK = re.compile(r"^(\d{1,2}):(\d{2})(?::(\d{2}))?$")
+
+
+def _parse_numeric_text(s, kind, unit=None):
+    """Numbers written as text: kind "plain" (currency signs, thousands separators, a trailing %, accounting
+    negatives "(12.5)"), "comma" (decimal comma, dots as thousands separators), "unit" (one fixed unit suffix
+    such as "kg") or "clock" ("HH:MM[:SS]" -> hours).  Unparseable values become NaN."""
+    v = s.astype("object").where(s.notna(), None).map(lambda x: None if x is None else str(x).strip())
+    if kind == "clock":
+        def clock(x):
+            m = _CLOCK.match(x) if x is not None else None
+            return np.nan if m is None else int(m.group(1)) + int(m.group(2)) / 60 + int(m.group(3) or 0) / 3600
+        return v.map(clock).astype(float)
+    if kind == "unit":
+        def strip_unit(x):
+            m = _UNIT.match(x) if x is not None else None
+            return m.group(1) if m is not None and m.group(2) == unit else x
+        v = v.map(strip_unit)
+    v = v.map(lambda x: None if x is None else _CURRENCY.sub("", x).replace(" ", "").replace("\u00a0", ""))
+    neg = v.map(lambda x: x is not None and len(x) > 2 and x[0] == "(" and x[-1] == ")")
+    v = v.map(lambda x: x[1:-1] if x is not None and len(x) > 2 and x[0] == "(" and x[-1] == ")" else x)
+    v = v.map(lambda x: x[:-1] if x is not None and x.endswith("%") else x)
+    if kind == "comma":
+        v = v.map(lambda x: x.replace(".", "").replace(",", ".") if x is not None and _DEC_COMMA.match(x) else x)
+    else:
+        v = v.map(lambda x: x.replace(",", "") if x is not None and _THOUSANDS.match(x) else x)
+    out = pd.to_numeric(v, errors="coerce").astype(float)
+    return out.where(~neg, -out)
+
+
+def _numeric_text_kind(s, accept):
+    """The numeric-text format that parses this column (as judged by ``accept``), or None."""
+    v = s.dropna().astype(str).str.strip()
+    if len(v) == 0:
+        return None, None
+    if v.map(lambda x: bool(_CLOCK.match(x))).mean() > 0.9:
+        return ("clock", None) if accept(_parse_numeric_text(s, "clock")) else (None, None)
+    units = v.map(lambda x: (_UNIT.match(x).group(2) if _UNIT.match(x) else None)).dropna()
+    for kind in ("plain", "comma", "unit"):
+        unit = None
+        if kind == "unit":
+            if len(units) == 0:
+                continue
+            unit = units.value_counts().index[0]
+        if accept(_parse_numeric_text(s, kind, unit)):
+            return kind, unit
+    return None, None
+
+
 class DataCleaner:
     """Learns which columns to keep and how to type them; applies it to new data."""
 
@@ -372,6 +425,8 @@ class DataCleaner:
         self.dropped_ = {"id": [], "constant": [], "empty": [], "unique_text": [], "unsupported": []}
         self.numeric_, self.categorical_, self.coerced_ = [], [], []
         self.dates_ = {}                                   # date column -> derived numeric columns
+        self.num_text_ = {}                                # column -> (numeric-text format, unit)
+        self.dayfirst_ = {}                                # date column written day-first (31/12/2024)
         for c in X.columns:
             s = X[c]
             if c in self.extra_ids or c == self.target_name:
@@ -408,6 +463,18 @@ class DataCleaner:
                 self.numeric_.append(c)
                 self.coerced_.append(c)
                 continue
+            # numbers written as text ("$1,200", "15%", "(3.5)", "0,75", "120 kg", "13:45"): only for columns
+            # with many distinct values -- a short code list ("4G", "L2") stays a categorical
+            if nn > 0 and s.nunique(dropna=True) > 25:
+                def accept(conv2, s=s, nn=nn):
+                    bad2 = s[s.notna() & conv2.isna()].astype(str).str.strip()
+                    return conv2.notna().sum() >= 0.95 * nn or (conv2.notna().sum() >= 0.8 * nn and bad2.nunique() <= 5)
+                kind, unit = _numeric_text_kind(s, accept)
+                if kind is not None:
+                    self.numeric_.append(c)
+                    self.coerced_.append(c)
+                    self.num_text_[c] = (kind, unit)
+                    continue
             if n >= 50 and s.nunique(dropna=True) >= 0.9 * nn:
                 self.dropped_["unique_text"].append(c)
                 continue
@@ -435,12 +502,13 @@ class DataCleaner:
         return pd.to_datetime(v, errors="coerce", format="mixed").notna().mean() > 0.95
 
     @staticmethod
-    def _to_datetime(s):
+    def _to_datetime(s, dayfirst=False):
         if pd.api.types.is_datetime64_any_dtype(s):
             d = s
         else:
             try:
-                d = pd.to_datetime(s.astype("object").where(s.notna(), None), errors="coerce", format="mixed")
+                d = pd.to_datetime(s.astype("object").where(s.notna(), None), errors="coerce", format="mixed",
+                                   dayfirst=dayfirst)
             except Exception:
                 d = pd.Series(pd.NaT, index=s.index)
         try:
@@ -450,8 +518,21 @@ class DataCleaner:
             pass
         return d
 
+    @staticmethod
+    def _is_dayfirst(s):
+        """d/m/y text dates: some first field is above 12 and no second field is."""
+        if pd.api.types.is_datetime64_any_dtype(s):
+            return False
+        m = s.dropna().astype(str).str.extract(r"^\s*(\d{1,2})[-/.](\d{1,2})[-/.]\d{2,4}")
+        if m.dropna().empty:
+            return False
+        a, b = pd.to_numeric(m[0], errors="coerce"), pd.to_numeric(m[1], errors="coerce")
+        return bool((a > 12).any() and not (b > 12).any())
+
     def _add_date(self, c, s):
-        d = self._to_datetime(s)
+        if self._is_dayfirst(s):
+            self.dayfirst_[c] = True
+        d = self._to_datetime(s, self.dayfirst_.get(c, False))
         if d.notna().sum() == 0:
             self.dropped_["unsupported"].append(c)
             return
@@ -479,13 +560,21 @@ class DataCleaner:
             return X.copy()
         return pd.DataFrame(X)
 
+    def _num(self, X, c):
+        """A raw numeric (or numeric-text) column as floats; NaN if the column is missing."""
+        if c not in X:
+            return np.full(len(X), np.nan)
+        if c in getattr(self, "num_text_", {}):
+            return _parse_numeric_text(X[c], *self.num_text_[c]).to_numpy(dtype=float)
+        return pd.to_numeric(X[c], errors="coerce").to_numpy(dtype=float)
+
     def transform(self, X):
         X = self._as_df(X)
         out = pd.DataFrame(index=X.index)
         derived = {}
         for c, keep in getattr(self, "dates_", {}).items():
             if c in X:
-                d = self._to_datetime(X[c])
+                d = self._to_datetime(X[c], getattr(self, "dayfirst_", {}).get(c, False))
                 vals = {"days": (d - pd.Timestamp("1970-01-01")).dt.total_seconds() / 86400.0,
                         "month": d.dt.month, "dow": d.dt.dayofweek, "hour": d.dt.hour}
             else:
@@ -493,8 +582,8 @@ class DataCleaner:
             for k in keep:
                 derived[f"{c}__{k}"] = vals[k].astype(float) if k in vals else np.nan
         for t in getattr(self, "twins_", []):                    # noise-weighted average of two twin readings
-            xa = pd.to_numeric(X[t["a"]], errors="coerce").to_numpy(dtype=float) if t["a"] in X else np.full(len(X), np.nan)
-            xb = pd.to_numeric(X[t["b"]], errors="coerce").to_numpy(dtype=float) if t["b"] in X else np.full(len(X), np.nan)
+            xa = self._num(X, t["a"])
+            xb = self._num(X, t["b"])
             derived[t["name"]] = np.where(np.isnan(xa), xb, np.where(np.isnan(xb), xa, t["wa"] * xa + t["wb"] * xb))
         for c in self.numeric_:
             if c in derived:
@@ -503,7 +592,10 @@ class DataCleaner:
                 col = X[c]
                 if pd.api.types.is_timedelta64_dtype(col):
                     col = col.dt.total_seconds()
-                out[c] = pd.to_numeric(col, errors="coerce").astype(float)
+                if c in getattr(self, "num_text_", {}):
+                    out[c] = _parse_numeric_text(col, *self.num_text_[c]).to_numpy(dtype=float)
+                else:
+                    out[c] = pd.to_numeric(col, errors="coerce").astype(float)
             else:
                 out[c] = np.nan
         for c in self.categorical_:
@@ -786,6 +878,8 @@ _BOOSTERS = ("lgbm", "xgb", "cat", "hyb")
 _FORESTS = ("et", "rf")
 # the GAM uses at most this many numeric columns (on wider data: the strongest by measured additive gain)
 _GAM_MAX_NUM = 60
+# tuning sample cap on very wide tables (rows x cleaned columns); the public problems have at most 0.5M cells
+_TUNE_MAX_CELLS = 2_500_000
 _MAX_TREES = {"lgbm": 8000, "xgb": 4000, "cat": 3000, "hyb": 8000}
 _PATIENCE = {"lgbm": 150, "xgb": 150, "cat": 100, "hyb": 150}
 
@@ -872,6 +966,50 @@ class SplineLogit:
         if getattr(self, "penalty", "l2") == "l1":
             D = (D - self.dmu_) / self.dsd_
         return self.lr_.predict_proba(D)
+
+
+def _cat_pairs(Xc, y, num_cols, cat_cols, n_jobs, max_pairs=4, min_gain=0.05):
+    """Categorical x categorical pairs among the measured interacting pairs (split gain at least min_gain of the
+    strongest pair's): the GAM gets one combined-level column for each."""
+    if len(cat_cols) < 2:
+        return []
+    st = _detect_structure(Xc, y, num_cols, cat_cols, n_jobs)
+    if not st:
+        return []
+    nn = len(num_cols)
+    gains = st.get("pair_gain", [1.0] * len(st["pairs"]))
+    out = [(cat_cols[a - nn], cat_cols[b - nn]) for (a, b), g in zip(st["pairs"], gains)
+           if a >= nn and b >= nn and g >= min_gain]
+    return out[:max_pairs]
+
+
+class _CatPairEncoder:
+    """Adds one combined-level categorical per measured categorical pair ("a|b"), then encodes with ``base``."""
+
+    def __init__(self, base, pairs):
+        self.base, self.pairs = base, list(pairs)
+
+    def _augment(self, Xc):
+        A = Xc.copy()
+        for a, b in self.pairs:
+            va, vb = (A[a] if a in A else pd.Series(None, index=A.index)), (A[b] if b in A else pd.Series(None, index=A.index))
+            ok = va.notna() & vb.notna()
+            A[f"{a}|{b}"] = (va.astype(str) + "|" + vb.astype(str)).where(ok, None)
+        return A
+
+    def fit_transform(self, Xc, num_cols, cat_cols, y=None):
+        return self.base.fit_transform(self._augment(Xc), num_cols, list(cat_cols) + [f"{a}|{b}" for a, b in self.pairs], y)
+
+    def transform(self, Xc):
+        return self.base.transform(self._augment(Xc))
+
+    @property
+    def feature_names_(self):
+        return self.base.feature_names_
+
+    @property
+    def cat_idx_(self):
+        return self.base.cat_idx_
 
 
 class _PairEncoder:
@@ -982,8 +1120,11 @@ def _fit_model(spec, Xc, y, num_cols, cat_cols, obj, n_jobs, eval_data=None):
             est = LogisticRegression(C=P["C"], class_weight=cw, max_iter=2000, solver="lbfgs").fit(Z, y)
     elif fam == "gam":
         keep = _gam_numerics(Xc, y, num_cols, cat_cols, n_jobs)
-        if len(keep) < len(num_cols):                      # wide data: the GAM uses the strongest numerics
-            enc = TabularEncoder(mode, max_levels=30)
+        ccp = _cat_pairs(Xc, y, num_cols, cat_cols, n_jobs)
+        if len(keep) < len(num_cols) or ccp:               # wide data: the GAM uses the strongest numerics;
+            enc = TabularEncoder(mode, max_levels=30)       # measured category pairs get a combined column
+            if ccp:
+                enc = _CatPairEncoder(enc, ccp)
             Z = enc.fit_transform(Xc, [num_cols[j] for j in keep], cat_cols, y)
         prs, cslopes = _gam_terms(P, Xc, y, num_cols, cat_cols, n_jobs, enc, keep)   # measured interaction terms
         est = SplineLogit(len(keep), C=P["C"], n_knots=P["knots"], basis=P.get("basis", "hinge"),
@@ -1054,7 +1195,10 @@ def _fit_model(spec, Xc, y, num_cols, cat_cols, obj, n_jobs, eval_data=None):
             est.fit(Z, y)
     elif fam == "hyb":
         keep = _gam_numerics(Xc, y, num_cols, cat_cols, n_jobs)
+        ccp = _cat_pairs(Xc, y, num_cols, cat_cols, n_jobs)
         encl = TabularEncoder("linear", max_levels=30)
+        if ccp:
+            encl = _CatPairEncoder(encl, ccp)
         Zl = encl.fit_transform(Xc, [num_cols[j] for j in keep], cat_cols, y)
         prs, cslopes = _gam_terms(P, Xc, y, num_cols, cat_cols, n_jobs, encl, keep)
         gam = SplineLogit(len(keep), C=P["C"], n_knots=P["knots"], basis="hinge", pairs=prs, cat_slopes=cslopes,
@@ -1147,7 +1291,10 @@ def _detect_structure(Xc, y, num_cols, cat_cols, n_jobs, max_pairs=32):
                 for ch in ("left_child", "right_child"):
                     if ch in node:
                         stack.append((node[ch], parents + (f,)))
-        out["pairs"] = [list(k) for k, _ in sorted(gains.items(), key=lambda kv: -kv[1])[:max_pairs]]
+        ranked = sorted(gains.items(), key=lambda kv: -kv[1])[:max_pairs]
+        out["pairs"] = [list(k) for k, _ in ranked]
+        top = ranked[0][1] if ranked and ranked[0][1] > 0 else 1.0
+        out["pair_gain"] = [float(g / top) for _, g in ranked]
     except Exception:
         pass
     try:
@@ -1449,8 +1596,13 @@ class StudentSolution:
         self.degenerate_ = False
 
         # sub-sample for tuning on very large data (final fit still uses everything)
-        if n > 60000:
-            sub = rng.choice(n, 40000, replace=False)
+        # rows used for tuning: all up to 60k; 40k above that, and on very wide tables at most _TUNE_MAX_CELLS
+        # cells (at least 20k rows) -- this bounds the fit time on a slow machine (the final fit still uses
+        # every row)
+        n_tune = 40000 if n > 60000 else n
+        n_tune = min(n_tune, max(20000, _TUNE_MAX_CELLS // max(1, Xc.shape[1])))
+        if n_tune < n:
+            sub = rng.choice(n, n_tune, replace=False)
             Xt, yt = Xc.iloc[sub].reset_index(drop=True), y[sub]
         else:
             Xt, yt = Xc, y

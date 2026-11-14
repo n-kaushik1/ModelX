@@ -1,0 +1,7 @@
+files: ['__pycache__', 'manifest.json', 'p1_model.joblib', 'p2_model.joblib', 'p3_model.joblib', 'p3_threshold.json', 'solution.py']
+manifest: {  "versions": {   "python": "3.11.9",   "numpy": "1.26.4",   "pandas": "2.3.1",   "scikit-learn": "1.7.1",   "lightgbm": "4.6.0",   "xgboost": "3.1.1",   "catboost": "1.2.10",   "imbalanced-learn": "0.14.0"  },  "created": "2026-11-14 11:14:04" }
+threshold: {"threshold": 0.09090909090909091}
+p1: searched={'gam': 11, 'hyb': 2, 'lgbm': 32, 'xgb': 18, 'cat': 4, 'et': 3} combiner=bagged_selection weights={'hyb+struct': 0.4101, 'lgbm+struct': 0.4514, 'xgb+struct': 0.1126, 'cat+struct': 0.026} calibrated=True oofLL=0.41641 oof_roc_auc=0.85574 fit=467s thr=0.5000 members=4 p=[0.0113,0.3041,0.9970]
+p2: searched={'gam': 11, 'hyb': 2, 'lgbm': 32, 'xgb': 18, 'cat': 4, 'et': 3} combiner=bagged_selection weights={'gam+struct': 0.1215, 'hyb+struct': 0.5976, 'lgbm+struct': 0.067, 'cat': 0.2138} calibrated=False oofLL=0.50615 oof_log_loss=-0.50615 fit=349s thr=0.5000 members=8 p=[0.0608,0.2556,0.9475]
+p3: searched={'gam': 11, 'hyb': 2, 'lgbm': 32, 'xgb': 18, 'cat': 4, 'et': 3} combiner=bagged_selection weights={'gam+struct': 0.2954, 'hyb+struct': 0.3864, 'lgbm+struct': 0.0745, 'lgbm': 0.061, 'xgb+struct': 0.1365, 'cat+struct': 0.0462} calibrated=False oofLL=0.19536 oof_cost=-0.42447 fit=428s thr=0.0909 members=8 p=[0.0141,0.0656,0.7655]
+   p3 oof cost/1000: {"chosen_threshold": 425.4, "bayes_threshold": 425.4, "predict_all_negative": 601.3333333333334, "predict_all_positive": 939.8666666666667} bayes 0.09090909090909091

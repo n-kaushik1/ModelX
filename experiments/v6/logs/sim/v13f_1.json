@@ -1,0 +1,1 @@
+{"tag": "v13f", "pid": 1, "name": "p2_like", "obj": "log_loss", "fit_s": 35926.3, "size_mb": 1.74, "auc": 0.7756373099637495, "ll": 0.4816136321989322, "bayes_auc": 0.7848944993216366, "bayes_ll": 0.473716804473757, "blend": {"gam+struct": 0.5905, "gam": 0.2938, "hyb+struct": 0.0298, "xgb": 0.0488, "xgb+struct": 0.0371}, "regret": 0.007896827725175193}

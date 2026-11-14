@@ -297,3 +297,32 @@ v13L        5 large_ll       log_loss      regret=0.00229 auc=0.7487 ll=0.2746 f
 v13L       21 large_ll       log_loss      regret=0.00219 auc=0.8565 ll=0.2369 fit=3053s size=6.1MB
 v13L       37 large_ll       log_loss      regret=0.00257 auc=0.8131 ll=0.2624 fit=2855s size=5.6MB
 QUEUE DONE jobs_v13_wide.txt
+v12a       3000 messy_auc      roc_auc       regret=0.07724 auc=0.7611 ll=0.4973 fit=426s size=6.9MB
+v12a       3001 messy_ll       log_loss      regret=0.10076 auc=0.6651 ll=0.5277 fit=443s size=3.1MB
+v13        3001 messy_ll       log_loss      regret=0.00840 auc=0.8114 ll=0.4354 fit=571s size=3.7MB
+v13        3000 messy_auc      roc_auc       regret=0.00743 auc=0.8309 ll=0.4308 fit=628s size=4.9MB
+v12a       3002 messy_auc      roc_auc       regret=0.04757 auc=0.7868 ll=0.4800 fit=487s size=3.5MB
+v12a       3003 messy_ll       log_loss      regret=0.03516 auc=0.7847 ll=0.4525 fit=517s size=11.5MB
+v13        3002 messy_auc      roc_auc       regret=0.01054 auc=0.8238 ll=0.4449 fit=701s size=6.7MB
+v13        3003 messy_ll       log_loss      regret=0.00903 auc=0.8156 ll=0.4264 fit=545s size=5.3MB
+QUEUE DONE jobs_v13_messy.txt
+v12a       1029 mostly_cat     roc_auc       regret=0.01914 auc=0.7916 ll=0.4852 fit=969s size=2.6MB
+v13f       1013 mostly_cat     roc_auc       regret=0.02057 auc=0.7729 ll=0.5015 fit=1042s size=2.6MB
+v12a       1021 mostly_cat     roc_auc       regret=0.02339 auc=0.7788 ll=0.5009 fit=1067s size=9.1MB
+v13f       1005 mostly_cat     roc_auc       regret=0.01295 auc=0.8050 ll=0.4761 fit=1160s size=1.6MB
+v13f       1002 hc_signal_ll   log_loss      regret=0.00861 auc=0.7997 ll=0.4461 fit=815s size=3.7MB
+v13f       1021 mostly_cat     roc_auc       regret=0.01982 auc=0.7824 ll=0.4974 fit=1080s size=4.2MB
+v13f       1029 mostly_cat     roc_auc       regret=0.01720 auc=0.7935 ll=0.4832 fit=1011s size=8.0MB
+v13f        8 highcard       roc_auc       regret=0.00652 auc=0.8131 ll=0.3899 fit=1134s size=7.0MB
+v13f       2003 wide_auc       roc_auc       regret=0.01925 auc=0.7717 ll=0.5041 fit=36009s size=6.5MB
+v13f        0 p1_like        roc_auc       regret=0.01168 auc=0.8103 ll=0.4722 fit=36067s size=2.9MB
+v13f        1 p2_like        log_loss      regret=0.00790 auc=0.7756 ll=0.4816 fit=35926s size=1.7MB
+v13f       2002 wide_rich_ll   log_loss      regret=0.01621 auc=0.8080 ll=0.4368 fit=38005s size=9.8MB
+v13f       14 catnum_inter   log_loss      regret=0.01081 auc=0.7940 ll=0.4502 fit=1993s size=5.4MB
+v13f        6 strong_inter   roc_auc       regret=0.01576 auc=0.7886 ll=0.5146 fit=2038s size=4.4MB
+v13f        2 p3_like        decision_cost regret=0.03104 auc=0.8225 ll=0.1817 cost=0.6216 thr=0.091 costBayesThr=0.6216 fit=2151s size=2.4MB
+v13f       3000 messy_auc      roc_auc       regret=0.00743 auc=0.8309 ll=0.4308 fit=471s size=4.9MB
+v13f       3001 messy_ll       log_loss      regret=0.00840 auc=0.8114 ll=0.4354 fit=436s size=4.0MB
+v13f       3003 messy_ll       log_loss      regret=0.00903 auc=0.8156 ll=0.4264 fit=398s size=5.3MB
+v13f       3002 messy_auc      roc_auc       regret=0.01054 auc=0.8238 ll=0.4449 fit=489s size=6.7MB
+QUEUE DONE jobs_v13_final.txt

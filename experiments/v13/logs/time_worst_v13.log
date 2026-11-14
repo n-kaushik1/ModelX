@@ -1,0 +1,51 @@
+worst_case (60000, 109)
+[framework] objective: {'metric': 'cost', 'metric_defaulted': False, 'fp_cost': 1.0, 'fn_cost': 10.0}
+[framework] profile: {'n_rows': 60000, 'n_features': 106, 'n_numeric': 101, 'n_categorical': 5, 'positive_rate': 0.08048333333333334, 'minority_count': 4829, 'imbalanced': True, 'missing_rate_overall': 0.00811933962264151, 'n_cols_with_missing': 27, 'max_cardinality': 196, 'n_skewed_numeric': 16} dropped: {'redundant_copy': ['x18_copy', 'x67_copy', 'x83_copy']}
+[framework] gam   it00 log_loss=-0.21537 trees=None t=   34s
+[framework] gam   it01 log_loss=-0.21571 trees=None t=   73s
+[framework] gam   it02 log_loss=-0.21539 trees=None t=   91s
+[framework] gam   it03 log_loss=-0.21538 trees=None t=  109s
+[framework] gam   it04 log_loss=-0.21538 trees=None t=  128s
+[framework] gam   it05 log_loss=-0.21540 trees=None t=  158s
+[framework] gam   it06 log_loss=-0.21460 trees=None t=  395s
+[framework] gam   it07 log_loss=-0.21468 trees=None t=  654s
+[framework] gam   it08 log_loss=-0.21448 trees=None t=  862s
+[framework] hyb   it00 log_loss=-0.21393 trees=517 t= 1174s
+[framework] hyb   it01 log_loss=-0.21357 trees=725 t= 1406s
+[framework] lgbm  it00 log_loss=-0.21528 trees=2888 t= 1455s
+[framework] lgbm  it01 log_loss=-0.21580 trees=1634 t= 1489s
+[framework] lgbm  it02 log_loss=-0.21553 trees=2051 t= 1533s
+[framework] lgbm  it03 log_loss=-0.21575 trees=1916 t= 1573s
+[framework] lgbm  it04 log_loss=-0.21537 trees=6244 t= 1679s
+[framework] lgbm  it05 log_loss=-0.21683 trees=1058 t= 1701s
+[framework] lgbm  it06 log_loss=-0.21593 trees=1661 t= 1738s
+[framework] lgbm  it07 log_loss=-0.21728 trees=762 t= 1756s
+[framework] lgbm  it08 log_loss=-0.21844 trees=709 t= 1783s
+[framework] xgb   it00 log_loss=-0.21521 trees=3128 t= 1864s
+[framework] xgb   it01 log_loss=-0.21601 trees=1556 t= 1913s
+[framework] xgb   it02 log_loss=-0.21555 trees=2094 t= 1978s
+[framework] xgb   it03 log_loss=-0.21656 trees=1067 t= 2020s
+[framework] xgb   it04 log_loss=-0.21601 trees=1523 t= 2073s
+[framework] xgb   it05 log_loss=-0.21769 trees=709 t= 2107s
+[framework] xgb   it06 log_loss=-0.21853 trees=727 t= 2154s
+[framework] cat   it00 log_loss=-0.21999 trees=1657 t= 2356s
+[framework] cat   it01 log_loss=-0.21805 trees=941 t= 2463s
+[framework] cat   it02 log_loss=-0.21835 trees=649 t= 2577s
+[framework] et    it00 log_loss=-0.23045 trees=None t= 2737s
+[framework] et    it01 log_loss=-0.23092 trees=None t= 2929s
+[framework] library gam   cost=-0.43585 log_loss=-0.21477 gam(C=0.05, knots=15, basis=hinge, pairs=6, cpairs=2, penalty=l1, phin t=27415s
+[framework] library gam   cost=-0.43523 log_loss=-0.21577 gam(C=0.05, knots=7, basis=hinge, class_weight=None) t=30863s
+[framework] library gam   cost=-0.43657 log_loss=-0.21583 gam(C=0.05, knots=7, basis=hinge, pairs=4, class_weight=None) t=34896s
+[framework] library gam   cost=-0.43528 log_loss=-0.21499 gam(C=0.1, knots=15, basis=hinge, pairs=4, cpairs=2, penalty=l1, phing t=36845s
+[framework] library hyb   cost=-0.43623 log_loss=-0.21401 hyb(C=0.05, knots=15, pairs=6, cpairs=2, phinge=6, chinge=2, depth=2,  t=36991s
+[framework] library hyb   cost=-0.43507 log_loss=-0.21446 hyb(C=0.1, knots=15, pairs=4, cpairs=2, phinge=4, chinge=2, depth=2, l t=37217s
+[framework] library lgbm  cost=-0.44083 log_loss=-0.21560 lgbm(depth=1, leaves=2, lr=0.05, min_leaf=20, subsample=1, colsample=1 t=37246s
+[framework] library lgbm  cost=-0.44080 log_loss=-0.21570 lgbm(depth=2, leaves=4, lr=0.01, min_leaf=20, subsample=0.8, colsample t=37399s
+[framework] library lgbm  cost=-0.44293 log_loss=-0.21580 lgbm(depth=2, leaves=4, lr=0.03, min_leaf=20, subsample=0.8, colsample t=37450s
+[framework] library xgb   cost=-0.44143 log_loss=-0.21569 xgb(depth=1, lr=0.05, mcw=5, subsample=1, colsample=1, l2=1, class_wei t=37509s
+[framework] library xgb   cost=-0.44340 log_loss=-0.21586 xgb(depth=2, lr=0.03, mcw=5, subsample=0.8, colsample=0.8, l2=1, inter t=37559s
+[framework] library cat   cost=-0.44680 log_loss=-0.21832 cat(depth=4, lr=0.05, l2=5, random_strength=1, bagging_temperature=1,  t=37730s
+[framework] library cat   cost=-0.44913 log_loss=-0.21900 cat(depth=6, lr=0.05, l2=3, random_strength=1, bagging_temperature=1,  t=37910s
+[framework] library et    cost=-0.47578 log_loss=-0.23064 et(n_estimators=300, min_leaf=5, max_features=0.4, class_weight=None) t=38198s
+[framework] done in 38215s; blend={'gam': 0.0777, 'hyb+struct': 0.7936, 'lgbm': 0.1287} threshold=0.0909
+TOTAL FIT SECONDS 38215 kfold_bag {'gam': 0.0777, 'hyb+struct': 0.7936, 'lgbm': 0.1287}

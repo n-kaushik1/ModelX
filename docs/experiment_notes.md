@@ -428,7 +428,10 @@ strong conventional pipeline (Optuna-tuned LightGBM, bagged, Platt, tuned thresh
 24 types, v12 had lower regret on 59 (AUC 0.0171 vs 0.0212, log loss 0.0124 vs 0.0167, cost 0.0282 vs 0.0425).
 The losses pointed at high-cardinality categoricals, which v13 target-encodes out of fold (regret roughly halved
 on all 5 such problems); v13 also keeps the GAM on data with more than 60 numerics (better on 7 of 7 wide
-problems) and fixes the seed of the sparse GAM's solver (fits are now reproducible). On the public problems v13
-is v12 (identical predictions with the seed fix). Rejected: a threshold-tailored scoring rule for the P3 blend
+problems), fixes the seed of the sparse GAM's solver (fits are now reproducible), reads numbers written as text
+("$1,200", "15%", "(3.5)", "0,75", "120 kg", "13:45") and day-first dates (regret on such problems 0.035-0.101 ->
+0.007-0.011), gives the GAM measured category x category terms (better on 4 of 4 category-rich problems), and caps
+the tuning sample on very wide tables (worst case 60k x 109 at 2 threads: over an hour -> 33 min). On the public
+problems v13 is v12 (identical predictions with the seed fix). Rejected: a threshold-tailored scoring rule for the P3 blend
 (no gain on half-splits or on synthetic cost problems), the full-data library for > 60k rows (tiny gain, twice
 the fit time).

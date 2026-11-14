@@ -1,0 +1,1 @@
+{"tag": "v13f", "pid": 3002, "name": "messy_auc", "obj": "roc_auc", "fit_s": 489.5, "size_mb": 6.7, "auc": 0.823793620813443, "ll": 0.4449375310720076, "bayes_auc": 0.8343384338069686, "bayes_ll": 0.43309781442401707, "blend": {"hyb+struct": 0.2012, "lgbm+struct": 0.5898, "xgb+struct": 0.0416, "cat": 0.1674}, "regret": 0.01054481299352561}

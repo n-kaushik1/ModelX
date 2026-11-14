@@ -41,6 +41,13 @@ SPECS2 = [
     dict(name="noisy_weak", n=8000, rate=0.30, obj="roc_auc", nn=20, nc=4, sd=0.6, ni=1),
 ]
 
+# messy text formats (pids 3000 + k): informative numerics written as "$1,234.50", "12.5%", "(3.20)", "0,75",
+# "120 kg" or a clock time, plus a day-first date
+SPECS4 = [
+    dict(name="messy_auc", n=8000, rate=0.30, obj="roc_auc", nn=16, nc=3, sd=1.6, ni=1, messy=True),
+    dict(name="messy_ll", n=8000, rate=0.25, obj="log_loss", nn=16, nc=3, sd=1.5, ni=1, messy=True),
+]
+
 # wide tables (pids 2000 + k)
 SPECS3 = [
     dict(name="wide_rich_ll", n=12000, rate=0.25, obj="log_loss", nn=120, nc=4, sd=1.6, ni=2, informative=40),
@@ -84,7 +91,8 @@ def _shape(rng, z, kind):
 
 def make(pid, n_test=20000):
     # pid >= len(SPECS): a fresh random draw of problem type pid % len(SPECS) (new shapes, columns and data)
-    sp = (SPECS3[(pid - 2000) % len(SPECS3)] if pid >= 2000 else
+    sp = (SPECS4[(pid - 3000) % len(SPECS4)] if pid >= 3000 else
+          SPECS3[(pid - 2000) % len(SPECS3)] if pid >= 2000 else
           SPECS2[(pid - 1000) % len(SPECS2)] if pid >= 1000 else SPECS[pid % len(SPECS)])
     rng = np.random.default_rng(7919 + 31 * pid)
     n = sp["n"] + n_test
@@ -172,6 +180,21 @@ def make(pid, n_test=20000):
     X.loc[(rng.random(n) < miss * 1.5) & (Z[c] > 0.5), c] = np.nan
     for j in range(min(2, nc)):
         X.loc[rng.random(n) < 0.03, f"cat{j}"] = None
+    if sp.get("messy"):
+        fmts = [lambda x: f"${x * 1000:,.2f}", lambda x: f"{x * 10:.1f}%",
+                lambda x: f"({abs(x):.2f})" if x < 0 else f"{x:.2f}", lambda x: f"{x:.2f}".replace(".", ","),
+                lambda x: f"{x * 50 + 200:.0f} kg"]
+        cols = [c for c in inf if c in X.columns][:len(fmts)]
+        for c, f in zip(cols, fmts):
+            z = _z(X[c].to_numpy())
+            X[c] = [None if not np.isfinite(v) else f(v) for v in z]
+        days = rng.integers(0, 730, n)
+        dates = pd.Timestamp("2023-01-01") + pd.to_timedelta(days, unit="D")
+        X["event_date"] = dates.strftime("%d/%m/%Y")
+        dow_eff = rng.normal(0, 0.5, 7)
+        logit_extra = dow_eff[dates.dayofweek.to_numpy()]
+        p = 1 / (1 + np.exp(-(np.log(p / (1 - p)) + logit_extra)))
+        y = (rng.random(n) < p).astype(int)
     X = X[rng.permutation(X.columns)]
     ntr = sp["n"]
     cost = sp.get("cost")

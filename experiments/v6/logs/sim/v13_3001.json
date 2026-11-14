@@ -1,0 +1,1 @@
+{"tag": "v13", "pid": 3001, "name": "messy_ll", "obj": "log_loss", "fit_s": 571.4, "size_mb": 3.69, "auc": 0.8114054716780087, "ll": 0.4353724021401309, "bayes_auc": 0.8201601463680188, "bayes_ll": 0.4269731594006398, "blend": {"hyb+struct": 0.4829, "lgbm+struct": 0.3313, "xgb+struct": 0.1858}, "regret": 0.008399242739491108}

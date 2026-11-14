@@ -1,0 +1,4 @@
+pid 1005 mostly_cat bayes AUC 0.8179 LL 0.4631 | gam k=0: AUC 0.7918 LL 0.4888 | hyb k=0: AUC 0.7900 LL 0.4908 | gam k=2: AUC 0.8029 LL 0.4782 | hyb k=2: AUC 0.8014 LL 0.4799 | gam k=4: AUC 0.8050 LL 0.4762 | hyb k=4: AUC 0.8032 LL 0.4788
+pid 1013 mostly_cat bayes AUC 0.7935 LL 0.4839 | gam k=0: AUC 0.7539 LL 0.5170 | hyb k=0: AUC 0.7538 LL 0.5183 | gam k=2: AUC 0.7623 LL 0.5106 | hyb k=2: AUC 0.7617 LL 0.5122 | gam k=4: AUC 0.7732 LL 0.5019 | hyb k=4: AUC 0.7712 LL 0.5045
+pid 1021 mostly_cat bayes AUC 0.8022 LL 0.4797 | gam k=0: AUC 0.7572 LL 0.5186 | hyb k=0: AUC 0.7589 LL 0.5175 | gam k=2: AUC 0.7723 LL 0.5066 | hyb k=2: AUC 0.7720 LL 0.5076 | gam k=4: AUC 0.7805 LL 0.4994 | hyb k=4: AUC 0.7785 LL 0.5018
+pid 1029 mostly_cat bayes AUC 0.8107 LL 0.4670 | gam k=0: AUC 0.7790 LL 0.4961 | hyb k=0: AUC 0.7833 LL 0.4925 | gam k=2: AUC 0.7906 LL 0.4855 | hyb k=2: AUC 0.7930 LL 0.4836 | gam k=4: AUC 0.7912 LL 0.4848 | hyb k=4: AUC 0.7900 LL 0.4861
